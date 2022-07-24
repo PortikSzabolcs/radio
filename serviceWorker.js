@@ -21,11 +21,15 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', (e) => {
   e.respondWith((async () => {
-    const r = await caches.match(e.request);
+  try{
+    const r = await fetch(e.request);
     console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
     if (r) { return r; }
-    const response = await fetch(e.request);
+    }
+    catch(error){
+    const response = await caches.match(e.request);
     return response;
+    }
   })());
 });
 
