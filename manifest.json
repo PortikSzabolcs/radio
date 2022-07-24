@@ -14,7 +14,7 @@
       "purpose": "any"
     },
     {
-      "src": "/img/maskable-icon.png",
+      "src": "/radio/img/maskable-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
