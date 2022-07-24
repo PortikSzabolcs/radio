@@ -1,0 +1,24 @@
+{
+  "name": "Saját Rádió",
+  "short_name": "Rádió",
+  "description": "Saját Online Rádió Gyűjtemény",
+  "lang": "hu-HU",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#404040",
+  "icons": [
+    {
+      "src": "/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/img/maskable-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+     }
+  ],
+  "background_color": "#404040"
+}
