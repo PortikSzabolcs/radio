@@ -35,19 +35,20 @@
 	<meta name="theme-color" content="#003000">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		*	{box-sizing:border-box;}
-		body	{background-color: black; background-image:linear-gradient(#002500,black); background-repeat:no-repeat;}
+		*	{}
+		body	{background-color: black; padding-top:60px; min-height: 100vh; background-image:linear-gradient(#002500,black); background-repeat:no-repeat;}
 		h1	{color:white;}
 		p	{color:white;}
-		a	{vertical-align:middle;}
-		img	{width:50px; max-height:50px; max-width:50px; text-align:center; border-radius:10px;}
+		a	{text-align:justify;}
+		img	{width:50px; max-height:50px; max-width:50px; position: relative; border-radius:10px;}
 		audio	{width:80vw; margin: 2px 1px 2px 1px; float:right; }
-		.header {height:60px; margin:0px 0px 0px 0px; border-bottom-style:solid; border-bottom-color:gray;}
-		.logo	{height:50px; max-width:350px; width:auto; margin: auto auto;}
+		.header {height:60px; width: 100%; background-color:#002500; border-bottom-style:solid; border-bottom-color:gray; position:fixed; top: 0; left: 0; z-index:1;}
+		.content{ border-style:solid; border-color:white; position: relative;}
+		.logo	{height:50px; max-width:350px; width:auto; margin:5px 0px 0px 0px;}
 		.row::after {content: ""; clear: both; display: table;}
-		.col-1	{width:10%; float:left; margin:4px 1px 3px 1px;}
-		.col-2	{width:88%; float:left; margin:4px 1px 3px 1px;}
-		.col-3	{width:100%; float:left; margin:10px 1px 10px 0px;}
+		.col-1	{width:10%; height: 60px; float:left; margin:4px 1px 3px 1px;}
+		.col-2	{width:88%; height: 60px; float:left; margin:4px 1px 3px 1px;}
+		.col-3	{width:100%; float:left; margin:10px 1px 10px 0px; position:relative;}
 		@media only screen and (min-width: 992px) {
 			audio	{width: 90%;}
 			.col-1 {width: 5%;}
@@ -59,13 +60,14 @@
 <body>
 <div class="header"> 
 	<img class="logo" src="https://scontent.fsbz3-1.fna.fbcdn.net/v/t1.15752-9/293607797_357557196382431_6862230488116952662_n.png?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeHxmdWrftulcirS_KO2tbyL50PyodhCgLbnQ_Kh2EKAttZeJv9Or1fwfb31DoAFaUw8GspNUzctLmHY8EcHGSgM&_nc_ohc=6-v9sX48puoAX80H9zR&_nc_ht=scontent.fsbz3-1.fna&oh=03_AVLuOf1NPJ-cw-a4NjdqhXEJ9bkSuh1sgckyGxIkNV3YLw&oe=63045142">
-	<a style="float:right; margin:0px 0px 0px 2px;" href=https://www.facebook.com/portik.szabolcs.94>
+	<a style="float:right; margin:5px 8px 0px 2px;" href=https://www.facebook.com/portik.szabolcs.94>
 		<img style=max-width:50px; src=https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/640px-Facebook_f_logo_%282021%29.svg.png>
 	</a>
-	<a style="float:right; margin:0px 2px 0px 0px;" href=https://m.me/portik.szabolcs.94>
+	<a style="float:right; margin:5px 2px 0px 0px;" href=https://m.me/portik.szabolcs.94>
 		<img style="max-width:50px;" src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png>
 	</a>
 </div>
+
 <div class="col-3">
 	<div class="col-1">
 	<a href=https://www.profm.ro> 
@@ -150,7 +152,7 @@
 </div>
 <div class= "col-3" style="float:right">
 	<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1ON2jRIszdmSyu93A55THx?utm_source=generator&theme=0" width="100%" height="380" frameBorder="" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-	</div>
+</div>
 
 </body>
 </html>
