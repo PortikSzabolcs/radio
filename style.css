@@ -21,6 +21,7 @@ audio	{
 	border-bottom-style:solid;
 	border-bottom-color:#cccccc;
 	position:fixed;
+	padding: 5px;
 	top: 0;
 	left: 0;
 	z-index:1;}
@@ -33,18 +34,15 @@ audio	{
 	background-image:linear-gradient(#002600,black);
 	}
 .logo	{height:50px;
-	max-width:350px;
+	max-width:200px;
 	width:auto;
-	margin:5px 0px 0px 0px;}
-.row::after {content: "";
-	clear: both;
-	display: table;}
+	}
 .col-1	{
 	display:inline-block;
 	vertical-align:middle;
 	height: 54px;
 	width:54px;
-	margin: 5px 0px 5px 0px;
+	margin: 5px 0px 5px 1px;
 	//border-style:solid;
 	}
 .col-2	{
@@ -61,11 +59,11 @@ audio	{
 	}
 .weather{float:right;
 	width:100%;
-	padding: 5px;
-	margin:10px 0px 10px 0px;}
+	margin:10px auto;}
 @media only screen and (min-width: 992px) {
 	audio	{width: 97%;}
 	.col-2 {width: calc(33% - 60px);}
 	.col-3 {width: 75%;}
-	.weather {width: 25%;}
+	.weather {width: 23%;
+		margin: 10px 5px 10px 0px;}
 }
