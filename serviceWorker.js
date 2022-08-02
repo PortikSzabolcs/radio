@@ -1,8 +1,9 @@
-let cacheName = 'radio-cache-v5';
+let cacheName = 'radio-cache-v6';
 let urlsToCache = [
     './',
     './index.html',
     './style.css',
+    './app.js',
     './img/logo.png',
     './img/favicon.png',
     './img/maskable-icon.png',
