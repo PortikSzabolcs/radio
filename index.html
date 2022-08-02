@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 <head>
 	<title>Saját Rádió</title>
 	
@@ -19,7 +19,7 @@
         });
     }
 	</script>
-	
+	<script type="text/javascript" src="app.js" charset="UTF-8" defer></script>
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="application-name" content="Rádió">
@@ -39,10 +39,10 @@
 <body>
 <div class="header"> 
 	<a href="/radio">
-	<img class="logo" src="img/logo.png">
+	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
-	<a style="float:right; margin:5px 5px 0px 0px;" href=https://m.me/portik.szabolcs.94>
-		<img style="max-width:40px;" src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png>
+	<a style="float:right; margin:5px 5px 0 0;" href=https://m.me/portik.szabolcs.94>
+		<img style="max-width:40px;" src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png alt="messenger-icon">
 	</a>
 </div>
 
@@ -55,7 +55,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://icast.connectmedia.hu/5201/live.mp3 type=audio/mpeg controls preload="none"> Rádió 1 Live</audio>
+	<audio id="radio-1" src=https://icast.connectmedia.hu/5201/live.mp3 type=audio/mpeg controls preload="none"> Rádió 1 Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -64,7 +64,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://securestreams5.autopo.st:1992/player type=audio/mpeg controls preload="none"> Rádió Gaga Live</audio>
+	<audio id="gaga" src=https://securestreams5.autopo.st:1992/player type=audio/mpeg controls preload="none"> Rádió Gaga Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -73,7 +73,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://icast.connectmedia.hu/4738/mr2.mp3 type=audio/mpeg controls preload="none"> Petőfi Rádió Live</audio>
+	<audio id="petofi" src=https://icast.connectmedia.hu/4738/mr2.mp3 type=audio/mpeg controls preload="none"> Petőfi Rádió Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -82,7 +82,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://icast.connectmedia.hu/5001/live.mp3 type=audio/mpeg controls preload="none"> Retro Radio Live</audio>
+	<audio id="retro" src=https://icast.connectmedia.hu/5001/live.mp3 type=audio/mpeg controls preload="none"> Retro Radio Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -91,7 +91,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=http://live.starradio.ro:9000/; type=audio/mpeg controls preload="none"> Star Radio Live</audio>
+	<audio id="star" src=http://live.starradio.ro:9000/; type=audio/mpeg controls preload="none"> Star Radio Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -100,7 +100,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio controls preload="none">
+	<audio id="szepviz" controls preload="none">
 		<source src=http://szepvizfm.ro:8000/stream#.mp3 type=audio/mpeg> 
 		<source src=https://stream2.rdstrm.com/szepviz-radio.mp3 type=audio/mpeg>
 		SzepvizFM Live
@@ -113,7 +113,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://mediagw.e-tiger.net/stream/coolfm type=audio/mpeg controls preload="none"> Cool FM Live</audio>
+	<audio id="cool" src=https://mediagw.e-tiger.net/stream/coolfm type=audio/mpeg controls preload="none"> Cool FM Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -122,7 +122,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://oxygenmusic.hu:8000/oxygenmusic_128 type=audio/mpeg controls preload="none"> Oxygen Live</audio>
+	<audio id="oxygen" src=https://oxygenmusic.hu:8000/oxygenmusic_128 type=audio/mpeg controls preload="none"> Oxygen Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -131,18 +131,18 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://ssl.omegahost.ro/8088/; type=audio/mpeg controls preload="none"> Best-Dance Live</audio>
+	<audio id="best-dance" src=https://ssl.omegahost.ro/8088/; type=audio/mpeg controls preload="none"> Best-Dance Live</audio>
 	</div>
 	
 	<hr>
 	
 	<div class="col-1">
 	<a href=https://www.profm.ro target="_blank" rel="noopener noreferrer"> 
-		<img style="border-radius:0px;" src=https://www.profm.ro/static/theme-repo/bin/images/profm-logo.svg alt="ProFM logo">
+		<img style="border-radius:0;" src=https://www.profm.ro/static/theme-repo/bin/images/profm-logo.svg alt="ProFM logo">
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://edge126.rcs-rds.ro/profm/profm.mp3 type=audio/mpeg controls preload="none"> ProFM Live</audio>
+	<audio id="pro" src=https://edge126.rcs-rds.ro/profm/profm.mp3 type=audio/mpeg controls preload="none"> ProFM Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -151,9 +151,8 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://live.kissfm.ro/kissfm.aacp type=audio/aac controls preload="none"> KissFM Live</audio>
+	<audio id="kiss" src=https://live.kissfm.ro/kissfm.aacp type=audio/aac controls preload="none"> KissFM Live</audio>
 	</div>
-
 
 
 	<div class="col-1">
@@ -162,7 +161,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://live.onefm.ro/onefm.aacp type=audio/aac controls preload="none"> One FM Live</audio>
+	<audio id="one" src=https://live.onefm.ro/onefm.aacp type=audio/aac controls preload="none"> One FM Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -171,7 +170,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://live.radio-impuls.ro/stream type=audio/mpeg controls preload="none"> Radio Impuls Live</audio>
+	<audio id="impuls" src=https://live.radio-impuls.ro/stream type=audio/mpeg controls preload="none"> Radio Impuls Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -180,7 +179,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://live.kissfm.ro/kiss.xtra type=audio/aac controls preload="none"> Kiss Pop Live</audio>
+	<audio id="kiss-pop" src=https://live.kissfm.ro/kiss.xtra type=audio/aac controls preload="none"> Kiss Pop Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -189,7 +188,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio src=https://live.kissfm.ro/kiss.energy type=audio/aac controls preload="none"> Kiss Energy Live</audio>
+	<audio id="kiss-energy" src=https://live.kissfm.ro/kiss.energy type=audio/aac controls preload="none"> Kiss Energy Live</audio>
 	</div>
 
 
