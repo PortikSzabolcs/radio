@@ -80,6 +80,13 @@ for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
     document.getElementsByTagName('audio')[i].addEventListener("play", function () {
         startPlaying(i);
     });
+    document.getElementsByTagName('audio')[i].addEventListener("pause", function () {
+        let source = document.getElementsByTagName('audio')[i].src;
+        document.getElementsByTagName('audio')[i].src = "";
+        document.getElementsByTagName('audio')[i].load();
+        document.getElementsByTagName('audio')[i].src = source;
+        document.getElementsByTagName('audio')[i].load();
+    });
 }
 
 function startPlaying(playing) {
@@ -90,5 +97,4 @@ function startPlaying(playing) {
             document.getElementsByTagName('audio')[i].pause();
         }
     }
-    document.getElementsByTagName('audio')[playing].load();
 }
