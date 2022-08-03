@@ -39,6 +39,7 @@ if('mediaSession' in navigator){
     navigator.mediaSession.metadata = new MediaMetadata();
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
+    navigator.mediaSession.metadata.artwork = [ { src: "/img/favicon.png", sizes: '192x192', type: 'image/png'} ];
     navigator.mediaSession.setActionHandler('nexttrack', () => {
         let id = 0;
         let max = document.getElementsByTagName('audio').length;
@@ -77,16 +78,17 @@ if('mediaSession' in navigator){
 
 for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
     document.getElementsByTagName('audio')[i].addEventListener("play", function () {
-        stopAll(i);
+        startPlaying(i);
     });
 }
 
-function stopAll(playing) {
+function startPlaying(playing) {
+    navigator.mediaSession.metadata.title = nevek[playing];
+    navigator.mediaSession.metadata.artwork = [artworks[playing]];
     for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
         if (i !== playing) {
             document.getElementsByTagName('audio')[i].pause();
         }
     }
-    navigator.mediaSession.metadata.title = nevek[playing];
-    navigator.mediaSession.metadata.artwork = [artworks[playing]];
+    document.getElementsByTagName('audio')[playing].load();
 }
