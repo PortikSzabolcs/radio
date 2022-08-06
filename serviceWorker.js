@@ -1,16 +1,16 @@
-let cacheName = 'radio-cache-v6';
+let cacheName = 'radio-cache-v7';
 let urlsToCache = [
-    './',
     './index.html',
     './style.css',
     './app.js',
     './img/logo.png',
-    './img/favicon.png',
+    './img/favicon-32x32.png',
+    './img/apple-touch.png',
     './img/maskable-icon.png',
+    './img/timer.png'
     ];
 
 self.addEventListener('install', function(event) {
-// Perform install steps
     event.waitUntil(
         caches.open(cacheName)
         .then(function(cache) {

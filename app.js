@@ -97,3 +97,53 @@ function startPlaying(playing) {
         }
     }
 }
+
+
+function idozitoclick(){
+    const menu = document.getElementById("popup_menu");
+    if(menu.style.display === "none") menu.style.display = "unset";
+    else menu.style.display = "none";
+}
+
+let idozites = [
+    null,
+    null,
+    null
+];
+
+function ido(min){
+    if(idozites[0] !== null) {
+        clearTimeout(idozites[0]);
+        clearInterval(idozites[2]);
+    }
+    if(min === 0) {
+        idozites[0] = null;
+        idozites[1] = null;
+        idozites[2] = null;
+        document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"/img/timer.png\" alt=\"timer-icon\">";
+    }
+    else {
+        idozites[0] = setTimeout(stopAll, min*60000);
+        idozites[1] = Date.now() + min*60000;
+        idozites[2] = setInterval(countdown, 1000);
+    }
+    document.getElementById("popup_menu").style.display = "none";
+}
+
+function stopAll(){
+    for(let i=0; i<document.getElementsByTagName('audio').length; i++){
+        document.getElementsByTagName('audio')[i].pause();
+    }
+    clearInterval(idozites[2]);
+    idozites[1] = null;
+    idozites[2] = null;
+    document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"/img/timer.png\" alt=\"timer-icon\">";
+}
+
+function countdown(){
+    let icon = document.getElementById("timer");
+    let until = idozites[1] - Date.now();
+    let minutes = until/60000;
+    let seconds = (until/1000)%60;
+    icon.innerText = Math.floor(minutes) + ":" + Math.ceil(seconds);
+}

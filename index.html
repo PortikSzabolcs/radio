@@ -14,7 +14,7 @@
         .register("serviceWorker.js", {
         scope: "./"
         })
-        .then(function (reg) {
+        .then(function () {
         console.log("Service worker registered");
         });
     }
@@ -28,8 +28,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="msapplication-starturl" content="/">
 
-	<link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="192x192" href="img/favicon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="192x192" href="img/apple-touch.png">
 	<meta name="author" content="Portik Szabolcs">
 	<meta name="description" content="Saját Online Rádió gyűjtemény">
 	<meta name="theme-color" content="#003000">
@@ -41,9 +42,9 @@
 	<a href="/radio">
 	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
-	<a style="float:right; margin:5px 5px 0 0;" href=https://m.me/portik.szabolcs.94>
-		<img style="max-width:40px;" src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/2048px-Facebook_Messenger_logo_2020.svg.png alt="messenger-icon">
-	</a>
+	<button id="timer" onclick="idozitoclick()">
+		<img style="width: 50px" src="/img/timer.png" alt="timer-icon">
+	</button>
 </div>
 
 <div class="content">
@@ -55,7 +56,7 @@
 	</a>
 	</div>
 	<div class="col-2">
-	<audio id="radio-1" src=https://icast.connectmedia.hu/5201/live.mp3 type=audio/mpeg controls preload="none"> Rádió 1 Live</audio>
+	<audio id="radio-1" src=https://icast.connectmedia.hu/5202/live.mp3 type=audio/mpeg controls preload="none"> Rádió 1 Live</audio>
 	</div>
 	
 	<div class="col-1">
@@ -166,7 +167,7 @@
 	
 	<div class="col-1">
 	<a href=https://www.radioimpuls.ro target="_blank" rel="noopener noreferrer"> 
-		<img style="margin: 11px 0px 0px 0px" src=https://www.radioimpuls.ro/img/logo.png alt="Radio Impuls logo" >
+		<img style="margin: 11px 0" src=https://www.radioimpuls.ro/img/logo.png alt="Radio Impuls logo" >
 	</a>
 	</div>
 	<div class="col-2">
@@ -198,6 +199,14 @@
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 </script>
+	</div>
+
+	<div id="popup_menu">
+		<button onclick="ido(0)">OFF</button>
+		<button onclick="ido(15)">0:15</button>
+		<button onclick="ido(30)">0:30</button>
+		<button onclick="ido(60)">1:00</button>
+		<button onclick="ido(120)">2:00</button>
 	</div>
 </div>
 
