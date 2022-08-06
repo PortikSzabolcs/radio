@@ -6,6 +6,7 @@ let urlsToCache = [
     './img/logo.png',
     './img/favicon-32x32.png',
     './img/apple-touch.png',
+    './img/android-chrome.png',
     './img/maskable-icon.png',
     './img/timer.png'
     ];
