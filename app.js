@@ -120,7 +120,7 @@ function ido(min){
         idozites[0] = null;
         idozites[1] = null;
         idozites[2] = null;
-        document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"/img/timer.png\" alt=\"timer-icon\">";
+        document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"img/timer.png\" alt=\"timer-icon\">";
     }
     else {
         idozites[0] = setTimeout(stopAll, min*60000);
