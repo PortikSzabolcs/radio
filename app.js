@@ -137,7 +137,7 @@ function stopAll(){
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
-    document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"/img/timer.png\" alt=\"timer-icon\">";
+    document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"img/timer.png\" alt=\"timer-icon\">";
 }
 
 function countdown(){
