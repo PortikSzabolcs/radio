@@ -126,6 +126,7 @@ function ido(min){
         idozites[0] = setTimeout(stopAll, min*60000);
         idozites[1] = Date.now() + min*60000;
         idozites[2] = setInterval(countdown, 1000);
+        document.getElementById("timer").innerText = min + ":00";
     }
     document.getElementById("popup_menu").style.display = "none";
 }
