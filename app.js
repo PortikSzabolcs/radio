@@ -34,8 +34,9 @@ const nevek = [
     "Kiss Energy"
 ];
 
+const mediaAPI = ('mediaSession' in navigator);
 
-if('mediaSession' in navigator){
+function mediaSessionInit(){
     navigator.mediaSession.metadata = new MediaMetadata();
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
@@ -89,8 +90,11 @@ for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
 }
 
 function startPlaying(playing) {
-    navigator.mediaSession.metadata.title = nevek[playing];
-    navigator.mediaSession.metadata.artwork = [artworks[playing]];
+    if(mediaAPI){
+        if(navigator.mediaSession.metadata == null) mediaSessionInit();
+        navigator.mediaSession.metadata.title = nevek[playing];
+        navigator.mediaSession.metadata.artwork = [artworks[playing]];
+    }
     for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
         if (i !== playing) {
             document.getElementsByTagName('audio')[i].pause();
