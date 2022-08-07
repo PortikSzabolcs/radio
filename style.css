@@ -27,6 +27,7 @@ button:hover{
 }
 .timer-buttons{
 	width: 100%;
+	height: 40px;
 }
 .header {
 	height:60px;

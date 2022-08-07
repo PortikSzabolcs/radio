@@ -39,7 +39,7 @@ if('mediaSession' in navigator){
     navigator.mediaSession.metadata = new MediaMetadata();
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
-    navigator.mediaSession.metadata.artwork = [ { src: "/img/favicon.png", sizes: '192x192', type: 'image/png'} ];
+    navigator.mediaSession.metadata.artwork = [ { src: "/img/apple-touch.png", sizes: '192x192', type: 'image/png'} ];
     navigator.mediaSession.setActionHandler('nexttrack', () => {
         let id = 0;
         let max = document.getElementsByTagName('audio').length;
