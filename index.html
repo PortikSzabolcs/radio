@@ -43,8 +43,8 @@
 	<a href="/radio">
 	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
-	<button id="timer" onclick="idozitoclick()">
-		<img style="width: 50px" src="img/timer.png" alt="timer-icon">
+	<button id="timer" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+		<img id="timer-icon" src="img/timer.png" alt="timer-icon">
 	</button>
 </div>
 
@@ -202,12 +202,12 @@
 </script>
 	</div>
 
-	<div id="popup_menu">
-		<button onclick="ido(0)">OFF</button>
-		<button onclick="ido(15)">0:15</button>
-		<button onclick="ido(30)">0:30</button>
-		<button onclick="ido(60)">1:00</button>
-		<button onclick="ido(120)">2:00</button>
+	<div id="popup_menu" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+		<button class="timer-buttons" onclick="ido(0)">OFF</button>
+		<button class="timer-buttons" onclick="ido(15)">0:15</button>
+		<button class="timer-buttons" onclick="ido(30)">0:30</button>
+		<button class="timer-buttons" onclick="ido(60)">1:00</button>
+		<button class="timer-buttons" onclick="ido(120)">2:00</button>
 	</div>
 </div>
 

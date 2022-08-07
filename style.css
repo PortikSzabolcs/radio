@@ -19,12 +19,17 @@ button{
 	color: white;
 	font-size: 20px;
 	text-align: center;
+	border-style: none;
+	border-width: thin;
 }
 button:hover{
-	background-color: #008500;
-	color: black;
+	background-color: #006000;
 }
-.header {height:60px;
+.timer-buttons{
+	width: 100%;
+}
+.header {
+	height:60px;
 	width: 100%;
 	background-color:#002800;
 	border-bottom-style:solid;
@@ -42,18 +47,33 @@ button:hover{
 	border-color:white;
 	background-image:linear-gradient(#002600,black);
 	}
-.logo	{height:50px;
+.logo	{
+	height:50px;
 	max-width:200px;
 	width:auto;
 	}
 #timer{
 	position: absolute;
-	right: 5px;
+	height: 100%;
+	right: 3px;
 	bottom: 0;
-	padding: 0;
 	border-style: none;
-	border-radius: 5px;
-	font-size: 35px;
+	font-size: 30px;
+}
+#timer-icon{
+	width: 40px;
+	margin: 7px 7px;
+}
+#popup_menu	{
+	display: none;
+	position: fixed;
+	background-color: #003500;
+	opacity: .95;
+	top: 57px;
+	right: 3px;
+	width: 66px;
+	text-align: center;
+	z-index: 2;
 }
 .col-1	{
 	display:inline-block;
@@ -75,19 +95,7 @@ button:hover{
 	float:left;
 	margin:5px 0px 5px 0px;
 	}
-#popup_menu	{
-	display: none;
-	position: fixed;
-	top: 65px;
-	right: 0;
-	width: 60px;
-	/*padding: 5px;*/
-	text-align: center;
-	background-color: #003500;
-	border-style: solid;
-	border-color: black;
-	border-radius: 5px;
-}
+
 .weather{float:right;
 	width:100%;
 	margin:10px auto;}

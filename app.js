@@ -99,10 +99,11 @@ function startPlaying(playing) {
 }
 
 
-function idozitoclick(){
-    const menu = document.getElementById("popup_menu");
-    if(menu.style.display === "none") menu.style.display = "unset";
-    else menu.style.display = "none";
+function idozitoMenuBe(){
+    document.getElementById("popup_menu").style.display = "block";
+}
+function idozitoMenuKi(){
+    document.getElementById("popup_menu").style.display = "none";
 }
 
 let idozites = [
@@ -120,7 +121,7 @@ function ido(min){
         idozites[0] = null;
         idozites[1] = null;
         idozites[2] = null;
-        document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"img/timer.png\" alt=\"timer-icon\">";
+        document.getElementById("timer").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
     }
     else {
         idozites[0] = setTimeout(stopAll, min*60000);
@@ -128,7 +129,7 @@ function ido(min){
         idozites[2] = setInterval(countdown, 1000);
         document.getElementById("timer").innerText = min + ":00";
     }
-    document.getElementById("popup_menu").style.display = "none";
+    idozitoMenuKi();
 }
 
 function stopAll(){
@@ -138,7 +139,7 @@ function stopAll(){
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
-    document.getElementById("timer").innerHTML = "<img style=\"width: 50px\" src=\"img/timer.png\" alt=\"timer-icon\">";
+    document.getElementById("timer").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
 }
 
 function countdown(){
