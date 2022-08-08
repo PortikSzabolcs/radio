@@ -8,7 +8,7 @@ const artworks = [
     { src: "https://coolfm.hu/radio/wp-content/uploads/2022/01/log%C3%B3-v%C3%A9gleges_shadow.png", sizes: '150x150', type: 'image/png' },
     { src: "https://mlotgijtlucd.i.optimole.com/w:500/h:500/q:75/rt:fill/g:ce/https://oxys.group/app/oxygen_music_logo%20(1)_juz25g1r.png", sizes: '150x150', type: 'image/png' },
     { src: "https://onlinestream.live/logos/6227.png", sizes: '150x150', type: 'image/png' },
-    { src: "https://www.profm.ro/static/theme-repo/bin/images/profm-logo.svg", sizes: '168x232', type: 'image/svg-xml' },
+    { src: "img/stations/profm-logo.jpg", sizes: '400x400', type: 'image/jpg' },
     { src: "https://www.kissfm.ro/assets/logo/kissfm-inverted.svg", sizes: '320x320', type: 'image/svg-xml' },
     { src: "https://www.onefm.ro/img/onefm-logo.png", sizes: '150x150', type: 'image/png' },
     { src: "https://www.radioimpuls.ro/img/logo.png", sizes: '250x147', type: 'image/png' },
