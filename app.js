@@ -83,6 +83,7 @@ for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
     });
     document.getElementsByTagName('audio')[i].addEventListener("pause", function () {
         let source = document.getElementsByTagName('audio')[i].src;
+        console.log(source);
         document.getElementsByTagName('audio')[i].src = "";
         document.getElementsByTagName('audio')[i].load();
         document.getElementsByTagName('audio')[i].src = source;
