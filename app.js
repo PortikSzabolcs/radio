@@ -83,7 +83,6 @@ for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
     });
     document.getElementsByTagName('audio')[i].addEventListener("pause", function () {
         let source = document.getElementsByTagName('audio')[i].src;
-        console.log(source);
         document.getElementsByTagName('audio')[i].src = "";
         document.getElementsByTagName('audio')[i].load();
         document.getElementsByTagName('audio')[i].src = source;
@@ -148,9 +147,11 @@ function stopAll(){
 }
 
 function countdown(){
-    let icon = document.getElementById("timer");
     let until = idozites[1] - Date.now();
     let minutes = until/60000;
     let seconds = (until/1000)%60;
-    icon.innerText = Math.floor(minutes) + ":" + Math.ceil(seconds);
+    let text = Math.floor(minutes) + ":";
+    if(Math.floor(seconds) < 10) text += "0" + Math.floor(seconds);
+    else text += Math.floor(seconds);
+    document.getElementById("timer").innerText = text;
 }
