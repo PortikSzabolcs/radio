@@ -1,8 +1,10 @@
 let cacheName = 'radio-cache-v7';
 let urlsToCache = [
+    './',
     './index.html',
     './style.css',
     './app.js',
+    './serviceWorker.js',
     './img/logo.png',
     './img/favicon-32x32.png',
     './img/apple-touch.png',
@@ -29,8 +31,7 @@ self.addEventListener('fetch', (e) => {
     if (r) { return r; }
     }
     catch(error){
-    const response = await caches.match(e.request);
-    return response;
+        return await caches.match(e.request);
     }
   })());
 });

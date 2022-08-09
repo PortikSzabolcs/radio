@@ -35,6 +35,35 @@ const nevek = [
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
+let lastOnline = null;
+
+if(!navigator.onLine){
+    if(confirm("Nincs internetkapcsolat. Próbáljuk újra?")) location.reload();
+    else close();
+}
+
+window.addEventListener("offline", function(e) {
+    let id = 0;
+    let max = document.getElementsByTagName('audio').length;
+    while(id < max){
+        if(!document.getElementsByTagName('audio')[id].paused){
+            lastOnline = document.getElementsByTagName("audio")[id];
+            break;
+        }
+        ++id;
+    }
+    console.log("offline");
+});
+
+window.addEventListener("online", function(e) {
+    if(lastOnline) {
+        if(!lastOnline.paused)lastOnline.load();
+        lastOnline.play();
+        lastOnline = null;
+        console.log("online again");
+    }
+});
+
 
 function mediaSessionInit(){
     navigator.mediaSession.metadata = new MediaMetadata();
@@ -80,10 +109,11 @@ function mediaSessionInit(){
 }
 
 for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
-    document.getElementsByTagName('audio')[i].addEventListener("play", function () {
+    let audio = document.getElementsByTagName('audio')[i];
+    audio.addEventListener("play", function () {
         startPlaying(i);
     });
-    document.getElementsByTagName('audio')[i].addEventListener("pause", function () {
+    audio.addEventListener("pause", function () {
         let source = document.getElementsByTagName('audio')[i].src;
         document.getElementsByTagName('audio')[i].src = "";
         document.getElementsByTagName('audio')[i].load();
