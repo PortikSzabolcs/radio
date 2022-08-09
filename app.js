@@ -48,6 +48,7 @@ function mediaSessionInit(){
             if(!document.getElementsByTagName('audio')[id].paused){
                 document.getElementsByTagName('audio')[id].pause();
                 if(id < max-1){
+                    if(id === 3) id++;
                     document.getElementsByTagName('audio')[id+1].play();
                 }
                 else{
@@ -65,6 +66,7 @@ function mediaSessionInit(){
             if(!document.getElementsByTagName('audio')[id].paused){
                 document.getElementsByTagName('audio')[id].pause();
                 if(id > 0){
+                    if(id === 5) id--;
                     document.getElementsByTagName('audio')[id-1].play();
                 }
                 else{
