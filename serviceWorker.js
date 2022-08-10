@@ -10,7 +10,8 @@ let urlsToCache = [
     './img/apple-touch.png',
     './img/android-chrome.png',
     './img/maskable-icon.png',
-    './img/timer.png'
+    './img/timer.png',
+    './img/dark-mode.png'
     ];
 
 self.addEventListener('install', function(event) {

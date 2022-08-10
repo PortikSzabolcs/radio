@@ -47,7 +47,7 @@ if(!navigator.onLine){
     else close();
 }
 
-window.addEventListener("offline", function(e) {
+window.addEventListener("offline", function() {
     let id = 0;
     let max = document.getElementsByTagName('audio').length;
     while(id < max){
@@ -61,7 +61,7 @@ window.addEventListener("offline", function(e) {
     console.log("offline");
 });
 
-window.addEventListener("online", function(e) {
+window.addEventListener("online", function() {
     if(lastOnline) {
         if(!lastOnline.paused)lastOnline.load();
         lastOnline.play();
