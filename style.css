@@ -16,18 +16,19 @@ audio	{
 	}
 button{
 	background-color: transparent;
+	padding: 1px;
 	color: white;
-	font-size: 20px;
+	font-size: 22px;
 	text-align: center;
 	border-style: none;
 	border-width: thin;
 }
 button:hover{
-	background-color: #006000;
+	background-color: #006500;
 }
 .timer-buttons{
 	width: 100%;
-	height: 40px;
+	height: 50px;
 }
 .header {
 	height:60px;
@@ -75,29 +76,30 @@ button:hover{
 	font-size: 30px;
 }
 #theme-button{
-	right: 70px;
+	width: 45px;
+	right: 90px;
 	bottom: 0;
 }
 #theme-icon{
 	width: 40px;
-	margin: 7px 7px;
 }
 #timer-button{
-	right: 4px;
+	right: 0;
 	bottom: 0;
+	width: 90px;
 }
 #timer-icon{
 	width: 40px;
-	margin: 7px 7px;
+	margin: 7px 0;
 }
 #popup_menu	{
 	display: none;
 	position: fixed;
-	background-color: #003500;
+	background-color: #005000;
 	opacity: .95;
 	top: 57px;
-	right: 4px;
-	width: 66px;
+	right: 0;
+	width: 90px;
 	text-align: center;
 	z-index: 2;
 }
@@ -126,9 +128,16 @@ button:hover{
 	width:100%;
 	margin:10px auto;}
 @media only screen and (min-width: 992px) {
-	audio	{width: 97%;}
-	.col-2 {width: calc(33% - 60px);}
-	.col-3 {width: 75%;}
-	.weather {width: 23%;
-		margin: 10px 5px 10px 0px;}
+	audio		{width: 97%;}
+	.col-2 		{width: calc(33% - 60px);}
+	.col-3 		{width: 75%;}
+	.weather {
+		width: 23%;
+		margin: 10px 5px 10px 0px;
+	}
+	#popup_menu, #timer-button { width: 100px; }
+	#theme-button {
+		width: 100px;
+		right: 100px;
+	}
 }

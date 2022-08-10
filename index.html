@@ -49,6 +49,13 @@
 	<button id="timer-button" class="header-button" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
 		<img id="timer-icon" src="img/timer.png" alt="timer-icon">
 	</button>
+	<div id="popup_menu" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+		<button class="timer-buttons" onclick="ido(0)">OFF</button>
+		<button class="timer-buttons" onclick="ido(15)">0:15</button>
+		<button class="timer-buttons" onclick="ido(30)">0:30</button>
+		<button class="timer-buttons" onclick="ido(60)">1:00</button>
+		<button class="timer-buttons" onclick="ido(120)">2:00</button>
+	</div>
 </div>
 
 <div id="contentID" class="content">
@@ -201,13 +208,6 @@
 </script>
 	</div>
 
-	<div id="popup_menu" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
-		<button class="timer-buttons" onclick="ido(0)">OFF</button>
-		<button class="timer-buttons" onclick="ido(15)">0:15</button>
-		<button class="timer-buttons" onclick="ido(30)">0:30</button>
-		<button class="timer-buttons" onclick="ido(60)">1:00</button>
-		<button class="timer-buttons" onclick="ido(120)">2:00</button>
-	</div>
 </div>
 
 </body>

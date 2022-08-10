@@ -163,13 +163,13 @@ function ido(min){
         idozites[0] = null;
         idozites[1] = null;
         idozites[2] = null;
-        document.getElementById("timer").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
+        document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
     }
     else {
         idozites[0] = setTimeout(stopAll, min*60000);
         idozites[1] = Date.now() + min*60000;
         idozites[2] = setInterval(countdown, 1000);
-        document.getElementById("timer").innerText = min + ":00";
+        document.getElementById("timer-button").innerText = min + ":00";
     }
     idozitoMenuKi();
 }
@@ -181,7 +181,7 @@ function stopAll(){
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
-    document.getElementById("timer").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
+    document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
 }
 
 function countdown(){
@@ -191,7 +191,7 @@ function countdown(){
     let text = Math.floor(minutes) + ":";
     if(Math.floor(seconds) < 10) text += "0" + Math.floor(seconds);
     else text += Math.floor(seconds);
-    document.getElementById("timer").innerText = text;
+    document.getElementById("timer-button").innerText = text;
 }
 
 function themeSwitch() {
