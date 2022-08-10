@@ -2,7 +2,7 @@
 body	{background-color: black; 
 	padding-top:60px;
 	min-height: 100vh;
-	margin: 0px 0px;}
+	margin: 0 0;}
 a	{color:transparent;}
 img	{
 	vertical-align: sub;
@@ -32,7 +32,18 @@ button:hover{
 .header {
 	height:60px;
 	width: 100%;
-	background-color:#002800;
+	background-color:#003000;
+	border-bottom-style:solid;
+	border-bottom-color:#cccccc;
+	position:fixed;
+	padding: 5px;
+	top: 0;
+	left: 0;
+	z-index:1;}
+.header-white{
+	height:60px;
+	width: 100%;
+	background-color:#00a000;
 	border-bottom-style:solid;
 	border-bottom-color:#cccccc;
 	position:fixed;
@@ -41,25 +52,39 @@ button:hover{
 	left: 0;
 	z-index:1;}
 .content{
-	width:100%;
 	display: block;
 	overflow: auto;	
 	padding: 8px;
-	border-color:white;
 	background-image:linear-gradient(#002600,black);
 	}
+.content-white{
+	display: block;
+	overflow: auto;
+	padding: 8px;
+	background-image:linear-gradient(#00bb00,#eeeeee);
+}
 .logo	{
 	height:50px;
 	max-width:200px;
 	width:auto;
 	}
-#timer{
+.header-button{
 	position: absolute;
 	height: 100%;
-	right: 3px;
-	bottom: 0;
 	border-style: none;
 	font-size: 30px;
+}
+#theme-button{
+	right: 70px;
+	bottom: 0;
+}
+#theme-icon{
+	width: 40px;
+	margin: 7px 7px;
+}
+#timer-button{
+	right: 4px;
+	bottom: 0;
 }
 #timer-icon{
 	width: 40px;
@@ -71,7 +96,7 @@ button:hover{
 	background-color: #003500;
 	opacity: .95;
 	top: 57px;
-	right: 3px;
+	right: 4px;
 	width: 66px;
 	text-align: center;
 	z-index: 2;
@@ -89,12 +114,12 @@ button:hover{
 	vertical-align:middle;
 	height:54px;
 	width: calc(100% - 60px);
-	margin: 5px 0px 5px 0px;
+	margin: 5px 0;
 	//border-style:solid;
 	}
 .col-3	{width:100%;
 	float:left;
-	margin:5px 0px 5px 0px;
+	margin:5px 0;
 	}
 
 .weather{float:right;

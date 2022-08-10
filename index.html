@@ -39,16 +39,19 @@
 
 </head>
 <body>
-<div class="header"> 
+<div id="headerID" class="header">
 	<a href="/radio">
 	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
-	<button id="timer" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+	<button id="theme-button" class="header-button" onclick="themeSwitch()">
+		<img id="theme-icon" src="img/dark-mode.png" alt="theme-icon">
+	</button>
+	<button id="timer-button" class="header-button" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
 		<img id="timer-icon" src="img/timer.png" alt="timer-icon">
 	</button>
 </div>
 
-<div class="content">
+<div id="contentID" class="content">
 <div class="col-3">
 
 	<div class="col-1">

@@ -36,6 +36,11 @@ const nevek = [
 
 const mediaAPI = ('mediaSession' in navigator);
 let lastOnline = null;
+let theme = null;
+if(localStorage.getItem("theme") === "white") {
+    theme = localStorage.getItem("theme");
+    themeSet();
+}
 
 if(!navigator.onLine){
     if(confirm("Nincs internetkapcsolat. Próbáljuk újra?")) location.reload();
@@ -48,6 +53,7 @@ window.addEventListener("offline", function(e) {
     while(id < max){
         if(!document.getElementsByTagName('audio')[id].paused){
             lastOnline = document.getElementsByTagName("audio")[id];
+            setTimeout(function (){lastOnline = null;}, 300000);
             break;
         }
         ++id;
@@ -186,4 +192,22 @@ function countdown(){
     if(Math.floor(seconds) < 10) text += "0" + Math.floor(seconds);
     else text += Math.floor(seconds);
     document.getElementById("timer").innerText = text;
+}
+
+function themeSwitch() {
+    if(theme === "white") theme = "black";
+    else theme = "white";
+    themeSet();
+}
+function themeSet() {
+    if(theme === "white"){
+        document.body.style.backgroundColor = "#eeeeee";
+        document.getElementById("contentID").className = "content-white";
+        document.getElementById("headerID").className = "header-white";
+    } else{
+        document.body.style.backgroundColor = "black";
+        document.getElementById("contentID").className = "content";
+        document.getElementById("headerID").className = "header";
+    }
+    localStorage.setItem("theme", theme);
 }
