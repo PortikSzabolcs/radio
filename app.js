@@ -201,13 +201,9 @@ function themeSwitch() {
 }
 function themeSet() {
     if(theme === "white"){
-        document.body.style.backgroundColor = "#eeeeee";
-        document.getElementById("contentID").className = "content-white";
-        document.getElementById("headerID").className = "header-white";
+        document.body.style.backgroundImage = "linear-gradient(#cfc, white)";
     } else{
-        document.body.style.backgroundColor = "black";
-        document.getElementById("contentID").className = "content";
-        document.getElementById("headerID").className = "header";
+        document.body.style.backgroundImage = "linear-gradient(#020, black)";
     }
     localStorage.setItem("theme", theme);
 }
