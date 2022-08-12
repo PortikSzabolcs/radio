@@ -106,11 +106,10 @@ button:hover{
 	height:54px;
 	width: calc(100% - 60px);
 	margin: 5px 0;
-	//border-style:solid;
 	}
 .col-3	{width:100%;
 	float:left;
-	margin:5px 0;
+	padding: 3px;
 	}
 
 .weather{float:right;
@@ -122,7 +121,7 @@ button:hover{
 	.col-3 		{width: 75%;}
 	.weather {
 		width: 23%;
-		margin: 10px 5px 10px 0px;
+		margin: 8px 5px;
 	}
 	#popup_menu, #timer-button { width: 100px; }
 	#theme-button {
