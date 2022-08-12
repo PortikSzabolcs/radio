@@ -37,6 +37,7 @@ const nevek = [
 const mediaAPI = ('mediaSession' in navigator);
 let lastOnline = null;
 let theme = null;
+
 if(localStorage.getItem("theme") === "white") {
     theme = localStorage.getItem("theme");
     themeSet();
@@ -81,7 +82,6 @@ function mediaSessionInit(){
         let max = document.getElementsByTagName('audio').length;
         while(id < max){
             if(!document.getElementsByTagName('audio')[id].paused){
-                document.getElementsByTagName('audio')[id].pause();
                 if(id < max-1){
                     if(id === 3) id++;
                     document.getElementsByTagName('audio')[id+1].play();
@@ -99,7 +99,6 @@ function mediaSessionInit(){
         let max = document.getElementsByTagName('audio').length;
         while(id < max){
             if(!document.getElementsByTagName('audio')[id].paused){
-                document.getElementsByTagName('audio')[id].pause();
                 if(id > 0){
                     if(id === 5) id--;
                     document.getElementsByTagName('audio')[id-1].play();
@@ -119,12 +118,6 @@ for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
     audio.addEventListener("play", function () {
         startPlaying(i);
     });
-    audio.addEventListener("pause", function () {
-        let source = document.getElementsByTagName('audio')[i].src;
-        document.getElementsByTagName('audio')[i].src = "";
-        document.getElementsByTagName('audio')[i].load();
-        document.getElementsByTagName('audio')[i].src = source;
-    });
 }
 
 function startPlaying(playing) {
@@ -134,8 +127,12 @@ function startPlaying(playing) {
         navigator.mediaSession.metadata.artwork = [artworks[playing]];
     }
     for (let i = 0; i < document.getElementsByTagName('audio').length; i++) {
-        if (i !== playing) {
-            document.getElementsByTagName('audio')[i].pause();
+        if (!document.getElementsByTagName('audio')[i].paused && i !== playing) {
+            let source = document.getElementsByTagName('audio')[i].src;
+            document.getElementsByTagName('audio')[i].src = "";
+            document.getElementsByTagName('audio')[i].load();
+            document.getElementsByTagName('audio')[i].src = source;
+            break;
         }
     }
 }

@@ -37,6 +37,9 @@ button:hover{
 	width: 100%;
 	background-color:#050;
 	box-shadow: 0 1px 1px #6666;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+	border-bottom-color: #bbb;
 	position:fixed;
 	padding: 5px;
 	top: 0;
