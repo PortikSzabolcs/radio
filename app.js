@@ -1,6 +1,6 @@
 const artworks = [
-    { src: "radio/img/stations/radio1.png",   sizes: '192x192',   type: 'image/png' },
-    { src: "radio/img/stations/gaga.svg", sizes: '400x400', type: 'image/svg' },
+    { src: "img/stations/radio1.png",   sizes: '192x192',   type: 'image/png' },
+    { src: "/img/stations/gaga.svg", sizes: '400x400', type: 'image/svg' },
     { src: "radio/img/stations/petofi.jpg",sizes: '250x250', type: 'image/jpg' },
     { src: "radio/img/stations/retro.png", sizes: '150x150', type: 'image/png' },
     { src: "radio/img/stations/star.jpg", sizes: '250x250', type: 'image/jpg' },
