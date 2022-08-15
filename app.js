@@ -1,19 +1,19 @@
 const artworks = [
-    { src: "/img/stations/radio1.png",   sizes: '192x192',   type: 'image/png' },
-    { src: "/img/stations/gaga.svg", sizes: '400x400', type: 'image/svg' },
-    { src: "/img/stations/petofi.jpg",sizes: '250x250', type: 'image/jpg' },
-    { src: "/img/stations/retro.png", sizes: '150x150', type: 'image/png' },
-    { src: "/img/stations/star.jpg", sizes: '250x250', type: 'image/jpg' },
-    { src: "/img/stations/szepviz.jpg", sizes: '250x250', type: 'image/jpg' },
-    { src: "/img/stations/coolfm.png", sizes: '150x150', type: 'image/png' },
-    { src: "/img/stations/oxygen.webp", sizes: '150x150', type: 'image/png' },
-    { src: "/img/stations/best-dance.png", sizes: '150x150', type: 'image/png' },
-    { src: "/img/stations/profm.jpg", sizes: '180x180', type: 'image/jpg' },
-    { src: "/img/stations/kissfm.svg", sizes: '320x320', type: 'image/svg-xml' },
-    { src: "/img/stations/onefm.png", sizes: '150x150', type: 'image/png' },
-    { src: "/img/stations/impuls.png", sizes: '250x147', type: 'image/png' },
-    { src: "/img/stations/kiss-pop.png", sizes: '150x150', type: 'image/png' },
-    { src: "/img/stations/kiss-energy.jpg", sizes: '150x150', type: 'image/jpg' }
+    { src: "img/stations/radio1.png",   sizes: '192x192',   type: 'image/png' },
+    { src: "img/stations/gaga.svg", sizes: '400x400', type: 'image/svg' },
+    { src: "img/stations/petofi.jpg",sizes: '250x250', type: 'image/jpg' },
+    { src: "img/stations/retro.png", sizes: '150x150', type: 'image/png' },
+    { src: "img/stations/star.jpg", sizes: '250x250', type: 'image/jpg' },
+    { src: "img/stations/szepviz.jpg", sizes: '250x250', type: 'image/jpg' },
+    { src: "img/stations/coolfm.png", sizes: '150x150', type: 'image/png' },
+    { src: "img/stations/oxygen.webp", sizes: '150x150', type: 'image/png' },
+    { src: "img/stations/best-dance.png", sizes: '150x150', type: 'image/png' },
+    { src: "img/stations/profm.jpg", sizes: '180x180', type: 'image/jpg' },
+    { src: "img/stations/kissfm.svg", sizes: '320x320', type: 'image/svg-xml' },
+    { src: "img/stations/onefm.png", sizes: '150x150', type: 'image/png' },
+    { src: "img/stations/impuls.png", sizes: '250x147', type: 'image/png' },
+    { src: "img/stations/kiss-pop.png", sizes: '150x150', type: 'image/png' },
+    { src: "img/stations/kiss-energy.jpg", sizes: '150x150', type: 'image/jpg' }
 ];
 
 const nevek = [
@@ -76,7 +76,7 @@ function mediaSessionInit(){
     navigator.mediaSession.metadata = new MediaMetadata();
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
-    navigator.mediaSession.metadata.artwork = [ { src: "/img/apple-touch.png", sizes: '192x192', type: 'image/png'} ];
+    navigator.mediaSession.metadata.artwork = [ { src: "img/apple-touch.png", sizes: '192x192', type: 'image/png'} ];
     navigator.mediaSession.setActionHandler('nexttrack', () => {
         let id = 0;
         let max = document.getElementsByTagName('audio').length;
