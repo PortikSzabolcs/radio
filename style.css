@@ -2,31 +2,38 @@
 body	{background-image: linear-gradient(#020, black);
 	padding-top:60px;
 	min-height: 100vh;
+	color: white;
 	margin: 0 0;}
 a	{color:transparent;}
+h1	{
+	font-size: 40px;
+	font-family: Arial, sans-serif;
+	text-align: left;
+	margin: 5px;
+	font-weight: normal;
+	}
 img	{
 	vertical-align: sub;
-	max-width: 54px;
-	width:54px;
-	max-height: 54px;
+	max-width: 40px;
+	width:40px;
+	max-height: 40px;
 	border-radius:8px;}
 audio	{
-	width:100%;
-	margin: 0 auto;
 	box-shadow: 1px 1px 1px #5555;
 	border-radius: 26px;
+	margin: 10px;
 	}
 button{
 	background-color: transparent;
-	padding: 1px;
 	color: white;
+	padding: 1px;
 	font-size: 22px;
 	text-align: center;
 	border-style: none;
-	border-width: thin;
 }
 button:hover{
 	background-color: #070;
+	cursor: pointer;
 }
 .timer-buttons{
 	width: 100%;
@@ -47,11 +54,11 @@ button:hover{
 	z-index:1;}
 .content{
 	display: block;
-	overflow: auto;	
 	padding: 8px;
+	overflow: hidden;
 	}
 .logo	{
-	height:50px;
+	max-height: 50px;
 	max-width:200px;
 	width:auto;
 	}
@@ -89,40 +96,58 @@ button:hover{
 	text-align: center;
 	z-index: 2;
 }
-.invert{
-	filter: invert(100%);
+#playing{
+	margin: 0;
+	width: 100%;
+	text-align: center;
+	float: left;
+	padding: 10px;
 }
-.col-1	{
-	display:inline-block;
-	vertical-align:middle;
-	height: 54px;
-	width:54px;
-	margin: 5px 0px 5px 1px;
-	border-radius: 8px;
-	}
-.col-2	{
-	display:inline-block;
-	vertical-align:middle;
-	height:54px;
-	width: calc(100% - 60px);
-	margin: 5px 0;
-	}
-.col-3	{width:100%;
-	float:left;
-	padding: 3px;
-	}
+#favorites{
+	width: 100%;
+	margin: 0;
+	float: left;
+	padding: 10px;
+	overflow: hidden;
+}
 
-.weather{float:right;
-	width:100%;
-	margin:10px auto;}
+.favoriteButton{
+	width: 25%;
+	height: 100%;
+	padding: 5px;
+}
+.favoriteLogo{
+	max-width: unset;
+	max-height: unset;
+	width: 100%;
+}
+.radioList{
+	float: right;
+	width: 100%;
+	padding: 10px;
+	overflow: hidden;
+}
+.radio-button{
+	border-radius: 10px;
+	width: 100%;
+	text-align: left;
+	font-size: 30px;
+	vertical-align: center;
+	padding: 3px;
+}
+#big-logo{
+	max-height: unset;
+	max-width: unset;
+	width: 200px;
+}
+
+
 @media only screen and (min-width: 992px) {
-	audio		{width: 97%;}
-	.col-2 		{width: calc(33% - 60px);}
-	.col-3 		{width: 75%;}
-	.weather {
-		width: 23%;
-		margin: 8px 5px;
-	}
+	#playing	{width: 33%;}
+	#favorites	{width: 34%;}
+	.radioList	{width: 33%;
+				height: calc(100vh - 80px);
+				overflow-y: scroll;}
 	#popup_menu, #timer-button { width: 100px; }
 	#theme-button {
 		width: 100px;

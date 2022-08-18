@@ -69,155 +69,101 @@
 </div>
 
 <div id="contentID" class="content">
-<div class="col-3">
 
-	<div class="col-1">
-	<a href=https://www.radio1.hu target="_blank" rel="noopener noreferrer"> 
-		<img src=img/stations/radio1.png alt="Radio 1 logo" >
-	</a>
+	<div id="playing">
+		<h1 id="title"> Válasszon rádiót</h1>
+		<button style="height: 200px; margin: 30px; border-radius: 8px;">
+			<img id="big-logo" src="img/apple-touch.png" alt="station logo">
+		</button>
+		<audio id="audio" src="" controls>Player</audio>
 	</div>
-	<div class="col-2">
-	<audio id="radio-1" src=https://icast.connectmedia.hu/5202/live.mp3 type=audio/mpeg controls preload="none"> Rádió 1 Live</audio>
+
+	<div id="favorites">
 	</div>
+
+<div class="radioList">
+	<h1> Minden rádió </h1>
+	<button class="radio-button" onclick="radioSelect(1)">
+		<img src=img/stations/radio1.png alt="Radio 1 logo">
+		Rádio 1
+	</button>
+
 	
-	<div class="col-1">
-	<a href=https://www.radiogaga.ro target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(2)">
 		<img src=img/stations/gaga.svg alt="Radio Gaga logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="gaga" src=https://securestreams5.autopo.st:1992/player type=audio/mpeg controls preload="none"> Rádió Gaga Live</audio>
-	</div>
+		Radio Gaga
+	</button>
 	
-	<div class="col-1">
-	<a href=https://myonlineradio.hu/mr2-petofi-radio target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(3)">
 		<img src=img/stations/petofi.jpg alt="Petofi Radio logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="petofi" src=https://icast.connectmedia.hu/4738/mr2.mp3 type=audio/mpeg controls preload="none"> Petőfi Rádió Live</audio>
-	</div>
+		Petőfi Rádió
+	</button>
 	
-	<div class="col-1">
-	<a href=https://www.retroradio.hu target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(4)">
 		<img style="margin: 6px auto;" src=img/stations/retro.png alt="Retro Radio logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="retro" src=https://icast.connectmedia.hu/5001/live.mp3 type=audio/mpeg controls preload="none"> Retro Radio Live</audio>
-	</div>
+		Retró Rádió
+	</button>
 	
-	<div class="col-1">
-	<a href=http://myonlineradio.hu/star-radio target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(5)">
 		<img src=img/stations/star.jpg alt="Star radio logo">
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="star" src=http://live.starradio.ro:9000/; type=audio/mpeg controls preload="none"> Star Radio Live</audio>
-	</div>
+		Star Rádió
+	</button>
 	
-	<div class="col-1">
-	<a href=http://myonlineradio.hu/szepviz-radio target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(6)">
 		<img src=img/stations/szepvizfm.jpg alt="SzepvizFM logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="szepviz" src=https://stream2.rdstrm.com/szepviz-radio.mp3 type=audio/mpeg controls preload="none">SzepvizFM Live</audio>
-	</div>
+		Szépvíz FM
+	</button>
 	
-	<div class="col-1">
-	<a href=https://coolfm.hu/radio/ target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(7)">
 		<img style="margin: 8px auto;" src=img/stations/coolfm.png alt="Cool FM logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="cool" src=https://mediagw.e-tiger.net/stream/coolfm type=audio/mpeg controls preload="none"> Cool FM Live</audio>
-	</div>
+		Cool FM
+	</button>
 	
-	<div class="col-1">
-	<a href=https://oxygenmusic.hu/csatorna target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(8)">
 		<img src=img/stations/oxygen.webp alt="Oxigen Music logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="oxygen" src=https://oxygenmusic.hu:8000/oxygenmusic_128 type=audio/mpeg controls preload="none"> Oxygen Live</audio>
-	</div>
+		Oxygen Music
+	</button>
 	
-	<div class="col-1">
-	<a href=https://best-dance.ro/ target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(9)">
 		<img src=img/stations/best-dance.png alt="Best-Dance logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="best-dance" src=https://ssl.omegahost.ro/8088/; type=audio/mpeg controls preload="none"> Best-Dance Live</audio>
-	</div>
+		Best-Dance Radio
+	</button>
 	
 	<hr>
 	
-	<div class="col-1" style="background-color: #231f20">
-	<a href=https://www.profm.ro target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(10)">
 		<img style="border-radius:0; padding: 1px" src=img/stations/profm.svg alt="ProFM logo">
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="pro" src=https://edge126.rcs-rds.ro/profm/profm.mp3 type=audio/mpeg controls preload="none"> ProFM Live</audio>
-	</div>
+		ProFM
+	</button>
 	
-	<div class="col-1" style="background-color: #0d6efd">
-	<a href=https://www.kissfm.ro target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(11)">
 		<img src=img/stations/kissfm.svg alt="KissFM logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="kiss" src=https://live.kissfm.ro/kissfm.aacp type=audio/aac controls preload="none"> KissFM Live</audio>
-	</div>
+		Kiss FM
+	</button>
 
 
-	<div class="col-1">
-	<a href=https://www.onefm.ro target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(12)">
 		<img src=img/stations/onefm.png alt="OneFM logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="one" src=https://live.onefm.ro/onefm.aacp type=audio/aac controls preload="none"> One FM Live</audio>
-	</div>
+		One FM
+	</button>
 	
-	<div class="col-1">
-	<a href=https://www.radioimpuls.ro target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(13)">
 		<img style="margin: 11px 0" src=img/stations/impuls.png alt="Radio Impuls logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="impuls" src=https://live.radio-impuls.ro/stream type=audio/mpeg controls preload="none"> Radio Impuls Live</audio>
-	</div>
+		Radio Impuls
+	</button>
 	
-	<div class="col-1">
-	<a href=https://soundis.ro/kisspop/ target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(14)">
 		<img src=img/stations/kiss-pop.png alt="Kiss Pop logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="kiss-pop" src=https://live.kissfm.ro/kiss.xtra type=audio/aac controls preload="none"> Kiss Pop Live</audio>
-	</div>
+		Kiss Pop
+	</button>
 	
-	<div class="col-1">
-	<a href=https://soundis.ro/kissenergy/ target="_blank" rel="noopener noreferrer"> 
+	<button class="radio-button" onclick="radioSelect(15)">
 		<img src=img/stations/kiss-energy.jpg alt="Kiss Energy logo" >
-	</a>
-	</div>
-	<div class="col-2">
-	<audio id="kiss-energy" src=https://live.kissfm.ro/kiss.energy type=audio/aac controls preload="none"> Kiss Energy Live</audio>
-	</div>
+		Kiss Energy
+	</button>
 
 
 </div>
-	<div class="weather">
-	<a class="weatherwidget-io" style="border-radius: 12px" href="https://forecast7.com/hu/46d1825d37/petreni/" data-label_1="HOMORÓDSZENTPÉTER" data-label_2="IDŐJÁRÁS" data-theme="original" >IDŐJÁRÁS</a>
-<script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-</script>
-	</div>
-
 </div>
 
 </body>
