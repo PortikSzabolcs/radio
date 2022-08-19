@@ -139,9 +139,11 @@ function radioSelect(selected){
     console.log(playPromise);
     if(playPromise !== undefined){
         playPromise.catch(function (){
-                window.open(radios[selected].audio,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
+            if(document.getElementById('audio').paused) {
+                window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
                 document.getElementById("title").innerText = "Ez a rádió csak új ablakban indul el!";
                 console.log("rejected");
+            }
             });
     }
 
