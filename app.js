@@ -1,15 +1,16 @@
 const artworks = [
     { src: "img/stations/radio1.png",   sizes: '192x192',   type: 'image/png' },
-    { src: "img/stations/gaga.svg", sizes: '400x400', type: 'image/svg' },
+    { src: "img/stations/gaga.png", sizes: '400x400', type: 'image/png' },
     { src: "img/stations/petofi.jpg",sizes: '250x250', type: 'image/jpg' },
     { src: "img/stations/retro.png", sizes: '150x150', type: 'image/png' },
     { src: "img/stations/star.jpg", sizes: '250x250', type: 'image/jpg' },
+    { src: "img/stations/msvradio.png", sizes: '250x250', type: 'image/jpg' },
     { src: "img/stations/szepvizfm.jpg", sizes: '250x250', type: 'image/jpg' },
     { src: "img/stations/coolfm.png", sizes: '150x150', type: 'image/png' },
     { src: "img/stations/oxygen.webp", sizes: '150x150', type: 'image/png' },
     { src: "img/stations/best-dance.png", sizes: '150x150', type: 'image/png' },
     { src: "img/stations/profm.jpg", sizes: '180x180', type: 'image/jpg' },
-    { src: "img/stations/kissfm.svg", sizes: '320x320', type: 'image/svg-xml' },
+    { src: "img/stations/kissfm.svg", sizes: '320x320', type: 'image/svg+xml' },
     { src: "img/stations/onefm.png", sizes: '150x150', type: 'image/png' },
     { src: "img/stations/impuls.png", sizes: '250x147', type: 'image/png' },
     { src: "img/stations/kiss-pop.png", sizes: '150x150', type: 'image/png' },
@@ -23,6 +24,7 @@ const radios = [
     { name: "Petőfi Rádió", logo: "img/stations/petofi.jpg", audio: "https://icast.connectmedia.hu/4738/mr2.mp3"},
     { name: "Retró Rádió", logo: "img/stations/retro.png", audio: "https://icast.connectmedia.hu/5001/live.mp3"},
     { name: "Star Rádió", logo: "img/stations/star.jpg", audio: "http://live.starradio.ro:9000/;"},
+    { name: "Marosvásárhelyi Rádió", logo: "img/stations/msvradio.png", audio: "http://stream2.srr.ro:8312/;"},
     { name: "Szépvíz FM", logo: "img/stations/szepvizfm.jpg", audio: "https://stream2.rdstrm.com/szepviz-radio.mp3"},
     { name: "Cool FM", logo: "img/stations/coolfm.png", audio: "https://mediagw.e-tiger.net/stream/coolfm"},
     { name: "Oxygen Music", logo: "img/stations/oxygen.webp", audio: "https://oxygenmusic.hu:8000/oxygenmusic_128"},
@@ -35,7 +37,13 @@ const radios = [
     { name: "Kiss-Energy", logo: "img/stations/kiss-energy.jpg", audio: "https://live.kissfm.ro/kiss.energy"}
 ];
 
+const mediaAPI = ('mediaSession' in navigator);
+let lastOnline = null;
+let theme = null;
+let nowPlaying = 0;
 let favorites = [];
+createRadioList();
+
 if(localStorage.getItem("favorites")){
     let string = localStorage.getItem("favorites");
     const arr = string.split(',');
@@ -44,17 +52,13 @@ if(localStorage.getItem("favorites")){
         favorites.push(Number(arr[i]));
     }
     updateFavList();
-    console.log(favorites);
 }
-
-const mediaAPI = ('mediaSession' in navigator);
-let lastOnline = null;
-let theme = null;
 
 if(localStorage.getItem("theme") === "white") {
-    theme = localStorage.getItem("theme");
+    theme = "white";
     themeSet();
 }
+
 
 if(!navigator.onLine){
     if(confirm("Nincs internetkapcsolat. Próbáljuk újra?")) location.reload();
@@ -84,6 +88,22 @@ window.addEventListener("online", function() {
     }
 });
 
+function createRadioList(){
+    for(let i=1; i<radios.length; i++){
+        let image = document.createElement('img');
+        image.src = radios[i].logo;
+        image.alt = radios[i].name + "logo";
+        let button = document.createElement('button');
+        button.appendChild(image);
+        button.innerHTML += " " + radios[i].name;
+        button.classList.add("radio-button");
+        button.onclick = function (){
+            radioSelect(i);
+        }
+        if(radios[i].name === "ProFM") document.getElementById("radioList").appendChild(document.createElement('hr'));
+        document.getElementById("radioList").appendChild(button);
+    }
+}
 
 function mediaSessionInit(){
     navigator.mediaSession.metadata = new MediaMetadata();
@@ -91,16 +111,39 @@ function mediaSessionInit(){
     navigator.mediaSession.metadata.title = "Saját Rádió";
     navigator.mediaSession.metadata.artwork = [ { src: "radio/img/apple-touch.png", sizes: '192x192', type: 'image/png'} ];
     navigator.mediaSession.setActionHandler('nexttrack', () => {
+        for(let i=0; i<favorites.length; i++){
+            if(favorites[i] === nowPlaying){
+                if(i === favorites.length-1) radioSelect(favorites[0]);
+                else radioSelect(favorites[i+1]);
+                break;
+            }
+        }
     });
     navigator.mediaSession.setActionHandler('previoustrack', () => {
+        for(let i=0; i<favorites.length; i++){
+            if(favorites[i] === nowPlaying){
+                if(i === 0) radioSelect(favorites[favorites.length - 1]);
+                else radioSelect(favorites[i-1]);
+                break;
+            }
+        }
     });
 }
 
 function radioSelect(selected){
+    document.getElementById("audio").src = radios[selected].audio;
+    let playPromise = document.getElementById("audio").play();
     document.getElementById("title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = radios[selected].logo;
-    document.getElementById("audio").src = radios[selected].audio;
-    document.getElementById("audio").play();
+    nowPlaying = selected;
+    console.log(playPromise);
+    if(playPromise !== undefined){
+        playPromise.catch(function (){
+                window.open(radios[selected].audio,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
+                document.getElementById("title").innerText = "Ez a rádió csak új ablakban indul el!";
+                console.log("rejected");
+            });
+    }
 
     let image = document.createElement("img");
     let button = document.createElement("button");
@@ -128,6 +171,8 @@ function radioSelect(selected){
         navigator.mediaSession.metadata.artwork = [artworks[selected-1]];
     }
 }
+
+// ~~~~~ KEDVENCEK FUNKCIOK ~~~~~
 
 function addToFavorites(nr){
     favorites.push(nr);
@@ -169,6 +214,8 @@ function updateFavList(){
     }
 }
 
+// ~~~~~ IDOZITO FUNKCIOK ~~~~~
+
 function idozitoMenuBe(){
     document.getElementById("popup_menu").style.display = "block";
 }
@@ -203,9 +250,7 @@ function ido(min){
 }
 
 function stopAll(){
-    for(let i=0; i<document.getElementsByTagName('audio').length; i++){
-        document.getElementsByTagName('audio')[i].pause();
-    }
+    document.getElementById("audio").pause();
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
@@ -221,6 +266,8 @@ function countdown(){
     else text += Math.floor(seconds);
     document.getElementById("timer-button").innerText = text;
 }
+
+// ~~~~~ TEMA FUNKCIOK ~~~~~
 
 function themeSwitch() {
     if(theme === "white") theme = "black";
