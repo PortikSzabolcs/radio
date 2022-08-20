@@ -1,25 +1,7 @@
-const artworks = [
-    { src: "img/stations/radio1.png",   sizes: '192x192',   type: 'image/png' },
-    { src: "img/stations/gaga.png", sizes: '400x400', type: 'image/png' },
-    { src: "img/stations/petofi.jpg",sizes: '250x250', type: 'image/jpg' },
-    { src: "img/stations/retro.png", sizes: '150x150', type: 'image/png' },
-    { src: "img/stations/msvradio.png", sizes: '250x250', type: 'image/jpg' },
-    { src: "img/stations/szepvizfm.jpg", sizes: '250x250', type: 'image/jpg' },
-    { src: "img/stations/coolfm.png", sizes: '150x150', type: 'image/png' },
-    { src: "img/stations/oxygen.webp", sizes: '150x150', type: 'image/png' },
-    { src: "img/stations/best-dance.png", sizes: '150x150', type: 'image/png' },
-    { src: "img/stations/profm.jpg", sizes: '180x180', type: 'image/jpg' },
-    { src: "img/stations/kissfm.svg", sizes: '320x320', type: 'image/svg+xml' },
-    { src: "img/stations/onefm.png", sizes: '150x150', type: 'image/png' },
-    { src: "img/stations/impuls.png", sizes: '250x147', type: 'image/png' },
-    { src: "img/stations/kiss-pop.png", sizes: '150x150', type: 'image/png' },
-    { src: "img/stations/kiss-energy.jpg", sizes: '150x150', type: 'image/jpg' }
-];
-
 const radios = [
     { name: "Válassz rádiót", logo: "img/apple-touch.png", audio:""},
     { name: "Rádió 1", logo: "img/stations/radio1.png", audio: "https://icast.connectmedia.hu/5202/live.mp3"},
-    { name: "Rádió Gaga", logo: "img/stations/gaga.svg", audio: "https://securestreams5.autopo.st:1992/player"},
+    { name: "Rádió Gaga - Príma Rádió", logo: "img/stations/gaga.svg", audio: "https://securestreams5.autopo.st:1992/player"},
     { name: "Petőfi Rádió", logo: "img/stations/petofi.jpg", audio: "https://icast.connectmedia.hu/4738/mr2.mp3"},
     { name: "Retró Rádió", logo: "img/stations/retro.png", audio: "https://icast.connectmedia.hu/5001/live.mp3"},
     { name: "Marosvásárhelyi Rádió", logo: "img/stations/msvradio.png", audio: "http://stream2.srr.ro:8312/;"},
@@ -31,8 +13,14 @@ const radios = [
     { name: "Kiss FM", logo: "img/stations/kissfm.svg", audio: "https://live.kissfm.ro/kissfm.aacp"},
     { name: "One FM", logo: "img/stations/onefm.png", audio: "https://live.onefm.ro/onefm.aacp"},
     { name: "Radio Impuls", logo: "img/stations/impuls.png", audio: "https://live.radio-impuls.ro/stream"},
-    { name: "Kiss-Pop", logo: "img/stations/kiss-pop.png", audio: "https://live.kissfm.ro/kiss.xtra"},
-    { name: "Kiss-Energy", logo: "img/stations/kiss-energy.jpg", audio: "https://live.kissfm.ro/kiss.energy"}
+    { name: "Dance FM", logo: "img/stations/dancefm.png", audio: "https://edge126.rcs-rds.ro/profm/dancefm.mp3"},
+    { name: "Digi FM", logo: "img/stations/digifm.svg", audio: "https://edge76.rcs-rds.ro/digifm/digifm.mp3"},
+    { name: "Radio ZUM", logo: "img/stations/radiozum.png", audio: "https://stream.radiozum.md/live"},
+    { name: "Europa FM", logo: "img/stations/europafm.png", audio: "https://astreaming.edi.ro:8443/EuropaFM_aac"},
+    { name: "Rock FM", logo: "img/stations/rockfm.png", audio: "https://live.rockfm.ro/rockfm.aacp"},
+    { name: "Magic FM", logo: "img/stations/magicfm.png", audio: "https://live.magicfm.ro/magicfm.aacp"},
+    { name: "Kiss - Pop", logo: "img/stations/kiss-pop.png", audio: "https://live.kissfm.ro/kiss.xtra"},
+    { name: "Kiss - Energy", logo: "img/stations/kiss-energy.jpg", audio: "https://live.kissfm.ro/kiss.energy"}
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
@@ -64,23 +52,17 @@ if(!navigator.onLine){
 }
 
 window.addEventListener("offline", function() {
-    let id = 0;
-    let max = document.getElementsByTagName('audio').length;
-    while(id < max){
-        if(!document.getElementsByTagName('audio')[id].paused){
-            lastOnline = document.getElementsByTagName("audio")[id];
-            setTimeout(function (){lastOnline = null;}, 300000);
-            break;
-        }
-        ++id;
+    if(!document.getElementById('audio').paused){
+        lastOnline = nowPlaying;
+        setTimeout(function (){lastOnline = null;}, 300000);
     }
     console.log("offline");
 });
 
 window.addEventListener("online", function() {
     if(lastOnline) {
-        if(!lastOnline.paused)lastOnline.load();
-        lastOnline.play();
+        if(!document.getElementById('audio').paused)document.getElementById('audio').load();
+        document.getElementById('audio').play();
         lastOnline = null;
         console.log("online again");
     }
@@ -134,13 +116,19 @@ function radioSelect(selected){
     document.getElementById("title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = radios[selected].logo;
     nowPlaying = selected;
-    console.log(playPromise);
     if(playPromise !== undefined){
-        playPromise.catch(function (){
+        playPromise.then(function (){
+            if(mediaAPI){
+                if(navigator.mediaSession.metadata == null) mediaSessionInit();
+                navigator.mediaSession.metadata.title = radios[selected].name;
+                navigator.mediaSession.metadata.artwork = [{src: radios[selected].logo}];
+            }
+        })
+            .catch(function (){
             if(document.getElementById('audio').paused) {
+                alert("Ez a rádió csak új ablakban indul el!");
                 window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
-                document.getElementById("title").innerText = "Ez a rádió csak új ablakban indul el!";
-                console.log("rejected");
+                console.log("Play promise rejected");
             }
             });
     }
@@ -163,12 +151,6 @@ function radioSelect(selected){
         image.src = "img/star-filled.png";
     } else {
         image.src = "img/star.png";
-    }
-
-    if(mediaAPI){
-        if(navigator.mediaSession.metadata == null) mediaSessionInit();
-        navigator.mediaSession.metadata.title = radios[selected].name;
-        navigator.mediaSession.metadata.artwork = [artworks[selected-1]];
     }
 }
 

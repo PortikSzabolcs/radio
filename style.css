@@ -17,7 +17,7 @@ img	{
 	max-width: 40px;
 	width:40px;
 	max-height: 40px;
-	border-radius:8px;}
+	border-radius:5px;}
 audio	{
 	margin: 10px 0;
 	}
@@ -30,7 +30,7 @@ button{
 	border-style: none;
 }
 button:hover{
-	background-color: #070;
+	background-color: #080;
 	cursor: pointer;
 }
 .timer-buttons{
@@ -113,6 +113,7 @@ button:hover{
 	width: 25%;
 	height: 100%;
 	padding: 5px;
+	border-radius: 10px;
 }
 .favoriteLogo{
 	max-width: unset;
@@ -126,7 +127,7 @@ button:hover{
 	overflow: hidden;
 }
 .radio-button{
-	border-radius: 10px;
+	border-radius: 5px;
 	width: 100%;
 	height: 46px;
 	text-align: left;
