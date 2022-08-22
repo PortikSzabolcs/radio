@@ -1,7 +1,7 @@
 const radios = [
     { name: "Válassz rádiót", logo: "img/apple-touch.png", audio:""},
     { name: "Rádió 1", logo: "img/stations/radio1.png", audio: "https://icast.connectmedia.hu/5202/live.mp3"},
-    { name: "Rádió Gaga - Príma Rádió", logo: "img/stations/gaga.svg", audio: "https://securestreams5.autopo.st:1992/player"},
+    { name: "Rádió Gaga - Príma Rádió", logo: "img/stations/gaga.png", audio: "https://securestreams5.autopo.st:1992/player"},
     { name: "Petőfi Rádió", logo: "img/stations/petofi.jpg", audio: "https://icast.connectmedia.hu/4738/mr2.mp3"},
     { name: "Retró Rádió", logo: "img/stations/retro.png", audio: "https://icast.connectmedia.hu/5001/live.mp3"},
     { name: "Marosvásárhelyi Rádió", logo: "img/stations/msvradio.png", audio: "http://stream2.srr.ro:8312/;"},
@@ -38,6 +38,12 @@ if(localStorage.getItem("favorites")){
         favorites.push(Number(arr[i]));
     }
     updateFavList();
+} else {
+    let text = document.createElement('p');
+    text.style.padding = "20px";
+    text.style.fontSize = "12px";
+    text.innerText = "Kedvencek hozzáadásához kattints a rádióra, majd a csillag ikonra.";
+    document.getElementById("favorites").appendChild(text);
 }
 
 if(localStorage.getItem("theme") === "white") {
@@ -73,9 +79,14 @@ function createRadioList(){
         let image = document.createElement('img');
         image.src = radios[i].logo;
         image.alt = radios[i].name + "logo";
+        image.classList.add("radio-button-logo");
         let button = document.createElement('button');
         button.appendChild(image);
-        button.innerHTML += " " + radios[i].name;
+        let text = document.createElement('span');
+        text.innerText = " " + radios[i].name;
+        text.style.verticalAlign = "middle";
+        text.style.marginLeft = "5px";
+        button.appendChild(text);
         button.classList.add("radio-button");
         button.onclick = function (){
             radioSelect(i);
@@ -126,7 +137,7 @@ function radioSelect(selected){
         })
             .catch(function (){
             if(document.getElementById('audio').paused) {
-                alert("Ez a rádió csak új ablakban indul el!");
+                if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
                 window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
                 console.log("Play promise rejected");
             }
@@ -136,6 +147,13 @@ function radioSelect(selected){
     let image = document.createElement("img");
     let button = document.createElement("button");
     button.style.float = "right";
+    button.onmouseover = function (){
+        button.style.backgroundColor = "unset";
+        image.style.scale = "1.2";
+    };
+    button.onmouseleave = function (){
+        image.style.scale = "unset";
+    };
     button.appendChild(image);
     document.getElementById("title").appendChild(button);
     button.onclick = function () {
@@ -182,18 +200,18 @@ function removeFromFavorites(nr){
 
 function updateFavList(){
     document.getElementById("favorites").innerHTML = "<h1> Kedvencek </h1>";
-    for(let i=0; i<favorites.length; i++) {
-        let button = document.createElement("button");
-        let image = document.createElement("img");
-        image.src = radios[favorites[i]].logo;
-        image.classList.add("favoriteLogo");
-        button.classList.add("favoriteButton");
-        button.appendChild(image);
-        button.onclick = function (){
-            radioSelect(favorites[i]);
+        for (let i = 0; i < favorites.length; i++) {
+            let button = document.createElement("button");
+            let image = document.createElement("img");
+            image.src = radios[favorites[i]].logo;
+            image.classList.add("favoriteLogo");
+            button.classList.add("favoriteButton");
+            button.appendChild(image);
+            button.onclick = function () {
+                radioSelect(favorites[i]);
+            }
+            document.getElementById("favorites").appendChild(button);
         }
-        document.getElementById("favorites").appendChild(button);
-    }
 }
 
 // ~~~~~ IDOZITO FUNKCIOK ~~~~~
@@ -258,7 +276,7 @@ function themeSwitch() {
 }
 function themeSet() {
     if(theme === "white"){
-        document.body.style.backgroundImage = "linear-gradient(#cfc, white)";
+        document.body.style.backgroundImage = "linear-gradient(#dfd, white)";
         document.body.style.color = "black";
         for(let i=0; i<document.getElementsByTagName('button').length; i++) {
             document.getElementsByTagName('button')[i].style.color = "black";
