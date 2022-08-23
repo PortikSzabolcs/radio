@@ -37,7 +37,7 @@ button:hover{
 	height: 50px;
 }
 .header {
-	height:60px;
+	height:90px;
 	width: 100%;
 	background-color:#050;
 	box-shadow: 0 1px 1px #6666;
@@ -45,8 +45,8 @@ button:hover{
 	border-bottom-width: thin;
 	border-bottom-color: #bbb;
 	position:fixed;
-	padding: 5px;
-	top: 0;
+	padding: 35px 5px 5px 5px;
+	top: -30px;
 	left: 0;
 	z-index:1;}
 .content{
@@ -61,21 +61,20 @@ button:hover{
 	}
 .header-button{
 	position: absolute;
-	height: 100%;
+	bottom: 0;
+	height: 60px;
 	border-style: none;
 	font-size: 30px;
 }
 #theme-button{
 	width: 45px;
 	right: 90px;
-	bottom: 0;
 }
 #theme-icon{
 	width: 40px;
 }
 #timer-button{
 	right: 0;
-	bottom: 0;
 	width: 90px;
 }
 #timer-icon{
