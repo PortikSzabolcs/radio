@@ -51,7 +51,6 @@ button:hover{
 	z-index:1;}
 .content{
 	display: block;
-	padding: 8px;
 	overflow: hidden;
 	}
 .logo	{
@@ -97,13 +96,13 @@ button:hover{
 	width: 100%;
 	text-align: center;
 	float: left;
-	padding: 10px;
+	padding: 15px;
 }
 #favorites{
 	width: 100%;
 	margin: 0;
 	float: left;
-	padding: 10px;
+	padding: 15px;
 	overflow: hidden;
 }
 
@@ -125,7 +124,7 @@ button:hover{
 #radioList{
 	float: right;
 	width: 100%;
-	padding: 10px;
+	padding: 15px;
 	overflow: hidden;
 }
 .radio-button{
@@ -160,7 +159,7 @@ button:hover{
 	#playing	{width: 33%;}
 	#favorites	{width: 34%;}
 	#radioList	{width: 33%;
-				height: calc(100vh - 80px);
+				height: calc(100vh - 60px);
 				overflow-y: scroll;}
 	#big-logo-container{
 		margin: 50px auto;
