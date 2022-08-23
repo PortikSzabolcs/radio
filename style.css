@@ -1,8 +1,4 @@
 *	{box-sizing: border-box;}
-html{
-	min-height: calc(100% + env(safe-area-inset-top));
-	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
 body	{background-image: linear-gradient(#020, black);
 	padding-top:60px;
 	min-height: 100vh;
@@ -41,7 +37,7 @@ button:hover{
 	height: 50px;
 }
 .header {
-	height:90px;
+	height:60px;
 	width: 100%;
 	background-color:#050;
 	box-shadow: 0 1px 1px #6666;
@@ -49,8 +45,8 @@ button:hover{
 	border-bottom-width: thin;
 	border-bottom-color: #bbb;
 	position:fixed;
-	padding: 35px 5px 5px 5px;
-	top: -30px;
+	padding: 5px;
+	top: 0;
 	left: 0;
 	z-index:1;}
 .content{
