@@ -109,7 +109,7 @@ button:hover{
 .favoriteButton{
 	width: 25%;
 	height: 100%;
-	padding: 5px;
+	padding: 10px;
 	border-radius: 10px;
 }
 .favoriteButton:hover{
@@ -151,22 +151,31 @@ button:hover{
 	width: 50%;
 	position: relative;
 	max-width:250px;
-	margin: 30px auto;
+	margin: 35px auto;
 	border-radius: 8px;
 }
 
-@media only screen and (min-width: 992px) {
-	#playing	{width: 33%;}
-	#favorites	{width: 34%;}
-	#radioList	{width: 33%;
-				height: calc(100vh - 60px);
-				overflow-y: scroll;}
-	#big-logo-container{
-		margin: 50px auto;
+@media only screen and (min-width: 768px) {
+	#playing	{width: 50%;}
+	#favorites	{width: 50%;}
+	.favoriteButton{
+		width: 33%;
 	}
 	#popup_menu, #timer-button { width: 100px; }
 	#theme-button {
 		width: 100px;
 		right: 100px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	#playing	{width: 35%; padding: 20px;}
+	#favorites	{width: 30%; padding: 25px;}
+	#radioList	{width: 35%;
+				padding: 20px;
+				height: calc(100vh - 60px);
+				overflow-y: scroll;}
+	#big-logo-container{
+		margin: 50px auto;
 	}
 }
