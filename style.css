@@ -51,7 +51,8 @@ button:hover{
 	z-index:1;}
 .content{
 	display: block;
-	overflow: hidden;
+	overflow-y: scroll;
+	height: calc(100vh - 60px);
 	}
 .logo	{
 	max-height: 50px;
@@ -183,5 +184,8 @@ button:hover{
 	}
 	.radio-button{
 		width: 100%;
+	}
+	.content{
+		overflow-y: hidden;
 	}
 }
