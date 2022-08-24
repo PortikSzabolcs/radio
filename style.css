@@ -161,6 +161,9 @@ button:hover{
 	.favoriteButton{
 		width: 33%;
 	}
+	.radio-button{
+		width: 50%;
+	}
 	#popup_menu, #timer-button { width: 100px; }
 	#theme-button {
 		width: 100px;
@@ -177,5 +180,8 @@ button:hover{
 				overflow-y: scroll;}
 	#big-logo-container{
 		margin: 50px auto;
+	}
+	.radio-button{
+		width: 100%;
 	}
 }
