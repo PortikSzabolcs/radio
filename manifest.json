@@ -1,7 +1,7 @@
 {
   "name": "Saját Rádió",
   "short_name": "Rádió",
-  "description": "Saját Online Rádió Gyűjtemény",
+  "description": "Online Rádió Gyűjtemény",
   "lang": "hu-HU",
   "start_url": "/radio/",
   "display": "standalone",
