@@ -28,6 +28,7 @@ let lastOnline = null;
 let theme = null;
 let nowPlaying = 0;
 let favorites = [];
+console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
 createRadioList();
 
 if(localStorage.getItem("favorites")){
