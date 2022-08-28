@@ -1,6 +1,6 @@
 {
   "name": "Saját Rádió",
-  "short_name": "My Radio",
+  "short_name": "My PWA",
   "description": "Online Rádió Gyűjtemény",
   "lang": "hu-HU",
   "start_url": "/radio/",
