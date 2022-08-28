@@ -103,21 +103,29 @@ function mediaSessionInit(){
     navigator.mediaSession.metadata.title = "Saját Rádió";
     navigator.mediaSession.metadata.artwork = [ { src: "radio/img/apple-touch.png", sizes: '192x192', type: 'image/png'} ];
     navigator.mediaSession.setActionHandler('nexttrack', () => {
-        for(let i=0; i<favorites.length; i++){
-            if(favorites[i] === nowPlaying){
-                if(i === favorites.length-1) radioSelect(favorites[0]);
-                else radioSelect(favorites[i+1]);
-                break;
+        if(favorites.length !== 0) {
+            let i;
+            for (i = 0; i < favorites.length; i++) {
+                if (favorites[i] === nowPlaying) {
+                    if (i === favorites.length - 1) radioSelect(favorites[0]);
+                    else radioSelect(favorites[i + 1]);
+                    break;
+                }
             }
+            if(i === favorites.length) radioSelect(favorites[0]);
         }
     });
     navigator.mediaSession.setActionHandler('previoustrack', () => {
-        for(let i=0; i<favorites.length; i++){
-            if(favorites[i] === nowPlaying){
-                if(i === 0) radioSelect(favorites[favorites.length - 1]);
-                else radioSelect(favorites[i-1]);
-                break;
+        if(favorites.length !== 0) {
+            let i;
+            for (i = 0; i < favorites.length; i++) {
+                if (favorites[i] === nowPlaying) {
+                    if (i === 0) radioSelect(favorites[favorites.length - 1]);
+                    else radioSelect(favorites[i - 1]);
+                    break;
+                }
             }
+            if(i === favorites.length) radioSelect(favorites[i-1]);
         }
     });
 }
