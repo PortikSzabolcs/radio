@@ -31,6 +31,11 @@ let favorites = [];
 console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
 createRadioList();
 
+if(localStorage.getItem("lastStation")){
+    document.getElementById("autoplay").checked = true;
+    radioSelect(localStorage.getItem("lastStation"));
+}
+
 if(localStorage.getItem("favorites")){
     let string = localStorage.getItem("favorites");
     const arr = string.split(',');
@@ -72,6 +77,14 @@ window.addEventListener("online", function() {
         document.getElementById('audio').play();
         lastOnline = null;
         console.log("online again");
+    }
+});
+
+document.getElementById("autoplay").addEventListener("click", function (){
+    if(document.getElementById("autoplay").checked) {
+        localStorage.setItem("lastStation", nowPlaying);
+    } else {
+        localStorage.removeItem("lastStation");
     }
 });
 
@@ -136,6 +149,7 @@ function radioSelect(selected){
     document.getElementById("title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = radios[selected].logo;
     nowPlaying = selected;
+    if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
     if(playPromise !== undefined){
         playPromise.then(function (){
             if(mediaAPI){

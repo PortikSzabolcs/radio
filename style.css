@@ -129,6 +129,17 @@ button:hover{
 	padding: 15px;
 	overflow: hidden;
 }
+
+#settings{
+	overflow: hidden;
+	position: relative;
+	bottom: 0;
+	opacity: .5;
+	padding: 20px;
+}
+#settings:hover{
+	opacity: 1;
+}
 .radio-button{
 	border-radius: 5px;
 	width: 100%;
@@ -180,6 +191,7 @@ button:hover{
 				padding: 20px;
 				height: calc(100vh - 60px);
 				overflow-y: scroll;}
+	#settings	{width: 35%}
 	#big-logo-container{
 		margin: 50px auto;
 	}
