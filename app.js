@@ -167,9 +167,11 @@ function radioSelect(selected){
             .catch(NotAllowedError => {
                 fetch(radios[selected].audio).then(function (){
                     console.error(NotAllowedError);
-                    alert("Ez az eszköz vagy böngésző nem engedélyezi az automatikus lejátszást!");
-                    localStorage.removeItem("lastStation");
-                    location.reload();
+                    if(document.getElementById("audio").paused) {
+                        alert("Ez az eszköz vagy böngésző nem engedélyezi az automatikus lejátszást!");
+                        localStorage.removeItem("lastStation");
+                        location.reload();
+                    }
                 })
                     .catch(function (){
                     if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
