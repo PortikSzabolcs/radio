@@ -54,11 +54,6 @@ function initPage() {
         document.getElementById("favorites").appendChild(text);
     }
 
-    if (!navigator.onLine) {
-        if (confirm("Nincs internetkapcsolat. Próbáljuk újra?")) location.reload();
-        else close();
-    }
-
     if (localStorage.getItem("lastStation")) {
         document.getElementById("autoplay").checked = true;
         radioSelect(Number(localStorage.getItem("lastStation")));
@@ -151,35 +146,36 @@ function mediaSessionInit(){
 
 function radioSelect(selected){
     document.getElementById("audio").src = radios[selected].audio;
-    let playPromise = document.getElementById("audio").play();
+    if (!navigator.onLine) {
+        alert("Nincs internetkapcsolat!");
+    } else {
+        let playPromise = document.getElementById("audio").play();
+        if(playPromise !== undefined){
+            playPromise.then(function (){
+                if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
+                if(mediaAPI){
+                    if(navigator.mediaSession.metadata == null) mediaSessionInit();
+                    navigator.mediaSession.metadata.title = radios[selected].name;
+                    navigator.mediaSession.metadata.artwork = [{src: radios[selected].logo}];
+                }
+            })
+                .catch(NotAllowedError => {
+                    fetch(radios[selected].audio).then(function (){
+                        console.error(NotAllowedError);
+                    })
+                        .catch(function (){
+                            if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
+                            window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
+                            console.log("Play promise rejected");
+                        });
+                })
+        }
+    }
+
     document.getElementById("title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = radios[selected].logo;
+    document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
-    if(playPromise !== undefined){
-        playPromise.then(function (){
-            if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
-            if(mediaAPI){
-                if(navigator.mediaSession.metadata == null) mediaSessionInit();
-                navigator.mediaSession.metadata.title = radios[selected].name;
-                navigator.mediaSession.metadata.artwork = [{src: radios[selected].logo}];
-            }
-        })
-            .catch(NotAllowedError => {
-                fetch(radios[selected].audio).then(function (){
-                    console.error(NotAllowedError);
-                    if(document.getElementById("audio").paused) {
-                        alert("Ez az eszköz vagy böngésző nem engedélyezi az automatikus lejátszást!");
-                        localStorage.removeItem("lastStation");
-                        location.reload();
-                    }
-                })
-                    .catch(function (){
-                    if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
-                    window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
-                    console.log("Play promise rejected");
-                });
-        })
-    }
 
     let image = document.createElement("img");
     let button = document.createElement("button");
@@ -241,6 +237,7 @@ function updateFavList(){
             let button = document.createElement("button");
             let image = document.createElement("img");
             image.src = radios[favorites[i]].logo;
+            image.alt = radios[favorites[i]].name;
             image.classList.add("favoriteLogo");
             button.classList.add("favoriteButton");
             button.appendChild(image);
