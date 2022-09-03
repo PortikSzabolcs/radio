@@ -11,7 +11,9 @@ let urlsToCache = [
     './img/android-chrome.png',
     './img/maskable-icon.png',
     './img/timer.png',
-    './img/dark-mode.png'
+    './img/dark-mode.png',
+    './img/star.png',
+    './img/star-filled.png'
     ];
 
 self.addEventListener('install', function(event) {

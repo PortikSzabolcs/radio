@@ -29,64 +29,70 @@ let theme = null;
 let nowPlaying = 0;
 let favorites = [];
 console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
-createRadioList();
+initPage();
 
-if(localStorage.getItem("lastStation")){
-    document.getElementById("autoplay").checked = true;
-    radioSelect(localStorage.getItem("lastStation"));
-}
+function initPage() {
 
-if(localStorage.getItem("favorites")){
-    let string = localStorage.getItem("favorites");
-    const arr = string.split(',');
-    arr.pop();
-    for(let i=0; i<arr.length; i++){
-        favorites.push(Number(arr[i]));
+    if (localStorage.getItem("theme") === "white") {
+        theme = "white";
+        themeSet();
     }
-    updateFavList();
-} else {
-    let text = document.createElement('p');
-    text.style.padding = "20px";
-    text.style.fontSize = "12px";
-    text.innerText = "Kedvencek hozzáadásához kattints a rádióra, majd a csillag ikonra.";
-    document.getElementById("favorites").appendChild(text);
-}
 
-if(localStorage.getItem("theme") === "white") {
-    theme = "white";
-    themeSet();
-}
-
-
-if(!navigator.onLine){
-    if(confirm("Nincs internetkapcsolat. Próbáljuk újra?")) location.reload();
-    else close();
-}
-
-window.addEventListener("offline", function() {
-    if(!document.getElementById('audio').paused){
-        lastOnline = nowPlaying;
-        setTimeout(function (){lastOnline = null;}, 300000);
-    }
-    console.log("offline");
-});
-
-window.addEventListener("online", function() {
-    if(lastOnline) {
-        if(!document.getElementById('audio').paused)document.getElementById('audio').load();
-        document.getElementById('audio').play();
-        lastOnline = null;
-        console.log("online again");
-    }
-});
-
-document.getElementById("autoplay").addEventListener("click", function (){
-    if(document.getElementById("autoplay").checked) {
-        localStorage.setItem("lastStation", nowPlaying);
+    if (localStorage.getItem("favorites")) {
+        let string = localStorage.getItem("favorites");
+        const arr = string.split(',');
+        arr.pop();
+        for (let i = 0; i < arr.length; i++) {
+            favorites.push(Number(arr[i]));
+        }
+        updateFavList();
     } else {
-        localStorage.removeItem("lastStation");
+        let text = document.createElement('p');
+        text.style.padding = "20px";
+        text.style.fontSize = "12px";
+        text.innerText = "Kedvencek hozzáadásához kattints a rádióra, majd a csillag ikonra.";
+        document.getElementById("favorites").appendChild(text);
     }
-});
+
+    if (!navigator.onLine) {
+        if (confirm("Nincs internetkapcsolat. Próbáljuk újra?")) location.reload();
+        else close();
+    }
+
+    if (localStorage.getItem("lastStation")) {
+        document.getElementById("autoplay").checked = true;
+        radioSelect(Number(localStorage.getItem("lastStation")));
+    }
+
+    createRadioList();
+
+    window.addEventListener("offline", function () {
+        if (!document.getElementById('audio').paused) {
+            lastOnline = nowPlaying;
+            setTimeout(function () {
+                lastOnline = null;
+            }, 300000);
+        }
+        console.log("offline");
+    });
+
+    window.addEventListener("online", function () {
+        if (lastOnline) {
+            if (!document.getElementById('audio').paused) document.getElementById('audio').load();
+            document.getElementById('audio').play();
+            lastOnline = null;
+            console.log("online again");
+        }
+    });
+
+    document.getElementById("autoplay").addEventListener("click", function () {
+        if (document.getElementById("autoplay").checked) {
+            localStorage.setItem("lastStation", nowPlaying);
+        } else {
+            localStorage.removeItem("lastStation");
+        }
+    });
+}
 
 function createRadioList(){
     for(let i=1; i<radios.length; i++){
@@ -149,9 +155,9 @@ function radioSelect(selected){
     document.getElementById("title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = radios[selected].logo;
     nowPlaying = selected;
-    if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
     if(playPromise !== undefined){
         playPromise.then(function (){
+            if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
             if(mediaAPI){
                 if(navigator.mediaSession.metadata == null) mediaSessionInit();
                 navigator.mediaSession.metadata.title = radios[selected].name;
@@ -159,18 +165,18 @@ function radioSelect(selected){
             }
         })
             .catch(NotAllowedError => {
-            console.error(NotAllowedError);
-            alert("Ez az eszköz nem engedélyezi az automatikus lejátszást!");
-            localStorage.removeItem("lastStation");
-            location.reload();
-        })
-            .catch(function (){
-                if(document.getElementById('audio').paused) {
+                fetch(radios[selected].audio).then(function (){
+                    console.error(NotAllowedError);
+                    alert("Ez az eszköz vagy böngésző nem engedélyezi az automatikus lejátszást!");
+                    localStorage.removeItem("lastStation");
+                    location.reload();
+                })
+                    .catch(function (){
                     if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
-                    window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
+                    window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
                     console.log("Play promise rejected");
-                }
-            });
+                });
+        })
     }
 
     let image = document.createElement("img");
