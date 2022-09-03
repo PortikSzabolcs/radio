@@ -158,12 +158,14 @@ function radioSelect(selected){
                 navigator.mediaSession.metadata.artwork = [{src: radios[selected].logo}];
             }
         })
-            .catch(function (){
-            if(document.getElementById('audio').paused) {
-                if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
-                window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
-                console.log("Play promise rejected");
-            }
+            .catch(error => function (){
+                console.error(error);
+                document.getElementById("title").innerText = error; //test!!!
+                if(document.getElementById('audio').paused) {
+                    if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
+                    window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=50px,width=300px');
+                    console.log("Play promise rejected");
+                }
             });
     }
 
