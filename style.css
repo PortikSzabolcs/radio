@@ -49,11 +49,6 @@ button:hover{
 	top: 0;
 	left: 0;
 	z-index:1;}
-.content{
-	display: block;
-	overflow-y: scroll;
-	height: calc(100vh - 60px);
-	}
 .logo	{
 	max-height: 50px;
 	max-width:200px;
@@ -115,7 +110,7 @@ button:hover{
 }
 .favoriteButton:hover{
 	background-color: unset;
-	padding: 0;
+	padding: 5px;
 }
 .favoriteLogo{
 	max-width: unset;
@@ -167,6 +162,13 @@ button:hover{
 	border-radius: 8px;
 }
 
+@media all and (display-mode: standalone) {
+	.content {
+		overflow-y: scroll;
+		height: calc(100vh - 60px)
+	}
+}
+
 @media only screen and (min-width: 768px) {
 	#playing	{width: 50%;}
 	#favorites	{width: 50%;}
@@ -184,20 +186,36 @@ button:hover{
 }
 
 @media only screen and (min-width: 992px) {
-	#playing	{width: 35%; padding: 20px;}
-	#favorites	{width: 30%; padding: 25px;}
-	#radioList	{width: 35%;
-				padding: 20px;
-				height: calc(100vh - 60px);
-				overflow-y: scroll;}
-	#settings	{width: 35%}
+	#playing {
+		width: 35%;
+		padding: 20px;
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+	}
+	#favorites {
+		width: 30%;
+		padding: 25px;
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+	}
+	#radioList {
+		width: 35%;
+		padding: 20px;
+	}
+	#settings {
+		width: 35%;
+		position: absolute;
+	}
 	#big-logo-container{
 		margin: 50px auto;
 	}
-	.radio-button{
+	.radio-button {
 		width: 100%;
 	}
-	.content{
-		overflow-y: hidden;
+	.content {
+		height: calc(100vh - 60px);
+		overflow-y: scroll;
 	}
 }
