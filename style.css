@@ -1,9 +1,9 @@
 *	{box-sizing: border-box;}
-body	{background-image: linear-gradient(#020, black);
+body {
+	background-image: linear-gradient(#020, black);
 	padding-top:60px;
 	min-height: 100vh;
 	color: white;
-	color-scheme: dark;
 	margin: 0 0;}
 h1	{
 	font-size: 40px;

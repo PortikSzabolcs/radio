@@ -312,14 +312,14 @@ function themeSet() {
     if(theme === "white"){
         document.body.style.backgroundImage = "linear-gradient(#dfd, white)";
         document.body.style.color = "black";
-        document.body.style.colorScheme = "normal";
+        document.documentElement.style.colorScheme = "normal";
         for(let i=0; i<document.getElementsByTagName('button').length; i++) {
             document.getElementsByTagName('button')[i].style.color = "black";
         }
     } else{
         document.body.style.backgroundImage = "linear-gradient(#020, black)";
         document.body.style.color = "white";
-        document.body.style.colorScheme = "dark";
+        document.documentElement.style.colorScheme = "dark";
         for(let i=0; i<document.getElementsByTagName('button').length; i++) {
             document.getElementsByTagName('button')[i].style.color = "white";
         }
