@@ -13,7 +13,8 @@ let urlsToCache = [
     './img/timer.png',
     './img/dark-mode.png',
     './img/star.png',
-    './img/star-filled.png'
+    './img/star-filled.png',
+    './img/website.png'
     ];
 
 self.addEventListener('install', function(event) {

@@ -1,26 +1,26 @@
 const radios = [
-    { name: "Válassz rádiót", logo: "img/apple-touch.png", audio:""},
-    { name: "Rádió 1", logo: "img/stations/radio1.png", audio: "https://icast.connectmedia.hu/5202/live.mp3"},
-    { name: "Rádió Gaga - Príma Rádió", logo: "img/stations/gaga.png", audio: "https://securestreams5.autopo.st:1992/player"},
-    { name: "Petőfi Rádió", logo: "img/stations/petofi.jpg", audio: "https://icast.connectmedia.hu/4738/mr2.mp3"},
-    { name: "Retró Rádió", logo: "img/stations/retro.png", audio: "https://icast.connectmedia.hu/5001/live.mp3"},
-    { name: "Marosvásárhelyi Rádió", logo: "img/stations/msvradio.png", audio: "http://stream2.srr.ro:8312/;"},
-    { name: "Szépvíz FM", logo: "img/stations/szepvizfm.jpg", audio: "https://stream2.rdstrm.com/szepviz-radio.mp3"},
-    { name: "Cool FM", logo: "img/stations/coolfm.png", audio: "https://mediagw.e-tiger.net/stream/coolfm"},
-    { name: "Oxygen Music", logo: "img/stations/oxygen.webp", audio: "https://oxygenmusic.hu:8000/oxygenmusic_128"},
-    { name: "Best-Dance Radio", logo: "img/stations/best-dance.png", audio: "https://ssl.omegahost.ro/8088/;"},
-    { name: "ProFM", logo: "img/stations/profm.jpg", audio: "https://edge126.rcs-rds.ro/profm/profm.mp3"},
-    { name: "Kiss FM", logo: "img/stations/kissfm.png", audio: "https://live.kissfm.ro/kissfm.aacp"},
-    { name: "One FM", logo: "img/stations/onefm.png", audio: "https://live.onefm.ro/onefm.aacp"},
-    { name: "Radio Impuls", logo: "img/stations/impuls.png", audio: "https://live.radio-impuls.ro/stream"},
-    { name: "Dance FM", logo: "img/stations/dancefm.png", audio: "https://edge126.rcs-rds.ro/profm/dancefm.mp3"},
-    { name: "Digi FM", logo: "img/stations/digifm.png", audio: "https://edge76.rcs-rds.ro/digifm/digifm.mp3"},
-    { name: "Radio ZUM", logo: "img/stations/radiozum.png", audio: "https://stream.radiozum.md/live"},
-    { name: "Europa FM", logo: "img/stations/europafm.png", audio: "https://astreaming.edi.ro:8443/EuropaFM_aac"},
-    { name: "Rock FM", logo: "img/stations/rockfm.png", audio: "https://live.rockfm.ro/rockfm.aacp"},
-    { name: "Magic FM", logo: "img/stations/magicfm.png", audio: "https://live.magicfm.ro/magicfm.aacp"},
-    { name: "Kiss - Pop", logo: "img/stations/kiss-pop.png", audio: "https://live.kissfm.ro/kiss.xtra"},
-    { name: "Kiss - Energy", logo: "img/stations/kiss-energy.jpg", audio: "https://live.kissfm.ro/kiss.energy"}
+    { name: "Válassz rádiót", logo: "img/apple-touch.png", audio:"", website: "/radio"},
+    { name: "Rádió 1", logo: "img/stations/radio1.png", audio: "https://icast.connectmedia.hu/5202/live.mp3", website: "https://radio1.hu"},
+    { name: "Rádió Gaga - Príma Rádió", logo: "img/stations/gaga.png", audio: "https://securestreams5.autopo.st:1992/player", website: "https://radiogaga.ro"},
+    { name: "Petőfi Rádió", logo: "img/stations/petofi.jpg", audio: "https://icast.connectmedia.hu/4738/mr2.mp3", website: "https://petofilive.hu"},
+    { name: "Retró Rádió", logo: "img/stations/retro.png", audio: "https://icast.connectmedia.hu/5001/live.mp3", website: "https://retroradio.hu"},
+    { name: "Marosvásárhelyi Rádió", logo: "img/stations/msvradio.png", audio: "http://stream2.srr.ro:8312/;", website: "https://www.marosvasarhelyiradio.ro/"},
+    { name: "Szépvíz FM", logo: "img/stations/szepvizfm.jpg", audio: "https://stream2.rdstrm.com/szepviz-radio.mp3", website: "http://myonlineradio.hu/szepviz-radio"},
+    { name: "Cool FM", logo: "img/stations/coolfm.png", audio: "https://mediagw.e-tiger.net/stream/coolfm", website: "https://coolfm.hu"},
+    { name: "Oxygen Music", logo: "img/stations/oxygen.webp", audio: "https://oxygenmusic.hu:8000/oxygenmusic_128", website: "https://oxygenmusic.hu/csatorna"},
+    { name: "Best-Dance Radio", logo: "img/stations/best-dance.png", audio: "https://ssl.omegahost.ro/8088/;", website: "https://best-dance.ro"},
+    { name: "ProFM", logo: "img/stations/profm.jpg", audio: "https://edge126.rcs-rds.ro/profm/profm.mp3", website: "https://profm.ro"},
+    { name: "Kiss FM", logo: "img/stations/kissfm.png", audio: "https://live.kissfm.ro/kissfm.aacp", website: "https://kissfm.ro"},
+    { name: "One FM", logo: "img/stations/onefm.png", audio: "https://live.onefm.ro/onefm.aacp", website: "https://onefm.ro"},
+    { name: "Radio Impuls", logo: "img/stations/impuls.png", audio: "https://live.radio-impuls.ro/stream", website: "https://radioimpuls.ro"},
+    { name: "Dance FM", logo: "img/stations/dancefm.png", audio: "https://edge126.rcs-rds.ro/profm/dancefm.mp3", website: "https://dancefm.ro"},
+    { name: "Digi FM", logo: "img/stations/digifm.png", audio: "https://edge76.rcs-rds.ro/digifm/digifm.mp3", website: "https://digifm.ro"},
+    { name: "Radio ZUM", logo: "img/stations/radiozum.png", audio: "https://stream.radiozum.md/live", website: "https://radiozum.md"},
+    { name: "Europa FM", logo: "img/stations/europafm.png", audio: "https://astreaming.edi.ro:8443/EuropaFM_aac", website: "https://europafm.ro"},
+    { name: "Rock FM", logo: "img/stations/rockfm.png", audio: "https://live.rockfm.ro/rockfm.aacp", website: "https://rockfm.ro"},
+    { name: "Magic FM", logo: "img/stations/magicfm.png", audio: "https://live.magicfm.ro/magicfm.aacp", website: "https://magicfm.ro"},
+    { name: "Kiss - Pop", logo: "img/stations/kiss-pop.png", audio: "https://live.kissfm.ro/kiss.xtra", website: "https://soundis.ro/kisspop/"},
+    { name: "Kiss - Energy", logo: "img/stations/kiss-energy.jpg", audio: "https://live.kissfm.ro/kiss.energy", website: "https://soundis.ro/kissenergy/"}
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
@@ -172,40 +172,37 @@ function radioSelect(selected){
         }
     }
 
-    document.getElementById("title").innerText = radios[selected].name;
+    document.getElementById("radio-title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = radios[selected].logo;
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
 
-    let image = document.createElement("img");
-    let button = document.createElement("button");
-    button.style.float = "right";
-    button.onmouseover = function (){
-        button.style.backgroundColor = "unset";
-        image.style.scale = "1.2";
-    };
-    button.onmouseleave = function (){
-        image.style.scale = "unset";
-    };
-    button.appendChild(image);
-    document.getElementById("title").appendChild(button);
-    button.onclick = function () {
-        if(favorites.includes(selected)){
-            removeFromFavorites(selected);
-            image.src = "img/star.png";
-        } else{
-            addToFavorites(selected);
-            image.src = "img/star-filled.png";
-        }
-    }
-    if(favorites.includes(selected)){
-        image.src = "img/star-filled.png";
-    } else {
-        image.src = "img/star.png";
-    }
+    updateFavicon();
+}
+
+function openPage(){
+    if(!nowPlaying) return;
+    window.open(radios[nowPlaying].website, "_blank");
 }
 
 // ~~~~~ KEDVENCEK FUNKCIOK ~~~~~
+function updateFavicon(){
+    if(favorites.includes(nowPlaying)){
+        document.getElementById("star-icon").src = "img/star-filled.png";
+    } else {
+        document.getElementById("star-icon").src = "img/star.png";
+    }
+}
+
+function favoriteSwitch() {
+    if(!nowPlaying) return;
+    if(favorites.includes(nowPlaying)){
+        removeFromFavorites(nowPlaying);
+    } else{
+        addToFavorites(nowPlaying);
+    }
+    updateFavicon();
+}
 
 function addToFavorites(nr){
     favorites.push(nr);
@@ -313,16 +310,10 @@ function themeSet() {
         document.body.style.backgroundImage = "linear-gradient(#dfd, white)";
         document.body.style.color = "black";
         document.documentElement.style.colorScheme = "normal";
-        for(let i=0; i<document.getElementsByTagName('button').length; i++) {
-            document.getElementsByTagName('button')[i].style.color = "black";
-        }
     } else{
         document.body.style.backgroundImage = "linear-gradient(#020, black)";
         document.body.style.color = "white";
         document.documentElement.style.colorScheme = "dark";
-        for(let i=0; i<document.getElementsByTagName('button').length; i++) {
-            document.getElementsByTagName('button')[i].style.color = "white";
-        }
     }
     localStorage.setItem("theme", theme);
 }

@@ -60,10 +60,10 @@
 	<a href="/radio">
 	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
-	<button id="theme-button" class="header-button" onclick="themeSwitch()">
+	<button id="theme-button" class="header-button" title="Világos/sötét mód" onclick="themeSwitch()">
 		<img id="theme-icon" src="img/dark-mode.png" alt="theme-icon">
 	</button>
-	<button id="timer-button" class="header-button" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+	<button id="timer-button" class="header-button" title="Időzített kikapcsolás" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
 		<img id="timer-icon" src="img/timer.png" alt="timer-icon">
 	</button>
 	<div id="popup_menu" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
@@ -78,7 +78,16 @@
 <div id="contentID" class="content">
 
 	<div id="playing">
-		<h1 id="title"> Válassz rádiót </h1>
+		<div id="playerHeader">
+			<button class="nowPlayingButton" id="addToFavorites-button" title="Kedvencekhez ad/eltávolít" onclick="favoriteSwitch()">
+				<img id="star-icon" src="img/star.png" alt="favorite icon">
+			</button>
+			<button class="nowPlayingButton" id="openWebsite-button" title="Rádió weboldala" onclick="openPage()">
+				<img src="img/website.png" alt="station website">
+			</button>
+			<span id="radio-title"> Válassz rádiót</span>
+		</div>
+
 		<div id="big-logo-container">
 			<img id="big-logo" src="img/apple-touch.png" alt="station logo">
 		</div>
