@@ -152,6 +152,7 @@ button:hover{
 	border-radius: 5px;
 	width: 100%;
 	height: 46px;
+	color: inherit;
 	vertical-align: middle;
 	text-align: left;
 	font-size: 30px;
