@@ -165,11 +165,11 @@ function radioSelect(selected){
                         console.error(NotAllowedError);
                     })
                         .catch(function (){
-                            if(radios[selected].audio[4] === 's') {
+                            if(radios[selected].audio[4] !== 's') {
                                 if (favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
                                 window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
                                 console.log("Play promise rejected");
-                            }
+                            } else alert("Ez a rádió jelenleg nem működik.");
                         });
                 })
         }
