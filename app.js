@@ -161,12 +161,15 @@ function radioSelect(selected){
             })
                 .catch(NotAllowedError => {
                     fetch(radios[selected].audio).then(function (){
+                        console.log("No autoplay:");
                         console.error(NotAllowedError);
                     })
                         .catch(function (){
-                            if(favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
-                            window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
-                            console.log("Play promise rejected");
+                            if(radios[selected].audio[4] === 's') {
+                                if (favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
+                                window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
+                                console.log("Play promise rejected");
+                            }
                         });
                 })
         }
