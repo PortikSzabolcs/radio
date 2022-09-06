@@ -95,6 +95,13 @@ const radios = [
         "lang": "hu"
     },
     {
+        "name": "One World Radio",
+        "id": "one-world",
+        "audio": "https://22193.live.streamtheworld.com/OWR_DABAAC.aac",
+        "website": "https://www.tomorrowland.com/home/radio",
+        "lang": "ro-en"
+    },
+    {
         "name": "Dance FM",
         "id": "dancefm",
         "audio": "https://edge126.rcs-rds.ro/profm/dancefm.mp3",
