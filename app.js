@@ -1,26 +1,183 @@
+const radiosOld = [
+    { id: "logo"},
+    { id: "radio1"},
+    { id: "gaga"},
+    { id: "petofi"},
+    { id: "retro"},
+    { id: "msvradio"},
+    { id: "szepvizfm"},
+    { id: "coolfm"},
+    { id: "oxygen"},
+    { id: "best-dance"},
+    { id: "profm"},
+    { id: "kissfm"},
+    { id: "onefm"},
+    { id: "impuls"},
+    { id: "dancefm"},
+    { id: "digifm"},
+    { id: "zum"},
+    { id: "europafm"},
+    { id: "rockfm"},
+    { id: "magicfm"},
+    { id: "kiss-pop"},
+    { id: "kiss-energy"},
+];
+
 const radios = [
-    { name: "Válassz rádiót", logo: "img/apple-touch.png", audio:"", website: "/radio"},
-    { name: "Rádió 1", logo: "img/stations/radio1.png", audio: "https://icast.connectmedia.hu/5202/live.mp3", website: "https://radio1.hu"},
-    { name: "Rádió Gaga - Príma Rádió", logo: "img/stations/gaga.png", audio: "https://securestreams5.autopo.st:1992/player", website: "https://radiogaga.ro"},
-    { name: "Petőfi Rádió", logo: "img/stations/petofi.jpg", audio: "https://icast.connectmedia.hu/4738/mr2.mp3", website: "https://petofilive.hu"},
-    { name: "Retró Rádió", logo: "img/stations/retro.png", audio: "https://icast.connectmedia.hu/5001/live.mp3", website: "https://retroradio.hu"},
-    { name: "Marosvásárhelyi Rádió", logo: "img/stations/msvradio.png", audio: "http://stream2.srr.ro:8312/;", website: "https://www.marosvasarhelyiradio.ro/"},
-    { name: "Szépvíz FM", logo: "img/stations/szepvizfm.jpg", audio: "https://stream2.rdstrm.com/szepviz-radio.mp3", website: "http://myonlineradio.hu/szepviz-radio"},
-    { name: "Cool FM", logo: "img/stations/coolfm.png", audio: "https://mediagw.e-tiger.net/stream/coolfm", website: "https://coolfm.hu"},
-    { name: "Oxygen Music", logo: "img/stations/oxygen.webp", audio: "https://oxygenmusic.hu:8000/oxygenmusic_128", website: "https://oxygenmusic.hu/csatorna"},
-    { name: "Best-Dance Radio", logo: "img/stations/best-dance.png", audio: "https://ssl.omegahost.ro/8088/;", website: "https://best-dance.ro"},
-    { name: "ProFM", logo: "img/stations/profm.jpg", audio: "https://edge126.rcs-rds.ro/profm/profm.mp3", website: "https://profm.ro"},
-    { name: "Kiss FM", logo: "img/stations/kissfm.png", audio: "https://live.kissfm.ro/kissfm.aacp", website: "https://kissfm.ro"},
-    { name: "One FM", logo: "img/stations/onefm.png", audio: "https://live.onefm.ro/onefm.aacp", website: "https://onefm.ro"},
-    { name: "Radio Impuls", logo: "img/stations/impuls.png", audio: "https://live.radio-impuls.ro/stream", website: "https://radioimpuls.ro"},
-    { name: "Dance FM", logo: "img/stations/dancefm.png", audio: "https://edge126.rcs-rds.ro/profm/dancefm.mp3", website: "https://dancefm.ro"},
-    { name: "Digi FM", logo: "img/stations/digifm.png", audio: "https://edge76.rcs-rds.ro/digifm/digifm.mp3", website: "https://digifm.ro"},
-    { name: "Radio ZUM", logo: "img/stations/radiozum.png", audio: "https://stream.radiozum.md/live", website: "https://radiozum.md"},
-    { name: "Europa FM", logo: "img/stations/europafm.png", audio: "https://astreaming.edi.ro:8443/EuropaFM_aac", website: "https://europafm.ro"},
-    { name: "Rock FM", logo: "img/stations/rockfm.png", audio: "https://live.rockfm.ro/rockfm.aacp", website: "https://rockfm.ro"},
-    { name: "Magic FM", logo: "img/stations/magicfm.png", audio: "https://live.magicfm.ro/magicfm.aacp", website: "https://magicfm.ro"},
-    { name: "Kiss - Pop", logo: "img/stations/kiss-pop.png", audio: "https://live.kissfm.ro/kiss.xtra", website: "https://soundis.ro/kisspop/"},
-    { name: "Kiss - Energy", logo: "img/stations/kiss-energy.jpg", audio: "https://live.kissfm.ro/kiss.energy", website: "https://soundis.ro/kissenergy/"}
+    {
+        "name": "Válassz rádiót",
+        "id": "logo",
+        "audio": "",
+        "website": "/radio",
+        "lang": 0
+    },
+    {
+        "name": "Best-Dance Radio",
+        "id": "best-dance",
+        "audio": "https://ssl.omegahost.ro/8088/;",
+        "website": "https://best-dance.ro",
+        "lang": "hu"
+    },
+    {
+        "name": "Cool FM",
+        "id": "coolfm",
+        "audio": "https://mediagw.e-tiger.net/stream/coolfm",
+        "website": "https://coolfm.hu",
+        "lang": "hu"
+    },
+    {
+        "name": "Marosvásárhelyi Rádió",
+        "id": "msvradio",
+        "audio": "http://stream2.srr.ro:8312/;",
+        "website": "https://www.marosvasarhelyiradio.ro/",
+        "lang": "hu"
+    },
+    {
+        "name": "Oxygen Music",
+        "id": "oxygen",
+        "audio": "https://oxygenmusic.hu:8000/oxygenmusic_128",
+        "website": "https://oxygenmusic.hu/csatorna",
+        "lang": "hu"
+    },
+    {
+        "name": "Petőfi Rádió",
+        "id": "petofi",
+        "audio": "https://icast.connectmedia.hu/4738/mr2.mp3",
+        "website": "https://petofilive.hu",
+        "lang": "hu"
+    },
+    {
+        "name": "Rádió 1",
+        "id": "radio1",
+        "audio": "https://icast.connectmedia.hu/5202/live.mp3",
+        "website": "https://radio1.hu",
+        "lang": "hu"
+    },
+    {
+        "name": "Rádió Gaga - Príma Rádió",
+        "id": "gaga",
+        "audio": "https://securestreams5.autopo.st:1992/player",
+        "website": "https://radiogaga.ro",
+        "lang": "hu"
+    },
+    {
+        "name": "Retró Rádió",
+        "id": "retro",
+        "audio": "https://icast.connectmedia.hu/5001/live.mp3",
+        "website": "https://retroradio.hu",
+        "lang": "hu"
+    },
+    {
+        "name": "Szépvíz FM",
+        "id": "szepvizfm",
+        "audio": "https://stream2.rdstrm.com/szepviz-radio.mp3",
+        "website": "http://myonlineradio.hu/szepviz-radio",
+        "lang": "hu"
+    },
+    {
+        "name": "Dance FM",
+        "id": "dancefm",
+        "audio": "https://edge126.rcs-rds.ro/profm/dancefm.mp3",
+        "website": "https://dancefm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Digi FM",
+        "id": "digifm",
+        "audio": "https://edge76.rcs-rds.ro/digifm/digifm.mp3",
+        "website": "https://digifm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Europa FM",
+        "id": "europafm",
+        "audio": "https://astreaming.edi.ro:8443/EuropaFM_aac",
+        "website": "https://europafm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Kiss - Energy",
+        "id": "kiss-energy",
+        "audio": "https://live.kissfm.ro/kiss.energy",
+        "website": "https://soundis.ro/kissenergy/",
+        "lang": "ro"
+    },
+    {
+        "name": "Kiss - Pop",
+        "id": "kiss-pop",
+        "audio": "https://live.kissfm.ro/kiss.xtra",
+        "website": "https://soundis.ro/kisspop/",
+        "lang": "ro"
+    },
+    {
+        "name": "Kiss FM",
+        "id": "kissfm",
+        "audio": "https://live.kissfm.ro/kissfm.aacp",
+        "website": "https://kissfm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Magic FM",
+        "id": "magicfm",
+        "audio": "https://live.magicfm.ro/magicfm.aacp",
+        "website": "https://magicfm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "One FM",
+        "id": "onefm",
+        "audio": "https://live.onefm.ro/onefm.aacp",
+        "website": "https://onefm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "ProFM",
+        "id": "profm",
+        "audio": "https://edge126.rcs-rds.ro/profm/profm.mp3",
+        "website": "https://profm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Radio Impuls",
+        "id": "impuls",
+        "audio": "https://live.radio-impuls.ro/stream",
+        "website": "https://radioimpuls.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Radio ZUM",
+        "id": "zum",
+        "audio": "https://stream.radiozum.md/live",
+        "website": "https://radiozum.md",
+        "lang": "ro"
+    },
+    {
+        "name": "Rock FM",
+        "id": "rockfm",
+        "audio": "https://live.rockfm.ro/rockfm.aacp",
+        "website": "https://rockfm.ro",
+        "lang": "ro"
+    }
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
@@ -39,11 +196,19 @@ function initPage() {
     }
 
     if (localStorage.getItem("favorites")) {
-        let string = localStorage.getItem("favorites");
+        updateOldFavorites();
+    }
+    if(localStorage.getItem("favs")){
+        let string = localStorage.getItem("favs");
         const arr = string.split(',');
         arr.pop();
         for (let i = 0; i < arr.length; i++) {
-            favorites.push(Number(arr[i]));
+            for(let j=0; j<radios.length; j++){
+                if(radios[j].id === arr[i]){
+                    favorites.push(j);
+                    break;
+                }
+            }
         }
         updateFavList();
     } else {
@@ -92,8 +257,8 @@ function initPage() {
 function createRadioList(){
     for(let i=1; i<radios.length; i++){
         let image = document.createElement('img');
-        image.src = radios[i].logo;
-        image.alt = radios[i].name + "logo";
+        image.src = "img/stations/" + radios[i].id + ".png";
+        image.alt = radios[i].name + " logo";
         image.classList.add("radio-button-logo");
         let button = document.createElement('button');
         button.appendChild(image);
@@ -106,7 +271,7 @@ function createRadioList(){
         button.onclick = function (){
             radioSelect(i);
         }
-        if(radios[i].name === "ProFM") document.getElementById("radioList").appendChild(document.createElement('hr'));
+        if(radios[i-1].lang === "hu" && radios[i].lang !== "hu") document.getElementById("radioList").appendChild(document.createElement('hr'));
         document.getElementById("radioList").appendChild(button);
     }
 }
@@ -145,6 +310,7 @@ function mediaSessionInit(){
 }
 
 function radioSelect(selected){
+    console.log(selected);
     document.getElementById("audio").src = radios[selected].audio;
     if (!navigator.onLine) {
         alert("Nincs internetkapcsolat!");
@@ -156,7 +322,7 @@ function radioSelect(selected){
                 if(mediaAPI){
                     if(navigator.mediaSession.metadata == null) mediaSessionInit();
                     navigator.mediaSession.metadata.title = radios[selected].name;
-                    navigator.mediaSession.metadata.artwork = [{src: radios[selected].logo}];
+                    navigator.mediaSession.metadata.artwork = [{src: "img/stations/" + radios[selected].id + ".png" }];
                 }
             })
                 .catch(NotAllowedError => {
@@ -176,7 +342,7 @@ function radioSelect(selected){
     }
 
     document.getElementById("radio-title").innerText = radios[selected].name;
-    document.getElementById("big-logo").src = radios[selected].logo;
+    document.getElementById("big-logo").src = "img/stations/" + radios[selected].id + ".png";
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
 
@@ -189,6 +355,18 @@ function openPage(){
 }
 
 // ~~~~~ KEDVENCEK FUNKCIOK ~~~~~
+function updateOldFavorites(){
+    let string = localStorage.getItem("favorites");
+    const arr = string.split(',');
+    arr.pop();
+    let updated = "";
+    for (let i = 0; i < arr.length; i++) {
+        updated += radiosOld[Number(arr[i])].id + ",";
+        localStorage.setItem("favs", updated);
+    }
+    localStorage.removeItem("favorites");
+}
+
 function updateFavicon(){
     if(favorites.includes(nowPlaying)){
         document.getElementById("star-icon").src = "img/star-filled.png";
@@ -211,9 +389,9 @@ function addToFavorites(nr){
     favorites.push(nr);
     let string = "";
     for(let i=0; i<favorites.length; i++){
-        string += favorites[i] + ',';
+        string += radios[favorites[i]].id + ',';
     }
-    localStorage.setItem("favorites", string);
+    localStorage.setItem("favs", string);
     updateFavList();
 }
 
@@ -225,9 +403,9 @@ function removeFromFavorites(nr){
     favorites = fav2;
     let string = "";
     for(let i=0; i<favorites.length; i++){
-        string += favorites[i] + ',';
+        string += radios[favorites[i]].id + ',';
     }
-    localStorage.setItem("favorites", string);
+    localStorage.setItem("favs", string);
     updateFavList();
 }
 
@@ -236,7 +414,7 @@ function updateFavList(){
         for (let i = 0; i < favorites.length; i++) {
             let button = document.createElement("button");
             let image = document.createElement("img");
-            image.src = radios[favorites[i]].logo;
+            image.src = "img/stations/" + radios[favorites[i]].id + ".png";
             image.alt = radios[favorites[i]].name;
             image.classList.add("favoriteLogo");
             button.classList.add("favoriteButton");
