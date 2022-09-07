@@ -39,6 +39,20 @@ const radios = [
         "lang": "hu"
     },
     {
+        "name": "Best FM - Budapest",
+        "id": "bestfm",
+        "audio": "https://icast.connectmedia.hu/5101/live.mp3/",
+        "website": "https://bestfm.hu/",
+        "lang": "hu"
+    },
+    {
+        "name": "City Rádió",
+        "id": "city",
+        "audio": "https://mscp1.gazduireradio.ro/cityradio",
+        "website": "https://www.city-radio.ro/",
+        "lang": "hu"
+    },
+    {
         "name": "Cool FM",
         "id": "coolfm",
         "audio": "https://mediagw.e-tiger.net/stream/coolfm",
@@ -46,10 +60,31 @@ const radios = [
         "lang": "hu"
     },
     {
+        "name": "Klub Rádió",
+        "id": "klub",
+        "audio": "https://stream.klubradio.hu:8443/",
+        "website": "https://www.klubradio.hu/",
+        "lang": "hu"
+    },
+    {
+        "name": "Kossuth Rádió",
+        "id": "kossuth",
+        "audio": "https://icast.connectmedia.hu/4736/mr1.mp3",
+        "website": "https://mediaklikk.hu/kossuth",
+        "lang": "hu"
+    },
+    {
         "name": "Marosvásárhelyi Rádió",
         "id": "msvradio",
         "audio": "http://stream2.srr.ro:8312/;",
         "website": "https://www.marosvasarhelyiradio.ro/",
+        "lang": "hu"
+    },
+    {
+        "name": "Mercy Mulatós Rádió",
+        "id": "mercy",
+        "audio": "http://stream.mercyradio.eu/mulatos.mp3",
+        "website": "https://mercyradio.eu/",
         "lang": "hu"
     },
     {
@@ -74,6 +109,13 @@ const radios = [
         "lang": "hu"
     },
     {
+        "name": "Rádió Gaga - Marosszék",
+        "id": "gaga-ms",
+        "audio": "https://securestreams4.autopo.st:1696/live",
+        "website": "https://radiogaga.ro",
+        "lang": "hu"
+    },
+    {
         "name": "Rádió Gaga - Príma Rádió",
         "id": "gaga",
         "audio": "https://securestreams5.autopo.st:1992/player",
@@ -85,6 +127,13 @@ const radios = [
         "id": "retro",
         "audio": "https://icast.connectmedia.hu/5001/live.mp3",
         "website": "https://retroradio.hu",
+        "lang": "hu"
+    },
+    {
+        "name": "Rocker Rádió",
+        "id": "rocker",
+        "audio": "https://radio.ch3.hu:8200/rocker.mp3",
+        "website": "https://rockerradio.online/kezdolap/",
         "lang": "hu"
     },
     {
@@ -265,6 +314,9 @@ function createRadioList(){
     for(let i=1; i<radios.length; i++){
         let image = document.createElement('img');
         image.src = "img/stations/" + radios[i].id + ".png";
+        image.onerror = function (){
+            this.src = "img/stations/logo.png";
+        };
         image.alt = radios[i].name + " logo";
         image.classList.add("radio-button-logo");
         let button = document.createElement('button');
@@ -318,6 +370,7 @@ function mediaSessionInit(){
 
 function radioSelect(selected){
     console.log(selected);
+    let selectedLogo = "img/stations/" + radios[selected].id + ".png";
     document.getElementById("audio").src = radios[selected].audio;
     if (!navigator.onLine) {
         alert("Nincs internetkapcsolat!");
@@ -329,7 +382,7 @@ function radioSelect(selected){
                 if(mediaAPI){
                     if(navigator.mediaSession.metadata == null) mediaSessionInit();
                     navigator.mediaSession.metadata.title = radios[selected].name;
-                    navigator.mediaSession.metadata.artwork = [{src: "img/stations/" + radios[selected].id + ".png" }];
+                    navigator.mediaSession.metadata.artwork = [{src: selectedLogo}, {src: "img/stations/logo.png"}];
                 }
             })
                 .catch(NotAllowedError => {
@@ -349,7 +402,10 @@ function radioSelect(selected){
     }
 
     document.getElementById("radio-title").innerText = radios[selected].name;
-    document.getElementById("big-logo").src = "img/stations/" + radios[selected].id + ".png";
+    document.getElementById("big-logo").src = selectedLogo;
+    document.getElementById("big-logo").onerror = function (){
+        this.src = "img/stations/logo.png";
+    };
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
 
