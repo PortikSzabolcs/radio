@@ -60,13 +60,6 @@ const radios = [
         "lang": "hu"
     },
     {
-        "name": "Klub Rádió",
-        "id": "klub",
-        "audio": "https://stream.klubradio.hu:8443/",
-        "website": "https://www.klubradio.hu/",
-        "lang": "hu"
-    },
-    {
         "name": "Kossuth Rádió",
         "id": "kossuth",
         "audio": "https://icast.connectmedia.hu/4736/mr1.mp3",
