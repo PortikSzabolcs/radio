@@ -149,7 +149,7 @@ button:hover{
 .radio-button{
 	border-radius: 5px;
 	width: 100%;
-	height: 46px;
+	height: 42px;
 	color: inherit;
 	vertical-align: middle;
 	text-align: left;
@@ -158,7 +158,7 @@ button:hover{
 	overflow: hidden;
 }
 .radio-button-logo{
-	width: 35px;
+	width: 36px;
 	aspect-ratio: 1/1;
 	object-fit: contain;
 	background-color: #1111;
