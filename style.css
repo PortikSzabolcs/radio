@@ -87,6 +87,12 @@ button:hover{
 	text-align: center;
 	z-index: 2;
 }
+.content{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
 #playing{
 	margin: 0;
 	width: 100%;
@@ -216,6 +222,7 @@ button:hover{
 		position: -webkit-sticky;
 		position: sticky;
 		top: 0;
+		order: -1;
 	}
 	#radioList {
 		width: 35%;
