@@ -102,7 +102,7 @@ const radios = [
         "lang": "hu"
     },
     {
-        "name": "Rádió Gaga - Marosszék",
+        "name": "Rádió Gaga - Maros",
         "id": "gaga-ms",
         "audio": "https://securestreams4.autopo.st:1696/live",
         "website": "https://radiogaga.ro",
@@ -308,7 +308,7 @@ function createRadioList(){
         let image = document.createElement('img');
         image.src = "img/stations/" + radios[i].id + ".png";
         image.onerror = function (){
-            this.src = "img/stations/logo.png";
+            this.src = "img/apple-touch.png";
         };
         image.alt = radios[i].name + " logo";
         image.classList.add("radio-button-logo");
@@ -397,7 +397,7 @@ function radioSelect(selected){
     document.getElementById("radio-title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = selectedLogo;
     document.getElementById("big-logo").onerror = function (){
-        this.src = "img/stations/logo.png";
+        this.src = "img/apple-touch.png";
     };
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;

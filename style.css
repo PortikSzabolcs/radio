@@ -22,7 +22,6 @@ img	{
 button{
 	background-color: transparent;
 	padding: 1px;
-	font-size: 22px;
 	text-align: center;
 	border-style: none;
 }
@@ -33,6 +32,7 @@ button:hover{
 .timer-buttons{
 	width: 100%;
 	height: 50px;
+	font-size: 22px;
 	color: white;
 }
 .header {
@@ -155,6 +155,7 @@ button:hover{
 	text-align: left;
 	font-size: 28px;
 	padding: 3px;
+	margin: 1px;
 	overflow: hidden;
 }
 .radio-button-logo{
@@ -170,6 +171,7 @@ button:hover{
 }
 #big-logo-container{
 	width: 50%;
+	aspect-ratio: 1/1;
 	position: relative;
 	max-width:250px;
 	margin: 35px auto;
