@@ -116,6 +116,7 @@ button:hover{
 
 .favoriteButton{
 	width: 25%;
+	aspect-ratio: 1/1;
 	height: 100%;
 	padding: 10px;
 	border-radius: 10px;
@@ -192,7 +193,7 @@ button:hover{
 		width: 33%;
 	}
 	.radio-button{
-		width: 50%;
+		width: 49%;
 	}
 	#popup_menu, #timer-button { width: 100px; }
 	#theme-button {
