@@ -147,6 +147,7 @@ button:hover{
 	overflow: hidden;
 	text-align: center;
 	position: relative;
+	width: 100%;
 	bottom: 0;
 	opacity: .4;
 	padding: 15px;
@@ -231,6 +232,7 @@ button:hover{
 	}
 	#settings {
 		position: absolute;
+		width: unset;
 	}
 	#big-logo-container{
 		margin: 50px auto;
