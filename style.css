@@ -145,9 +145,10 @@ button:hover{
 
 #settings{
 	overflow: hidden;
+	text-align: center;
 	position: relative;
 	bottom: 0;
-	opacity: .5;
+	opacity: .4;
 	padding: 15px;
 }
 #settings:hover{
@@ -229,7 +230,6 @@ button:hover{
 		padding: 20px;
 	}
 	#settings {
-		width: 35%;
 		position: absolute;
 	}
 	#big-logo-container{
