@@ -394,8 +394,7 @@ function radioSelect(selected){
             })
                 .catch(NotAllowedError => {
                     fetch(radios[selected].audio).then(function (){
-                        console.log("No autoplay:");
-                        console.error(NotAllowedError);
+                        console.log("No autoplay!");
                     })
                         .catch(function (){
                             if(radios[selected].audio[4] !== 's') {

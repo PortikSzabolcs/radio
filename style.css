@@ -187,6 +187,8 @@ button:hover{
 	max-width:250px;
 	margin: 35px auto;
 	border-radius: 8px;
+	display: flex;
+	align-items: center;
 }
 
 @media all and (display-mode: standalone) {
