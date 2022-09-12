@@ -144,6 +144,13 @@ const radios = [
         "lang": "ro-en"
     },
     {
+        "name": "Asha Radio",
+        "id": "asha",
+        "audio": "https://live.asha.ro/asha",
+        "website": "https://asha.ro",
+        "lang": "ro"
+    },
+    {
         "name": "Dance FM",
         "id": "dancefm",
         "audio": "https://edge126.rcs-rds.ro/profm/dancefm.mp3",
@@ -225,6 +232,13 @@ const radios = [
         "id": "rockfm",
         "audio": "https://live.rockfm.ro/rockfm.aacp",
         "website": "https://rockfm.ro",
+        "lang": "ro"
+    },
+    {
+        "name": "Virgin Radio",
+        "id": "virgin",
+        "audio": "https://astreaming.edi.ro:8443/VirginRadio_aac",
+        "website": "https://virginradio.ro",
         "lang": "ro"
     }
 ];

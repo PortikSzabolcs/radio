@@ -102,6 +102,7 @@ button:hover{
 }
 #playerHeader{
 	text-align: left;
+	margin: 5px 0;
 }
 .nowPlayingButton{
 	float: right;
@@ -146,6 +147,7 @@ button:hover{
 #settings{
 	overflow: hidden;
 	text-align: center;
+	line-height: 25px;
 	position: relative;
 	width: 100%;
 	bottom: 0;
