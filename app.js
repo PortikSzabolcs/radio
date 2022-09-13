@@ -244,7 +244,7 @@ const radios = [
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
-let lastOnline = null;
+const player = document.getElementById("audio");
 let theme = null;
 let nowPlaying = 0;
 let favorites = [];
@@ -288,25 +288,7 @@ function initPage() {
     }
 
     createRadioList();
-
-    window.addEventListener("offline", function () {
-        if (!document.getElementById('audio').paused) {
-            lastOnline = nowPlaying;
-            setTimeout(function () {
-                lastOnline = null;
-            }, 300000);
-        }
-        console.log("offline");
-    });
-
-    window.addEventListener("online", function () {
-        if (lastOnline) {
-            if (!document.getElementById('audio').paused) document.getElementById('audio').load();
-            document.getElementById('audio').play();
-            lastOnline = null;
-            console.log("online again");
-        }
-    });
+    networkHelperInit();
 
     document.getElementById("autoplay").addEventListener("click", function () {
         if (document.getElementById("autoplay").checked) {
@@ -378,11 +360,11 @@ function mediaSessionInit(){
 function radioSelect(selected){
     console.log(selected);
     let selectedLogo = "img/stations/" + radios[selected].id + ".png";
-    document.getElementById("audio").src = radios[selected].audio;
+    player.src = radios[selected].audio;
     if (!navigator.onLine) {
         alert("Nincs internetkapcsolat!");
     } else {
-        let playPromise = document.getElementById("audio").play();
+        let playPromise = player.play();
         if(playPromise !== undefined){
             playPromise.then(function (){
                 if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
@@ -392,18 +374,13 @@ function radioSelect(selected){
                     navigator.mediaSession.metadata.artwork = [{src: selectedLogo}, {src: "img/stations/logo.png"}];
                 }
             })
-                .catch(NotAllowedError => {
-                    fetch(radios[selected].audio).then(function (){
-                        console.log("No autoplay!");
-                    })
-                        .catch(function (){
-                            if(radios[selected].audio[4] !== 's') {
-                                if (favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
-                                window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
-                                console.log("Play promise rejected");
-                            } else alert("Ez a rádió jelenleg nem működik.");
-                        });
-                })
+                .catch(function () {
+                    if(radios[selected].audio[4] !== 's') {
+                        if (favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
+                        window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
+                        console.log("HTTP Play promise rejected");
+                    }
+                });
         }
     }
 
@@ -494,6 +471,67 @@ function updateFavList(){
             document.getElementById("favorites").appendChild(button);
         }
 }
+// ~~~~~ HALOZATI STABILITAS ~~~~~
+function networkHelperInit(){
+
+    let networkTimeout = null;
+
+    function retryPlaying(){
+        player.load();
+        player.play();
+    }
+
+    function deleteNetworkTimeout(){
+        if(networkTimeout) {
+            clearInterval(networkTimeout);
+            networkTimeout = null;
+            console.log("timeout unset!");
+            return true;
+        }
+        return false;
+    }
+    function deleteOfflineTimeout(){
+        if(window.ononline) {
+            if (player.networkState !== 1) {
+                window.ononline = null;
+                console.log("removed event listener for online");
+            } else {
+                setTimeout(function () {
+                    window.ononline = null;
+                    console.log("deleted event listener for online");
+                }, 150000);
+            }
+        }
+    }
+
+    window.addEventListener("offline", function (){
+        if(!player.paused) {
+            window.ononline = retryPlaying;
+            console.log("added event listener for online");
+        }
+    });
+
+    player.addEventListener('waiting',function () {
+        if(player.readyState === 2 && navigator.onLine){
+            console.log("slow connection timeout set!");
+            networkTimeout = setInterval(function (){
+                if(navigator.onLine) retryPlaying();
+                else deleteNetworkTimeout();
+            }, 10000);
+            setTimeout(deleteNetworkTimeout, 180000);
+        }
+    });
+
+    // ha elindul a lejatszas vagy szuneteltetodik, akkor torlodik az idozito
+    player.addEventListener('canplay', function (){
+        deleteNetworkTimeout();
+        deleteOfflineTimeout();
+    });
+    player.addEventListener('pause', function (){
+        deleteNetworkTimeout();
+        deleteOfflineTimeout();
+    });
+}
 
 // ~~~~~ IDOZITO FUNKCIOK ~~~~~
 
@@ -531,7 +569,7 @@ function ido(min){
 }
 
 function stopAll(){
-    document.getElementById("audio").pause();
+    player.pause();
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
