@@ -477,9 +477,10 @@ function networkHelperInit(){
     let networkTimeout = null;
 
     function retryPlaying(){
-        if(!player.paused)player.load();
-        player.play();
-
+        setTimeout(function (){
+            player.load();
+            player.play();
+        }, 500);
     }
 
     function deleteNetworkTimeout(){
@@ -518,7 +519,7 @@ function networkHelperInit(){
             networkTimeout = setInterval(function (){
                 if(navigator.onLine) retryPlaying();
                 else deleteNetworkTimeout();
-            }, 10000);
+            }, 7500);
             setTimeout(deleteNetworkTimeout, 180000);
         }
     });
