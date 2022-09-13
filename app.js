@@ -477,10 +477,8 @@ function networkHelperInit(){
     let networkTimeout = null;
 
     function retryPlaying(){
-        setTimeout(function (){
-            player.load();
-            player.play();
-        }, 500);
+        if(!player.paused)player.load();
+        player.play();
 
     }
 
