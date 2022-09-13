@@ -477,8 +477,11 @@ function networkHelperInit(){
     let networkTimeout = null;
 
     function retryPlaying(){
-        player.load();
-        player.play();
+        setTimeout(function (){
+            player.load();
+            player.play();
+        }, 500);
+
     }
 
     function deleteNetworkTimeout(){
