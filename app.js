@@ -477,6 +477,7 @@ function networkHelperInit(){
 
     function retryPlaying(){
         setTimeout(function (){
+            player.src = radios[nowPlaying].audio;
             player.load();
             player.play();
         }, 500);
