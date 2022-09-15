@@ -11,6 +11,7 @@ h1, #radio-title{
 	text-align: left;
 	margin: 5px 10px 5px 0;
 	font-weight: normal;
+	overflow-wrap: break-word;
 	}
 img	{
 	vertical-align: middle;
@@ -168,6 +169,8 @@ button:hover{
 	padding: 3px;
 	margin: 1px;
 	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: clip;
 }
 .radio-button-logo{
 	width: 36px;
