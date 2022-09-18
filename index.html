@@ -58,8 +58,8 @@
 	<a href="/radio">
 	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
-	<button id="theme-button" class="header-button" title="Világos/sötét mód" onclick="themeSwitch()">
-		<img id="theme-icon" src="img/dark-mode.png" alt="theme-icon">
+	<button id="settings-button" class="header-button" title="Beállítások" onclick="settingSwitch()">
+		<img id="settings-icon" src="img/dark-mode.png" alt="settings-icon">
 	</button>
 	<button id="timer-button" class="header-button" title="Időzített kikapcsolás" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
 		<img id="timer-icon" src="img/timer.png" alt="timer-icon">
@@ -99,14 +99,34 @@
 	<div id="radioList">
 		<h1> Minden rádió </h1>
 	</div>
-	<form id="settings">
-		<input type="checkbox" id="autoplay" name="autoplay">
-		<label for="autoplay"> Utoljára hallgatott betöltése megnyitáskor </label>
-		<br>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSed5_IUz_paWywaOuTRvPk_XzwsNywqyqhzlhY2ANmIAhgUWQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">
-			Visszajelzés
-		</a>
-	</form>
+
+	<div id="settings" style="transform: translateX(100%)">
+		<div class="settings-entry" style="border-width: unset; padding: 25px 0">
+			<h style="	font-family: Bahnschrift, sans-serif; font-size: 40px; font-weight: bolder;"> Beállítások </h>
+		</div>
+		<div class="settings-entry">
+			<label for="autoplay"> Automatikus betöltés </label>
+			<input style="width: 20px; aspect-ratio: 1/1;" type="checkbox" id="autoplay" name="autoplay">
+			<br>
+			<p class="helpText"> Utoljára hallgatott rádió betöltése az alkalmazás/weboldal megnyitásakor</p>
+		</div>
+		<div class="settings-entry">
+			<label for="theme-selector"> Téma: </label>
+			<select style="font-size: 25px; vertical-align: middle" id="theme-selector" name="theme-selector" onchange="themeSwitch()">
+				<option value="dark"> Sötét </option>
+				<option value="light"> Világos </option>
+				<option value="auto"> Auto </option>
+			</select>
+			<br>
+			<p class="helpText"> Sötét, világos vagy automatikus színmód az eszköz beállításai szerint </p>
+		</div>
+		<div class="settings-entry">
+			<a href="https://docs.google.com/forms/d/e/1FAIpQLSed5_IUz_paWywaOuTRvPk_XzwsNywqyqhzlhY2ANmIAhgUWQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">
+				Visszajelzés
+			</a>
+		</div>
+	</div>
+
 </div>
 
 </body>

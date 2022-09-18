@@ -253,9 +253,9 @@ initPage();
 
 function initPage() {
 
-    if (localStorage.getItem("theme") === "white") {
-        theme = "white";
-        themeSet();
+    if (localStorage.getItem("theme")) {
+        document.getElementById("theme-selector").value = localStorage.getItem("theme");
+        themeSwitch();
     }
 
     if (localStorage.getItem("favorites")) {
@@ -591,19 +591,37 @@ function countdown(){
 // ~~~~~ TEMA FUNKCIOK ~~~~~
 
 function themeSwitch() {
-    if(theme === "white") theme = "black";
-    else theme = "white";
+    let select = document.getElementById("theme-selector");
+    switch (select.value){
+        case "dark": theme = "dark";
+        break;
+        case "light": theme = "light";
+        break;
+        case "auto": {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) theme = "light";
+            else theme = "dark";
+            break;
+        }
+        default : theme = "dark";
+    }
+    localStorage.setItem("theme", select.value);
     themeSet();
 }
 function themeSet() {
-    if(theme === "white"){
+    if(theme === "light"){
         document.body.style.backgroundImage = "linear-gradient(#dfd, white)";
+        document.getElementById("settings").classList.add("lightBackground");
         document.body.style.color = "black";
-        document.documentElement.style.colorScheme = "normal";
     } else{
         document.body.style.backgroundImage = "linear-gradient(#020, black)";
+        document.getElementById("settings").classList.remove("lightBackground");
         document.body.style.color = "white";
-        document.documentElement.style.colorScheme = "dark";
     }
-    localStorage.setItem("theme", theme);
+    document.documentElement.style.colorScheme = theme;
+}
+
+function settingSwitch(){
+    let settings = document.getElementById("settings");
+    if(settings.style.transform) settings.style.transform = "";
+    else settings.style.transform = "translateX(100%)";
 }

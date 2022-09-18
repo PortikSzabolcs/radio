@@ -13,6 +13,9 @@ h1, #radio-title{
 	font-weight: normal;
 	overflow-wrap: break-word;
 	}
+a{
+	color: inherit;
+}
 img	{
 	vertical-align: middle;
 	max-width: 40px;
@@ -62,12 +65,9 @@ button:hover{
 	font-size: 30px;
 	color: white;
 }
-#theme-button{
+#settings-button{
 	width: 45px;
 	right: 90px;
-}
-#theme-icon{
-	width: 40px;
 }
 #timer-button{
 	right: 0;
@@ -146,17 +146,34 @@ button:hover{
 }
 
 #settings{
-	overflow: hidden;
-	text-align: center;
-	line-height: 25px;
-	position: relative;
+	position: fixed;
+	font-family: Arial, sans-serif;
+	color: inherit;
+	top: 60px;
+	right: 0;
 	width: 100%;
-	bottom: 0;
-	opacity: .4;
+	height: calc(100vh - 60px);
+	background-color: #000000f3;
+	vertical-align: middle;
+	padding: 10px;
+	overflow: hidden;
+}
+.lightBackground{
+	background-color: #fffffff3 !important;
+}
+.settings-entry{
+	font-size: 26px;
+	min-height: 60px;
+	line-height: 40px;
+	border-bottom-style: solid;
+	border-color: grey;
+	border-width: thin;
 	padding: 15px;
 }
-#settings:hover{
-	opacity: 1;
+.helpText{
+	font-size: small;
+	line-height: normal;
+	margin: 0;
 }
 .radio-button{
 	border-radius: 5px;
@@ -237,9 +254,8 @@ button:hover{
 		width: 35%;
 		padding: 20px;
 	}
-	#settings {
-		position: absolute;
-		width: unset;
+	#settings{
+		width: 35%;
 	}
 	#big-logo-container{
 		margin: 50px auto;
