@@ -30,7 +30,6 @@ button{
 	border-style: none;
 }
 button:hover{
-	background-color: #080;
 	cursor: pointer;
 }
 .timer-buttons{
@@ -38,6 +37,9 @@ button:hover{
 	height: 50px;
 	font-size: 22px;
 	color: white;
+}
+.hover:hover{
+	background-color: #080;
 }
 .header {
 	height:60px;

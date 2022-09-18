@@ -316,6 +316,7 @@ function createRadioList(){
         text.style.marginLeft = "5px";
         button.appendChild(text);
         button.classList.add("radio-button");
+        button.classList.add("hover");
         button.onclick = function (){
             radioSelect(i);
         }
