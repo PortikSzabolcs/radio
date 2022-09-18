@@ -1,13 +1,13 @@
 *	{box-sizing: border-box;}
 body {
-	background-image: linear-gradient(#020, black);
+	background-image: linear-gradient(#002000, black);
 	padding-top:60px;
 	min-height: 100vh;
 	color: white;
 	margin: 0 0;}
 h1, #radio-title{
 	font-size: 40px;
-	font-family: Arial, sans-serif;
+	font-family: Bahnschrift, sans-serif;
 	text-align: left;
 	margin: 5px 10px 5px 0;
 	font-weight: normal;
@@ -153,22 +153,21 @@ button:hover{
 	right: 0;
 	width: 100%;
 	height: calc(100vh - 60px);
-	background-color: #000000f3;
+	background-color: #000000f2;
 	vertical-align: middle;
 	padding: 10px;
 	overflow: hidden;
 }
 .lightBackground{
-	background-color: #fffffff3 !important;
+	background-color: #fffffffa !important;
 }
 .settings-entry{
 	font-size: 26px;
-	min-height: 60px;
-	line-height: 40px;
 	border-bottom-style: solid;
 	border-color: grey;
 	border-width: thin;
 	padding: 15px;
+	margin: 10px;
 }
 .helpText{
 	font-size: small;
@@ -228,7 +227,7 @@ button:hover{
 		width: 49%;
 	}
 	#popup_menu, #timer-button { width: 100px; }
-	#theme-button {
+	#settings-button {
 		width: 100px;
 		right: 100px;
 	}

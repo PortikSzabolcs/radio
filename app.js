@@ -32,7 +32,7 @@ const radios = [
         "lang": 0
     },
     {
-        "name": "Best-Dance Radio",
+        "name": "Best - Dance Radio",
         "id": "best-dance",
         "audio": "https://ssl.omegahost.ro/8088/;",
         "website": "https://best-dance.ro",
@@ -609,11 +609,11 @@ function themeSwitch() {
 }
 function themeSet() {
     if(theme === "light"){
-        document.body.style.backgroundImage = "linear-gradient(#dfd, white)";
+        document.body.style.backgroundImage = "linear-gradient(#dfffdf, white)";
         document.getElementById("settings").classList.add("lightBackground");
         document.body.style.color = "black";
     } else{
-        document.body.style.backgroundImage = "linear-gradient(#020, black)";
+        document.body.style.backgroundImage = "linear-gradient(#002000, black)";
         document.getElementById("settings").classList.remove("lightBackground");
         document.body.style.color = "white";
     }
