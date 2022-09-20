@@ -1,26 +1,26 @@
 const radiosOld = [
-    { id: "logo"},
-    { id: "radio1"},
-    { id: "gaga"},
-    { id: "petofi"},
-    { id: "retro"},
-    { id: "msvradio"},
-    { id: "szepvizfm"},
-    { id: "coolfm"},
-    { id: "oxygen"},
-    { id: "best-dance"},
-    { id: "profm"},
-    { id: "kissfm"},
-    { id: "onefm"},
-    { id: "impuls"},
-    { id: "dancefm"},
-    { id: "digifm"},
-    { id: "zum"},
-    { id: "europafm"},
-    { id: "rockfm"},
-    { id: "magicfm"},
-    { id: "kiss-pop"},
-    { id: "kiss-energy"},
+    {id: "logo"},
+    {id: "radio1"},
+    {id: "gaga"},
+    {id: "petofi"},
+    {id: "retro"},
+    {id: "msvradio"},
+    {id: "szepvizfm"},
+    {id: "coolfm"},
+    {id: "oxygen"},
+    {id: "best-dance"},
+    {id: "profm"},
+    {id: "kissfm"},
+    {id: "onefm"},
+    {id: "impuls"},
+    {id: "dancefm"},
+    {id: "digifm"},
+    {id: "zum"},
+    {id: "europafm"},
+    {id: "rockfm"},
+    {id: "magicfm"},
+    {id: "kiss-pop"},
+    {id: "kiss-energy"},
 ];
 
 const radios = [
@@ -253,6 +253,11 @@ initPage();
 
 function initPage() {
 
+    if (localStorage.getItem("lastStation")) {
+        document.getElementById("autoplay").checked = true;
+        radioSelect(Number(localStorage.getItem("lastStation")));
+    }
+
     if (localStorage.getItem("theme")) {
         document.getElementById("theme-selector").value = localStorage.getItem("theme");
         themeSwitch();
@@ -261,13 +266,13 @@ function initPage() {
     if (localStorage.getItem("favorites")) {
         updateOldFavorites();
     }
-    if(localStorage.getItem("favs")){
+    if (localStorage.getItem("favs")) {
         let string = localStorage.getItem("favs");
         const arr = string.split(',');
         arr.pop();
         for (let i = 0; i < arr.length; i++) {
-            for(let j=0; j<radios.length; j++){
-                if(radios[j].id === arr[i]){
+            for (let j = 0; j < radios.length; j++) {
+                if (radios[j].id === arr[i]) {
                     favorites.push(j);
                     break;
                 }
@@ -282,28 +287,20 @@ function initPage() {
         document.getElementById("favorites").appendChild(text);
     }
 
-    if (localStorage.getItem("lastStation")) {
-        document.getElementById("autoplay").checked = true;
-        radioSelect(Number(localStorage.getItem("lastStation")));
+    if (localStorage.getItem("networkHelper")) {
+        document.getElementById("networkHelper").checked = true;
+        networkHelper();
     }
 
     createRadioList();
-    networkHelperInit();
-
-    document.getElementById("autoplay").addEventListener("click", function () {
-        if (document.getElementById("autoplay").checked) {
-            localStorage.setItem("lastStation", nowPlaying);
-        } else {
-            localStorage.removeItem("lastStation");
-        }
-    });
+    settingsInit();
 }
 
-function createRadioList(){
-    for(let i=1; i<radios.length; i++){
+function createRadioList() {
+    for (let i = 1; i < radios.length; i++) {
         let image = document.createElement('img');
         image.src = "img/stations/" + radios[i].id + ".png";
-        image.onerror = function (){
+        image.onerror = function () {
             this.src = "img/apple-touch.png";
         };
         image.alt = radios[i].name + " logo";
@@ -317,21 +314,21 @@ function createRadioList(){
         button.appendChild(text);
         button.classList.add("radio-button");
         button.classList.add("hover");
-        button.onclick = function (){
+        button.onclick = function () {
             radioSelect(i);
         }
-        if(radios[i-1].lang === "hu" && radios[i].lang !== "hu") document.getElementById("radioList").appendChild(document.createElement('hr'));
+        if (radios[i - 1].lang === "hu" && radios[i].lang !== "hu") document.getElementById("radioList").appendChild(document.createElement('hr'));
         document.getElementById("radioList").appendChild(button);
     }
 }
 
-function mediaSessionInit(){
+function mediaSessionInit() {
     navigator.mediaSession.metadata = new MediaMetadata();
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
-    navigator.mediaSession.metadata.artwork = [ { src: "radio/img/apple-touch.png", sizes: '192x192', type: 'image/png'} ];
+    navigator.mediaSession.metadata.artwork = [{src: "radio/img/apple-touch.png", sizes: '192x192', type: 'image/png'}];
     navigator.mediaSession.setActionHandler('nexttrack', () => {
-        if(favorites.length !== 0) {
+        if (favorites.length !== 0) {
             let i;
             for (i = 0; i < favorites.length; i++) {
                 if (favorites[i] === nowPlaying) {
@@ -340,11 +337,11 @@ function mediaSessionInit(){
                     break;
                 }
             }
-            if(i === favorites.length) radioSelect(favorites[0]);
+            if (i === favorites.length) radioSelect(favorites[0]);
         }
     });
     navigator.mediaSession.setActionHandler('previoustrack', () => {
-        if(favorites.length !== 0) {
+        if (favorites.length !== 0) {
             let i;
             for (i = 0; i < favorites.length; i++) {
                 if (favorites[i] === nowPlaying) {
@@ -353,29 +350,29 @@ function mediaSessionInit(){
                     break;
                 }
             }
-            if(i === favorites.length) radioSelect(favorites[i-1]);
+            if (i === favorites.length) radioSelect(favorites[i - 1]);
         }
     });
 }
 
-function radioSelect(selected){
+function radioSelect(selected) {
     let selectedLogo = "img/stations/" + radios[selected].id + ".png";
     player.src = radios[selected].audio;
     if (!navigator.onLine) {
         alert("Nincs internetkapcsolat!");
     } else {
         let playPromise = player.play();
-        if(playPromise !== undefined){
-            playPromise.then(function (){
-                if(document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
-                if(mediaAPI){
-                    if(navigator.mediaSession.metadata == null) mediaSessionInit();
+        if (playPromise !== undefined) {
+            playPromise.then(function () {
+                if (document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
+                if (mediaAPI) {
+                    if (navigator.mediaSession.metadata == null) mediaSessionInit();
                     navigator.mediaSession.metadata.title = radios[selected].name;
                     navigator.mediaSession.metadata.artwork = [{src: selectedLogo}, {src: "img/stations/logo.png"}];
                 }
             })
                 .catch(function () {
-                    if(radios[selected].audio[4] !== 's') {
+                    if (radios[selected].audio[4] !== 's') {
                         if (favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
                         window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
                         console.log("HTTP Play promise rejected");
@@ -386,7 +383,7 @@ function radioSelect(selected){
 
     document.getElementById("radio-title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = selectedLogo;
-    document.getElementById("big-logo").onerror = function (){
+    document.getElementById("big-logo").onerror = function () {
         this.src = "img/apple-touch.png";
     };
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
@@ -395,13 +392,13 @@ function radioSelect(selected){
     updateFavicon();
 }
 
-function openPage(){
-    if(!nowPlaying) return;
+function openPage() {
+    if (!nowPlaying) return;
     window.open(radios[nowPlaying].website, "_blank");
 }
 
 // ~~~~~ KEDVENCEK FUNKCIOK ~~~~~
-function updateOldFavorites(){
+function updateOldFavorites() {
     let string = localStorage.getItem("favorites");
     const arr = string.split(',');
     arr.pop();
@@ -413,8 +410,8 @@ function updateOldFavorites(){
     localStorage.removeItem("favorites");
 }
 
-function updateFavicon(){
-    if(favorites.includes(nowPlaying)){
+function updateFavicon() {
+    if (favorites.includes(nowPlaying)) {
         document.getElementById("star-icon").src = "img/star-filled.png";
     } else {
         document.getElementById("star-icon").src = "img/star.png";
@@ -422,70 +419,71 @@ function updateFavicon(){
 }
 
 function favoriteSwitch() {
-    if(!nowPlaying) return;
-    if(favorites.includes(nowPlaying)){
+    if (!nowPlaying) return;
+    if (favorites.includes(nowPlaying)) {
         removeFromFavorites(nowPlaying);
-    } else{
+    } else {
         addToFavorites(nowPlaying);
     }
     updateFavicon();
 }
 
-function addToFavorites(nr){
+function addToFavorites(nr) {
     favorites.push(nr);
     let string = "";
-    for(let i=0; i<favorites.length; i++){
+    for (let i = 0; i < favorites.length; i++) {
         string += radios[favorites[i]].id + ',';
     }
     localStorage.setItem("favs", string);
     updateFavList();
 }
 
-function removeFromFavorites(nr){
+function removeFromFavorites(nr) {
     const fav2 = [];
-    for(let i=0; i<favorites.length; i++){
-        if(favorites[i] !== nr) fav2.push(favorites[i]);
+    for (let i = 0; i < favorites.length; i++) {
+        if (favorites[i] !== nr) fav2.push(favorites[i]);
     }
     favorites = fav2;
     let string = "";
-    for(let i=0; i<favorites.length; i++){
+    for (let i = 0; i < favorites.length; i++) {
         string += radios[favorites[i]].id + ',';
     }
     localStorage.setItem("favs", string);
     updateFavList();
 }
 
-function updateFavList(){
+function updateFavList() {
     document.getElementById("favorites").innerHTML = "<h1> Kedvencek </h1>";
-        for (let i = 0; i < favorites.length; i++) {
-            let button = document.createElement("button");
-            let image = document.createElement("img");
-            image.src = "img/stations/" + radios[favorites[i]].id + ".png";
-            image.alt = radios[favorites[i]].name;
-            image.classList.add("favoriteLogo");
-            button.classList.add("favoriteButton");
-            button.appendChild(image);
-            button.onclick = function () {
-                radioSelect(favorites[i]);
-            }
-            document.getElementById("favorites").appendChild(button);
+    for (let i = 0; i < favorites.length; i++) {
+        let button = document.createElement("button");
+        let image = document.createElement("img");
+        image.src = "img/stations/" + radios[favorites[i]].id + ".png";
+        image.alt = radios[favorites[i]].name;
+        image.classList.add("favoriteLogo");
+        button.classList.add("favoriteButton");
+        button.appendChild(image);
+        button.onclick = function () {
+            radioSelect(favorites[i]);
         }
+        document.getElementById("favorites").appendChild(button);
+    }
 }
+
 // ~~~~~ HALOZATI STABILITAS ~~~~~
-function networkHelperInit(){
+function networkHelper() {
 
     let networkTimeout = null;
 
-    function retryPlaying(){
-        setTimeout(function (){
+    function retryPlaying() {
+        setTimeout(function () {
             player.src = radios[nowPlaying].audio;
             player.load();
             player.play();
         }, 500);
     }
 
-    function deleteNetworkTimeout(){
-        if(networkTimeout) {
+    function deleteNetworkTimeout() {
+        if (networkTimeout) {
             clearInterval(networkTimeout);
             networkTimeout = null;
             console.log("timeout unset!");
@@ -493,8 +491,9 @@ function networkHelperInit(){
         }
         return false;
     }
-    function deleteOfflineTimeout(){
-        if(window.ononline) {
+
+    function deleteOfflineTimeout() {
+        if (window.ononline) {
             if (player.networkState !== 1) {
                 window.ononline = null;
                 console.log("removed event listener for online");
@@ -507,30 +506,28 @@ function networkHelperInit(){
         }
     }
 
-    window.addEventListener("offline", function (){
-        if(!player.paused) {
+    window.addEventListener("offline", function () {
+        if (!player.paused) {
             window.ononline = retryPlaying;
             console.log("added event listener for online");
         }
     });
-
-    player.addEventListener('waiting',function () {
-        if(player.readyState === 2 && navigator.onLine){
+    player.addEventListener('waiting', function () {
+        if (player.readyState === 2 && navigator.onLine) {
             console.log("slow connection timeout set!");
-            networkTimeout = setInterval(function (){
-                if(navigator.onLine) retryPlaying();
+            networkTimeout = setInterval(function () {
+                if (navigator.onLine) retryPlaying();
                 else deleteNetworkTimeout();
             }, 7500);
             setTimeout(deleteNetworkTimeout, 180000);
         }
     });
-
     // ha elindul a lejatszas vagy szuneteltetodik, akkor torlodik az idozito
-    player.addEventListener('canplay', function (){
+    player.addEventListener('canplay', function () {
         deleteNetworkTimeout();
         deleteOfflineTimeout();
     });
-    player.addEventListener('pause', function (){
+    player.addEventListener('pause', function () {
         deleteNetworkTimeout();
         deleteOfflineTimeout();
     });
@@ -538,10 +535,11 @@ function networkHelperInit(){
 
 // ~~~~~ IDOZITO FUNKCIOK ~~~~~
 
-function idozitoMenuBe(){
+function idozitoMenuBe() {
     document.getElementById("popup_menu").style.display = "block";
 }
-function idozitoMenuKi(){
+
+function idozitoMenuKi() {
     document.getElementById("popup_menu").style.display = "none";
 }
 
@@ -551,27 +549,26 @@ let idozites = [
     null
 ];
 
-function ido(min){
-    if(idozites[0] !== null) {
+function ido(min) {
+    if (idozites[0] !== null) {
         clearTimeout(idozites[0]);
         clearInterval(idozites[2]);
     }
-    if(min === 0) {
+    if (min === 0) {
         idozites[0] = null;
         idozites[1] = null;
         idozites[2] = null;
         document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
-    }
-    else {
-        idozites[0] = setTimeout(stopAll, min*60000);
-        idozites[1] = Date.now() + min*60000;
+    } else {
+        idozites[0] = setTimeout(stopAll, min * 60000);
+        idozites[1] = Date.now() + min * 60000;
         idozites[2] = setInterval(countdown, 1000);
         document.getElementById("timer-button").innerText = min + ":00";
     }
     idozitoMenuKi();
 }
 
-function stopAll(){
+function stopAll() {
     player.pause();
     clearInterval(idozites[2]);
     idozites[1] = null;
@@ -579,12 +576,12 @@ function stopAll(){
     document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
 }
 
-function countdown(){
+function countdown() {
     let until = idozites[1] - Date.now();
-    let minutes = until/60000;
-    let seconds = (until/1000)%60;
+    let minutes = until / 60000;
+    let seconds = (until / 1000) % 60;
     let text = Math.floor(minutes) + ":";
-    if(Math.floor(seconds) < 10) text += "0" + Math.floor(seconds);
+    if (Math.floor(seconds) < 10) text += "0" + Math.floor(seconds);
     else text += Math.floor(seconds);
     document.getElementById("timer-button").innerText = text;
 }
@@ -593,27 +590,31 @@ function countdown(){
 
 function themeSwitch() {
     let select = document.getElementById("theme-selector");
-    switch (select.value){
-        case "dark": theme = "dark";
-        break;
-        case "light": theme = "light";
-        break;
+    switch (select.value) {
+        case "dark":
+            theme = "dark";
+            break;
+        case "light":
+            theme = "light";
+            break;
         case "auto": {
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) theme = "light";
             else theme = "dark";
             break;
         }
-        default : theme = "dark";
+        default :
+            theme = "dark";
     }
     localStorage.setItem("theme", select.value);
     themeSet();
 }
+
 function themeSet() {
-    if(theme === "light"){
+    if (theme === "light") {
         document.body.style.backgroundImage = "linear-gradient(#dfffdf, white)";
         document.getElementById("settings").classList.add("lightBackground");
         document.body.style.color = "black";
-    } else{
+    } else {
         document.body.style.backgroundImage = "linear-gradient(#002000, black)";
         document.getElementById("settings").classList.remove("lightBackground");
         document.body.style.color = "white";
@@ -621,8 +622,31 @@ function themeSet() {
     document.documentElement.style.colorScheme = theme;
 }
 
-function settingSwitch(){
+//~~~~~ BEALLITASOK ~~~~~
+function settingSwitch() {
     let settings = document.getElementById("settings");
-    if(settings.style.transform) settings.style.transform = "";
+    if (settings.style.transform) settings.style.transform = "";
     else settings.style.transform = "translateX(100%)";
+}
+
+function settingsInit() {
+
+    document.getElementById("autoplay").addEventListener("click", function () {
+        if (document.getElementById("autoplay").checked) {
+            localStorage.setItem("lastStation", nowPlaying);
+        } else {
+            localStorage.removeItem("lastStation");
+        }
+    });
+
+    document.getElementById("networkHelper").addEventListener("click", function () {
+        if (!document.getElementById("networkHelper").checked) {
+            localStorage.removeItem("networkHelper");
+            networkHelper();
+        } else {
+            localStorage.setItem("networkHelper", "true");
+            networkHelper();
+        }
+    });
+
 }
