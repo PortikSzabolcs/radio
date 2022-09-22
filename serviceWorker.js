@@ -1,17 +1,18 @@
-let cacheName = 'radio-cache-v10';
+let cacheName = 'radio-cache-v11';
 let urlsToCache = [
     './',
     './index.html',
     './style.css',
     './app.js',
+    './manifest.json',
     './serviceWorker.js',
     './img/logo.png',
     './img/favicon-32x32.png',
     './img/apple-touch.png',
     './img/android-chrome.png',
     './img/maskable-icon.png',
-    './img/timer.png',
-    './img/dark-mode.png',
+    './img/timer.svg',
+    './img/settings.svg',
     './img/star.png',
     './img/star-filled.png',
     './img/website.png'
@@ -28,17 +29,23 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', (e) => {
-  e.respondWith((async () => {
-  try{
-    const r = await fetch(e.request);
-    console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
-    if (r) { return r; }
-    }
-    catch(error){
-        return await caches.match(e.request);
-    }
-  })());
+    e.respondWith((async () => {
+        const r = await caches.match(e.request);
+        if (r) { return r; }
+        try{
+            const response = await fetch(e.request);
+            const cache = await caches.open(cacheName);
+            console.log(`[Service Worker] Fetching new resource: ${e.request.url}`);
+            if(e.request.url.includes("/img/stations")){
+                cache.put(e.request, response.clone());
+            }
+            return response;
+        }catch (error){
+            console.log(error);
+        }
+    })());
 });
+
 
 
 self.addEventListener('activate', (e) => {

@@ -62,12 +62,12 @@
 	<img class="logo" src="img/logo.png" alt="My Radio logo">
 	</a>
 	<button id="settings-button" class="header-button hover" title="Beállítások" onclick="settingSwitch()">
-		<img id="settings-icon" src="img/dark-mode.png" alt="settings-icon">
+		<img id="settings-icon" src="img/settings.svg" alt="settings-icon">
 	</button>
 	<button id="timer-button" class="header-button hover" title="Időzített kikapcsolás" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
-		<img id="timer-icon" src="img/timer.png" alt="timer-icon">
+		<img id="timer-icon" src="img/timer.svg" alt="timer-icon">
 	</button>
-	<div id="popup_menu" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+	<div id="popup_menu" style="transform: translateY(-120%);" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
 		<button class="timer-buttons hover" onclick="ido(0)">OFF</button>
 		<button class="timer-buttons hover" onclick="ido(15)">0:15</button>
 		<button class="timer-buttons hover" onclick="ido(30)">0:30</button>

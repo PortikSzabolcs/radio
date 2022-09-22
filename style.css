@@ -68,7 +68,7 @@ select{
 	padding: 5px;
 	top: 0;
 	left: 0;
-	z-index:1;}
+	z-index:10;}
 .logo	{
 	max-height: 50px;
 	max-width:200px;
@@ -76,34 +76,38 @@ select{
 	}
 .header-button{
 	position: absolute;
+	background-color: #050;
 	bottom: 0;
 	height: 60px;
 	border-style: none;
-	font-size: 30px;
+	font-size: 26px;
 	color: white;
 }
 #settings-button{
-	width: 45px;
-	right: 90px;
+	width: 60px;
+	right: 0;
+}
+#settings-icon{
+	transition: all .4s ease;
 }
 #timer-button{
-	right: 0;
-	width: 90px;
+	right: 60px;
+	width: 80px;
 }
 #timer-icon{
 	width: 40px;
 	margin: 7px 0;
 }
 #popup_menu	{
-	display: none;
+	transition: all .3s;
 	position: fixed;
 	background-color: #151;
 	opacity: .95;
 	top: 60px;
-	right: 0;
-	width: 90px;
+	right: 60px;
+	width: 80px;
 	text-align: center;
-	z-index: 2;
+	z-index: -1;
 }
 .content{
 	display: flex;
@@ -172,8 +176,9 @@ select{
 	height: calc(100vh - 60px);
 	background-color: #000000f2;
 	vertical-align: middle;
-	padding: 10px;
+	padding: 5px;
 	overflow: hidden;
+	transition: transform .5s;
 }
 .lightBackground{
 	background-color: #fffffffa !important;
@@ -183,7 +188,7 @@ select{
 	border-bottom-style: solid;
 	border-color: grey;
 	border-width: thin;
-	padding: 15px;
+	padding: 15px 5px;
 	margin: 0 15px;
 }
 .helpText{
@@ -243,10 +248,12 @@ select{
 	.radio-button{
 		width: 49%;
 	}
-	#popup_menu, #timer-button { width: 100px; }
-	#settings-button {
+	#popup_menu, #timer-button {
 		width: 100px;
 		right: 100px;
+	}
+	#settings-button {
+		width: 100px;
 	}
 }
 

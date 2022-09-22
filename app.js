@@ -102,7 +102,7 @@ const radios = [
         "lang": "hu"
     },
     {
-        "name": "Rádió Gaga - Maros",
+        "name": "Rádió Gaga - Marosszék",
         "id": "gaga-ms",
         "audio": "https://securestreams4.autopo.st:1696/live",
         "website": "https://radiogaga.ro",
@@ -536,11 +536,11 @@ function networkHelper() {
 // ~~~~~ IDOZITO FUNKCIOK ~~~~~
 
 function idozitoMenuBe() {
-    document.getElementById("popup_menu").style.display = "block";
+    document.getElementById("popup_menu").style.transform = "";
 }
 
 function idozitoMenuKi() {
-    document.getElementById("popup_menu").style.display = "none";
+    document.getElementById("popup_menu").style.transform = "translateY(-120%)";
 }
 
 let idozites = [
@@ -558,7 +558,7 @@ function ido(min) {
         idozites[0] = null;
         idozites[1] = null;
         idozites[2] = null;
-        document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
+        document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.svg\" alt=\"timer-icon\">";
     } else {
         idozites[0] = setTimeout(stopAll, min * 60000);
         idozites[1] = Date.now() + min * 60000;
@@ -573,7 +573,7 @@ function stopAll() {
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
-    document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.png\" alt=\"timer-icon\">";
+    document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.svg\" alt=\"timer-icon\">";
 }
 
 function countdown() {
@@ -625,8 +625,15 @@ function themeSet() {
 //~~~~~ BEALLITASOK ~~~~~
 function settingSwitch() {
     let settings = document.getElementById("settings");
-    if (settings.style.transform) settings.style.transform = "";
-    else settings.style.transform = "translateX(100%)";
+    let settingsIcon = document.getElementById("settings-icon");
+    if (settings.style.transform) {
+        settings.style.transform = "";
+        settingsIcon.style.transform = "rotate(90deg)";
+    }
+    else {
+        settings.style.transform = "translateX(100%)";
+        settingsIcon.style.transform = "";
+    }
 }
 
 function settingsInit() {
