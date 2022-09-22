@@ -535,6 +535,11 @@ function networkHelper() {
 
 // ~~~~~ IDOZITO FUNKCIOK ~~~~~
 
+function idozito(){
+    if(document.getElementById("popup_menu").style.transform) idozitoMenuBe();
+    else idozitoMenuKi();
+}
+
 function idozitoMenuBe() {
     document.getElementById("popup_menu").style.transform = "";
 }
