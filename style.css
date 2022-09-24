@@ -199,6 +199,9 @@ select{
 	white-space: nowrap;
 	text-overflow: clip;
 }
+.radio-button:hover{
+	background-color: #080;
+}
 .radio-button-logo{
 	width: 36px;
 	aspect-ratio: 1/1;
@@ -283,7 +286,7 @@ select{
 	.radio-button {
 		width: 100%;
 	}
-	.hover:hover{
+	.pcHover:hover{
 		background-color: #080;
 	}
 	.content {
