@@ -1,11 +1,10 @@
-let cacheName = 'radio-cache-v11.2';
+let cacheName = 'radio-cache-v11.3';
 let urlsToCache = [
     './',
     './index.html',
     './style.css',
     './app.js',
     './manifest.json',
-    './serviceWorker.js',
     './img/logo.png',
     './img/favicon-32x32.png',
     './img/apple-touch.png',
