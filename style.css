@@ -53,9 +53,6 @@ select{
 	font-size: 22px;
 	color: white;
 }
-.hover:hover{
-	background-color: #080;
-}
 .header {
 	height:60px;
 	width: 100%;
@@ -131,10 +128,6 @@ select{
 	padding: 3px;
 	height: auto;
 }
-.nowPlayingButton:hover{
-	background-color: unset;
-	scale: 1.2;
-}
 #favorites{
 	width: 100%;
 	margin: 0;
@@ -149,10 +142,6 @@ select{
 	height: 100%;
 	padding: 10px;
 	border-radius: 10px;
-}
-.favoriteButton:hover{
-	background-color: unset;
-	padding: 5px;
 }
 .favoriteLogo{
 	max-width: unset;
@@ -178,7 +167,7 @@ select{
 	vertical-align: middle;
 	padding: 5px;
 	overflow: hidden;
-	transition: transform .5s;
+	transition: transform .4s;
 }
 .lightBackground{
 	background-color: #fffffffa !important;
@@ -241,9 +230,17 @@ select{
 
 @media only screen and (min-width: 768px) {
 	#playing	{width: 50%;}
+	.nowPlayingButton:hover{
+		background-color: unset;
+		scale: 1.2;
+	}
 	#favorites	{width: 50%;}
 	.favoriteButton{
 		width: 33%;
+	}
+	.favoriteButton:hover{
+		background-color: unset;
+		padding: 5px;
 	}
 	.radio-button{
 		width: 49%;
@@ -285,6 +282,9 @@ select{
 	}
 	.radio-button {
 		width: 100%;
+	}
+	.hover:hover{
+		background-color: #080;
 	}
 	.content {
 		height: calc(100vh - 60px);

@@ -327,6 +327,14 @@ function mediaSessionInit() {
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
     navigator.mediaSession.metadata.artwork = [{src: "radio/img/apple-touch.png", sizes: '192x192', type: 'image/png'}];
+    navigator.mediaSession.setActionHandler('pause',() => {
+        player.pause();
+        if(document.getElementById("video")) document.getElementById("video").pause();
+    });
+    navigator.mediaSession.setActionHandler('play',() => {
+        player.play();
+        if(document.getElementById("video")) document.getElementById("video").play();
+    });
     navigator.mediaSession.setActionHandler('nexttrack', () => {
         if (favorites.length !== 0) {
             let i;
@@ -389,6 +397,7 @@ function radioSelect(selected) {
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
 
+    if(localStorage.getItem("PIP") && 'pictureInPictureEnabled' in document)pipSet();
     updateFavicon();
 }
 
@@ -467,6 +476,37 @@ function updateFavList() {
         }
         document.getElementById("favorites").appendChild(button);
     }
+}
+
+// ~~~~~ PIP ~~~~~
+function pipInit(){
+    const video = document.createElement('video');
+    video.id = "video";
+    video.muted = true;
+    video.hidden = true;
+    document.getElementById('playing').appendChild(video);
+}
+
+function pipSet(){
+    if(document.getElementById("video") === null) pipInit();
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 170;
+
+    const image = new Image();
+    image.src = document.getElementById("big-logo").src;
+    let width = (image.width/image.height)*170;
+
+    canvas.getContext('2d').drawImage(image, (300-width)/2, 0, width, 170);
+    document.getElementById("video").srcObject = canvas.captureStream();
+    canvas.remove();
+
+    document.getElementById("video").play().then(function (){
+        document.getElementById("video").requestPictureInPicture().then(r => console.log(r)).catch(e => console.log(e));
+    }).catch(error => {
+        console.log(error);
+    })
 }
 
 // ~~~~~ HALOZATI STABILITAS ~~~~~
