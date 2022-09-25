@@ -363,6 +363,7 @@ function mediaSessionInit() {
 }
 
 function radioSelect(selected) {
+    if(!selected) return;
     let selectedLogo = "img/stations/" + radios[selected].id + ".png";
     player.src = radios[selected].audio;
     if (!navigator.onLine) {
