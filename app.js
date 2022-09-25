@@ -253,11 +253,6 @@ initPage();
 
 function initPage() {
 
-    if (localStorage.getItem("lastStation")) {
-        document.getElementById("autoplay").checked = true;
-        radioSelect(Number(localStorage.getItem("lastStation")));
-    }
-
     if (localStorage.getItem("theme")) {
         document.getElementById("theme-selector").value = localStorage.getItem("theme");
         themeSwitch();
@@ -285,6 +280,11 @@ function initPage() {
         text.style.fontSize = "12px";
         text.innerText = "Kedvencek hozzáadásához kattints a rádióra, majd a csillag ikonra.";
         document.getElementById("favorites").appendChild(text);
+    }
+    
+    if (localStorage.getItem("lastStation")) {
+        document.getElementById("autoplay").checked = true;
+        radioSelect(Number(localStorage.getItem("lastStation")));
     }
 
     if (localStorage.getItem("networkHelper")) {
