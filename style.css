@@ -1,9 +1,7 @@
 *	{box-sizing: border-box;}
 body {
-	background-image: linear-gradient(#001800, black);
 	padding-top:60px;
 	min-height: 100vh;
-	color: white;
 	margin: 0 0;
 	overscroll-behavior-y: contain;
 }
@@ -168,6 +166,7 @@ select{
 	vertical-align: middle;
 	padding: 5px;
 	overflow: hidden;
+	overflow-y: scroll;
 	transition: transform .4s;
 }
 .lightBackground{

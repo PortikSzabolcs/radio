@@ -656,13 +656,9 @@ function themeSwitch() {
 
 function themeSet() {
     if (theme === "light") {
-        document.body.style.backgroundImage = "linear-gradient(#dfffdf, white)";
         document.getElementById("settings").classList.add("lightBackground");
-        document.body.style.color = "black";
     } else {
-        document.body.style.backgroundImage = "linear-gradient(#001800, black)";
         document.getElementById("settings").classList.remove("lightBackground");
-        document.body.style.color = "white";
     }
     document.documentElement.style.colorScheme = theme;
 }
