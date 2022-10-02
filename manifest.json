@@ -8,6 +8,12 @@
   "theme_color": "rgb(0, 70, 10)",
   "icons": [
     {
+      "src": "img/windows-tile.png",
+      "sizes": "150x150",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "img/apple-touch.png",
       "sizes": "180x180",
       "type": "image/png",
@@ -24,6 +30,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+     },
+     {
+      "src": "img/windows-splash.png",
+      "sizes": "620x300",
+      "type": "image/png",
+      "purpose": "any"
      }
   ],
   "background_color": "rgb(70, 70, 70)"
