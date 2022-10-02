@@ -301,7 +301,7 @@ function createRadioList() {
         let image = document.createElement('img');
         image.src = "img/stations/" + radios[i].id + ".png";
         image.onerror = function () {
-            this.src = "img/apple-touch.png";
+            this.src = "img/maskable-grey.svg";
         };
         image.alt = radios[i].name + " logo";
         image.classList.add("radio-button-logo");
@@ -325,7 +325,7 @@ function mediaSessionInit() {
     navigator.mediaSession.metadata = new MediaMetadata();
     navigator.mediaSession.metadata.artist = "Saját Rádió";
     navigator.mediaSession.metadata.title = "Saját Rádió";
-    navigator.mediaSession.metadata.artwork = [{src: "radio/img/apple-touch.png", sizes: '192x192', type: 'image/png'}];
+    navigator.mediaSession.metadata.artwork = [{src: "radio/img/apple-touch.png", sizes: '180x180', type: 'image/png'}, {src:"radio/img/maskable-icon.png", sizes:'512x512', type:'image/png'}];
     navigator.mediaSession.setActionHandler('pause',() => {
         player.pause();
         if(document.getElementById("video")) document.getElementById("video").pause();
@@ -392,7 +392,7 @@ function radioSelect(selected) {
     document.getElementById("radio-title").innerText = radios[selected].name;
     document.getElementById("big-logo").src = selectedLogo;
     document.getElementById("big-logo").onerror = function () {
-        this.src = "img/apple-touch.png";
+        this.src = "img/maskable-grey.svg";
     };
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
@@ -660,7 +660,7 @@ function themeSet() {
         document.getElementById("settings").classList.add("lightBackground");
         document.body.style.color = "black";
     } else {
-        document.body.style.backgroundImage = "linear-gradient(#002000, black)";
+        document.body.style.backgroundImage = "linear-gradient(#001800, black)";
         document.getElementById("settings").classList.remove("lightBackground");
         document.body.style.color = "white";
     }

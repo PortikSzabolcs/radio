@@ -1,15 +1,16 @@
-let cacheName = 'radio-cache-v11.8';
+let cacheName = 'radio-cache-v12';
 let urlsToCache = [
     './',
     './index.html',
     './style.css',
     './app.js',
     './manifest.json',
-    './img/logo.png',
-    './img/favicon-32x32.png',
+    './img/main-logo.svg',
+    './img/favicon-32.png',
     './img/apple-touch.png',
     './img/android-chrome.png',
     './img/maskable-icon.png',
+    './img/maskable-grey.svg',
     './img/timer.svg',
     './img/settings.svg',
     './img/star.png',

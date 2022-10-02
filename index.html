@@ -26,15 +26,17 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="application-name" content="Saját Rádió">
 	<meta name="apple-mobile-web-app-title" content="Rádió">
-	<meta name="msapplication-navbutton-color" content="#006000">
+	<meta name="msapplication-navbutton-color" content="rgb(0, 70 10)">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<meta name="msapplication-starturl" content="/">
 
-	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="192x192" href="img/apple-touch.png">
-	<link rel="shortcut icon" type="image/png" sizes="64x64" href="img/android-chrome.png">
-	<meta name="theme-color" content="#050">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+	<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="img/apple-touch.png">
+	<link rel="shortcut icon" type="image/png" sizes="192x192" href="img/android-chrome.png">
+	<meta name="theme-color" content="rgb(0, 70, 10)">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Portik Szabolcs">
 	<meta name="description" content="Magyar és egyéb nyelvű rádiók online gyűjteménye." />
@@ -61,8 +63,9 @@
 </head>
 <body>
 <div id="headerID" class="header">
-	<a href="/radio">
-	<img class="logo" src="img/logo.png" alt="My Radio logo">
+	<a href="/radio" style="color: rgb(80,210,20); font-style: italic; font-family: Reem Kufi Fun, sans-serif; font-size: 30px; text-decoration: none; line-height: 50px;">
+	<img id="main-logo" src="img/main-logo.svg" alt="My Radio logo">
+	MY RADIO
 	</a>
 	<button id="settings-button" class="header-button pcHover" title="Beállítások" onclick="settingSwitch()">
 		<img id="settings-icon" src="img/settings.svg" alt="settings-icon">
@@ -93,7 +96,7 @@
 		</div>
 
 		<div id="big-logo-container">
-			<img id="big-logo" src="img/apple-touch.png" alt="station logo">
+			<img id="big-logo" src="img/maskable-grey.svg" alt="station logo">
 		</div>
 		<audio id="audio" src="" controls>Player</audio>
 	</div>

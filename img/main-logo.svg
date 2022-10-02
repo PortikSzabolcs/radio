@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="400.00006"
+   height="400.00003"
+   viewBox="0 0 105.83335 105.83335"
+   version="1.1"
+   id="svg3151"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title34948">Radio LOGO</title>
+  <defs
+     id="defs3148" />
+  <g
+     id="layer1">
+    <path
+       style="fill:#3cc80a;fill-opacity:1;stroke:#000000;stroke-width:5.29167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 13.229167,29.104166 79.374999,2.6458333"
+       id="path3977" />
+    <rect
+       style="fill:#50d214;fill-opacity:1;stroke:none;stroke-width:1.32292;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3558"
+       width="105.83334"
+       height="79.375"
+       x="-1.9382326e-06"
+       y="26.458332"
+       ry="10.583333" />
+    <ellipse
+       style="fill:#dc1400;fill-opacity:1;stroke:#000000;stroke-width:5.29167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path11458"
+       cx="52.916664"
+       cy="66.145836"
+       rx="23.812498"
+       ry="23.812504" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:5.29167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 52.916666,42.333333 v 15.875"
+       id="path23758" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529417;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path1003"
+       d="m 52.916665,31.20624 5.053624,8.753137 -10.107251,-2e-6 z"
+       transform="matrix(1.5706547,0,0,0.85368106,-30.197141,9.3111299)" />
+  </g>
+  <metadata
+     id="metadata34946">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Radio LOGO</dc:title>
+        <dc:date>2022.09.30.</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Portik Szabolcs</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>radio</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
