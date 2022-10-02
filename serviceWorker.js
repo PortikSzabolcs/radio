@@ -6,7 +6,7 @@ let urlsToCache = [
     './app.js',
     './manifest.json',
     './img/main-logo.svg',
-    './img/favicon-32.png',
+    './img/favicon-96.png',
     './img/apple-touch.png',
     './img/android-chrome.png',
     './img/maskable-icon.png',
