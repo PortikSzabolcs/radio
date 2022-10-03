@@ -590,9 +590,14 @@ function idozitoMenuKi() {
 }
 
 function timeInput(){
-    let str = document.getElementById("timer-input").value.split(":");
-    let time = parseInt(str[0])*60 + parseInt(str[1]);
-    ido(time);
+    let str = document.getElementById("timer-input").value;
+    if(str === "") ido(0);
+    else{
+        let s = str.split(":");
+        let time = parseInt(str[0])*60 + parseInt(str[1]);
+        if(time < 999) ido(time);
+        else ido(999);
+    }
 }
 
 let idozites = [
