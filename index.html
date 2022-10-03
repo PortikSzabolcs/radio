@@ -77,7 +77,10 @@
 		<button class="timer-buttons pcHover" onclick="ido(15)">0:15</button>
 		<button class="timer-buttons pcHover" onclick="ido(30)">0:30</button>
 		<button class="timer-buttons pcHover" onclick="ido(60)">1:00</button>
-		<button class="timer-buttons pcHover" onclick="ido(120)">2:00</button>
+		<button class="timer-buttons pcHover" onclick="ido(90)">1:30</button>
+		<div class="timer-buttons pcHover" >
+			<input type="time" id="timer-input" name="timer-input" style="width: inherit; height: inherit; font-size: large; text-align: center;" max="10:00" oninput="timeInput()">
+		</div>
 	</div>
 </div>
 
@@ -126,13 +129,13 @@
 		</div>
 		<div class="settings-entry">
 			<label for="autoplay"> Automatikus betöltés </label>
-			<input type="checkbox" id="autoplay" name="autoplay">
+			<input class="checkbox" type="checkbox" id="autoplay" name="autoplay">
 			<br>
 			<p class="helpText"> Utoljára hallgatott rádió betöltése az alkalmazás/weboldal megnyitásakor</p>
 		</div>
 		<div class="settings-entry">
 			<label for="networkHelper"> Internetes stabilitás növelése </label>
-			<input type="checkbox" id="networkHelper" name="networkHelper">
+			<input class="checkbox" type="checkbox" id="networkHelper" name="networkHelper">
 			<br>
 			<p class="helpText"> Ha szakadozik az internet, segít az újrapróbálkozásban (Kísérleti funkció) </p>
 		</div>

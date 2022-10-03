@@ -586,6 +586,13 @@ function idozitoMenuBe() {
 
 function idozitoMenuKi() {
     document.getElementById("popup_menu").style.transform = "translateY(-120%)";
+    document.getElementById("timer-input").value = "00:00";
+}
+
+function timeInput(){
+    let str = document.getElementById("timer-input").value.split(":");
+    let time = parseInt(str[0])*60 + parseInt(str[1]);
+    ido(time);
 }
 
 let idozites = [
@@ -610,7 +617,6 @@ function ido(min) {
         idozites[2] = setInterval(countdown, 1000);
         document.getElementById("timer-button").innerText = min + ":00";
     }
-    idozitoMenuKi();
 }
 
 function stopAll() {

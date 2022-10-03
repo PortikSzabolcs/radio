@@ -31,7 +31,7 @@ button{
 button:hover{
 	cursor: pointer;
 }
-input{
+.checkbox{
 	width: 20px;
 	aspect-ratio: 1/1;
 	float: right;
