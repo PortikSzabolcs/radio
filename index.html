@@ -73,12 +73,12 @@
 		<img id="timer-icon" src="img/timer.svg" alt="timer-icon">
 	</button>
 	<div id="popup_menu" style="transform: translateY(-120%);" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
-		<button class="timer-buttons pcHover" onclick="ido(0)">OFF</button>
-		<button class="timer-buttons pcHover" onclick="ido(30)">0:30</button>
-		<button class="timer-buttons pcHover" onclick="ido(60)">1:00</button>
-		<button class="timer-buttons pcHover" onclick="ido(90)">1:30</button>
+		<button class="timer-buttons pcHover" onclick="ido(0); idozitoMenuKi()">OFF</button>
+		<button class="timer-buttons pcHover" onclick="ido(30); idozitoMenuKi()">0:30</button>
+		<button class="timer-buttons pcHover" onclick="ido(60); idozitoMenuKi()">1:00</button>
+		<button class="timer-buttons pcHover" onclick="ido(90); idozitoMenuKi()">1:30</button>
 		<div class="timer-buttons pcHover" >
-			<input type="time" id="timer-input" name="timer-input" style="width: inherit; height: inherit; font-size: large; text-align: center;" max="10:00" oninput="timeInput()">
+			<input type="time" id="timer-input" name="timer-input" style="width: inherit; height: inherit; font-size: large; text-align: center;" max="10:00" onchange="timeInput()">
 		</div>
 	</div>
 </div>

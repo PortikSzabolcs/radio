@@ -585,7 +585,7 @@ function idozitoMenuBe() {
 }
 
 function idozitoMenuKi() {
-    document.getElementById("popup_menu").style.transform = "translateY(-120%)";
+    document.getElementById("popup_menu").style.transform = "translateY(-125%)";
     document.getElementById("timer-input").value = "00:00";
 }
 
@@ -593,8 +593,9 @@ function timeInput(){
     let str = document.getElementById("timer-input").value;
     if(str === "") ido(0);
     else{
-        let s = str.split(":");
-        let time = parseInt(str[0])*60 + parseInt(str[1]);
+        let s = str.split(':');
+        console.log("valtozik");
+        let time = parseInt(s[0])*60 + parseInt(s[1]);
         if(time < 999) ido(time);
         else ido(999);
     }
