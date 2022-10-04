@@ -586,7 +586,6 @@ function idozitoMenuBe() {
 
 function idozitoMenuKi() {
     document.getElementById("popup_menu").style.transform = "translateY(-125%)";
-    document.getElementById("timer-input").value = "00:00";
 }
 
 function timeInput(){
@@ -594,10 +593,8 @@ function timeInput(){
     if(str === "") ido(0);
     else{
         let s = str.split(':');
-        console.log("valtozik");
         let time = parseInt(s[0])*60 + parseInt(s[1]);
-        if(time < 999) ido(time);
-        else ido(999);
+        ido(time);
     }
 }
 
@@ -621,7 +618,7 @@ function ido(min) {
         idozites[0] = setTimeout(stopAll, min * 60000);
         idozites[1] = Date.now() + min * 60000;
         idozites[2] = setInterval(countdown, 1000);
-        document.getElementById("timer-button").innerText = min + ":00";
+        document.getElementById("timer-button").innerText = formatTime(min*60);
     }
 }
 
@@ -630,17 +627,36 @@ function stopAll() {
     clearInterval(idozites[2]);
     idozites[1] = null;
     idozites[2] = null;
+    document.getElementById("timer-input").value = "00:00";
     document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.svg\" alt=\"timer-icon\">";
 }
 
 function countdown() {
     let until = idozites[1] - Date.now();
-    let minutes = until / 60000;
-    let seconds = (until / 1000) % 60;
-    let text = Math.floor(minutes) + ":";
-    if (Math.floor(seconds) < 10) text += "0" + Math.floor(seconds);
-    else text += Math.floor(seconds);
-    document.getElementById("timer-button").innerText = text;
+    document.getElementById("timer-button").innerText = formatTime(until/1000);
+}
+
+function formatTime(sec){
+    let seconds = Math.floor(sec % 60);
+    let minutes = Math.floor((sec / 60) % 60);
+    let hours = Math.floor((sec / 3600) % 60);
+    let str = "";
+    if(hours){
+        str += hours + ":";
+        if(minutes < 10) str += "0";
+        str += minutes;
+        return str;
+    }
+    if(minutes){
+        str += minutes + ":";
+        if(seconds < 10) str += "0";
+        str += seconds;
+        return str;
+    }
+    str += "0:";
+    if(seconds < 10) str += "0";
+    str += seconds;
+    return str;
 }
 
 // ~~~~~ TEMA FUNKCIOK ~~~~~

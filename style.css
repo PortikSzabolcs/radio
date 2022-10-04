@@ -42,6 +42,7 @@ select, #timer-input{
 	vertical-align: middle;
 	float: right;
 	margin: 0 10px;
+	width: auto;
 }
 .timer-buttons{
 	width: 100%;
