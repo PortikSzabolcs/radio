@@ -37,7 +37,7 @@ button:hover{
 	float: right;
 	margin: 0 10px;
 }
-select{
+select, #timer-input{
 	font-size: 22px;
 	vertical-align: middle;
 	float: right;

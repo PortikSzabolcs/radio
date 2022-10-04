@@ -253,8 +253,8 @@ initPage();
 
 function initPage() {
 
-    if (localStorage.getItem("theme")) {
-        document.getElementById("theme-selector").value = localStorage.getItem("theme");
+    if (localStorage.getItem("mode")) {
+        document.getElementById("theme-selector").value = localStorage.getItem("mode");
         themeSwitch();
     }
 
@@ -662,7 +662,7 @@ function themeSwitch() {
         default :
             theme = "dark";
     }
-    localStorage.setItem("theme", select.value);
+    localStorage.setItem("mode", select.value);
     themeSet();
 }
 
@@ -708,5 +708,10 @@ function settingsInit() {
             networkHelper();
         }
     });
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(e){
+        if(e.matches) theme = "dark";
+        else theme = "light";
+        themeSet();
+    })
 
 }
