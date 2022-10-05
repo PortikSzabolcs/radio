@@ -245,6 +245,7 @@ const radios = [
 
 const mediaAPI = ('mediaSession' in navigator);
 const player = document.getElementById("audio");
+let param = window.location.search;
 let theme = null;
 let nowPlaying = 0;
 let favorites = [];
@@ -281,8 +282,21 @@ function initPage() {
         text.innerText = "Kedvencek hozzáadásához kattints a rádióra, majd a csillag ikonra.";
         document.getElementById("favorites").appendChild(text);
     }
-    
-    if (localStorage.getItem("lastStation")) {
+
+    if(param !== ""){
+        const params = new URLSearchParams(param);
+        if(params.has("s")){
+            const radio = params.get("s");
+            for(let i=0; i<radios.length; i++){
+                if(radios[i].id === radio) {
+                    radioSelect(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    if (localStorage.getItem("lastStation") && !nowPlaying) {
         document.getElementById("autoplay").checked = true;
         radioSelect(Number(localStorage.getItem("lastStation")));
     }
