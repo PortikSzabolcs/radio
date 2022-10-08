@@ -5,7 +5,7 @@
   "lang": "hu-HU",
   "start_url": "/radio/",
   "display": "standalone",
-  "theme_color": "rgb(0, 70, 10)",
+  "theme_color": "rgb(70, 70, 70)",
   "icons": [
     {
       "src": "img/favicon-96.png",

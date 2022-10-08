@@ -28,9 +28,6 @@ button{
 	text-align: center;
 	border-style: none;
 }
-button:hover{
-	cursor: pointer;
-}
 .checkbox{
 	width: 20px;
 	aspect-ratio: 1/1;
@@ -138,7 +135,6 @@ select, #timer-input{
 
 .favoriteButton{
 	width: 25%;
-	aspect-ratio: 1/1;
 	height: 100%;
 	padding: 10px;
 	border-radius: 10px;
@@ -147,6 +143,9 @@ select, #timer-input{
 	max-width: unset;
 	max-height: unset;
 	width: 100%;
+	aspect-ratio: 1/1;
+	object-fit: contain;
+	box-shadow: 0 0 3px #777;
 }
 #radioList{
 	float: right;
@@ -207,7 +206,8 @@ select, #timer-input{
 	width: 36px;
 	aspect-ratio: 1/1;
 	object-fit: contain;
-	background-color: #1111;
+	box-shadow: 0 0 0 1px #7777;
+	background-color: #7777;
 }
 #big-logo{
 	max-height: unset;
@@ -220,7 +220,7 @@ select, #timer-input{
 	position: relative;
 	max-width:225px;
 	margin: 35px auto;
-	border-radius: 8px;
+	border-radius: 3px;
 	display: flex;
 	align-items: center;
 }
@@ -232,19 +232,28 @@ select, #timer-input{
 	}
 }
 
-@media only screen and (min-width: 768px) {
-	#playing	{width: 50%;}
+@media (hover: hover) {
+	button:hover{
+		cursor: pointer;
+	}
+	.header-button:hover, .timer-buttons:hover{
+		background-color: #080;
+	}
 	.nowPlayingButton:hover{
 		background-color: unset;
 		scale: 1.2;
 	}
-	#favorites	{width: 50%;}
-	.favoriteButton{
-		width: 33%;
-	}
 	.favoriteButton:hover{
 		background-color: unset;
 		padding: 5px;
+	}
+  }
+
+@media only screen and (min-width: 768px) {
+	#playing	{width: 50%;}
+	#favorites	{width: 50%;}
+	.favoriteButton{
+		width: 33%;
 	}
 	.radio-button{
 		width: 49%;
@@ -286,9 +295,6 @@ select, #timer-input{
 	}
 	.radio-button {
 		width: 100%;
-	}
-	.pcHover:hover{
-		background-color: #080;
 	}
 	.content {
 		height: calc(100vh - 60px);

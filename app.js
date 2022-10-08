@@ -247,6 +247,7 @@ const mediaAPI = ('mediaSession' in navigator);
 const player = document.getElementById("audio");
 let param = window.location.search;
 let theme = null;
+let focused = -1;
 let nowPlaying = 0;
 let favorites = [];
 console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
@@ -596,10 +597,12 @@ function idozito(){
 
 function idozitoMenuBe() {
     document.getElementById("popup_menu").style.transform = "";
+    document.getElementById("popup_menu").style.display = "block";
 }
 
 function idozitoMenuKi() {
     document.getElementById("popup_menu").style.transform = "translateY(-125%)";
+    document.getElementById("popup_menu").style.display = "none";
 }
 
 function timeInput(){
@@ -720,7 +723,33 @@ function settingSwitch() {
 }
 
 function settingsInit() {
-
+    
+    document.addEventListener('keydown', (event) => {
+        var code = event.code;
+        switch(code){
+            case "ArrowDown", "ArrowRight": {
+                event.preventDefault();
+                if(focused == -1) focused = 8;
+                else if(focused < document.getElementsByTagName("button").length - 1) focused++;
+                document.getElementsByTagName("button")[focused].focus();
+                break;
+            }
+            case "ArrowUp", "ArrowLeft": {
+                event.preventDefault();
+                if(focused == -1) focused = 8;
+                else if(focused > 0) focused--;
+                document.getElementsByTagName("button")[focused].focus();
+                break;
+            }
+            case "Space": {
+                event.preventDefault();
+                if(player.paused) player.play();
+                else player.pause();
+                break;
+            }
+        }
+      }, false);
+    
     document.getElementById("autoplay").addEventListener("click", function () {
         if (document.getElementById("autoplay").checked) {
             localStorage.setItem("lastStation", nowPlaying);
