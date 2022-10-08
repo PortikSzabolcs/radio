@@ -142,7 +142,8 @@ select, #timer-input{
 	width: 100%;
 	aspect-ratio: 1/1;
 	object-fit: contain;
-	box-shadow: 0 0 3px #777;
+	background-color: #aaa2;
+	box-shadow: 0 1px 2px #555;
 }
 #radioList{
 	float: right;
@@ -159,15 +160,15 @@ select, #timer-input{
 	right: 0;
 	width: 100%;
 	height: calc(100vh - 60px);
-	background-color: #000000f2;
+	background-color: #fffffff2;
 	vertical-align: middle;
 	padding: 5px;
 	overflow: hidden;
 	overflow-y: scroll;
 	transition: transform .4s;
 }
-.lightBackground{
-	background-color: #fffffffa !important;
+.darkBackground{
+	background-color: #000000f5 !important;
 }
 .settings-entry{
 	font-size: 26px;

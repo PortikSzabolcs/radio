@@ -693,7 +693,7 @@ function themeSwitch() {
             break;
         }
         default :
-            theme = "dark";
+            theme = "auto";
     }
     localStorage.setItem("mode", select.value);
     themeSet();
@@ -701,9 +701,9 @@ function themeSwitch() {
 
 function themeSet() {
     if (theme === "light") {
-        document.getElementById("settings").classList.add("lightBackground");
+        document.getElementById("settings").classList.remove("darkBackground");
     } else {
-        document.getElementById("settings").classList.remove("lightBackground");
+        document.getElementById("settings").classList.add("darkBackground");
     }
     document.documentElement.style.colorScheme = theme;
 }
@@ -767,10 +767,8 @@ function settingsInit() {
             networkHelper();
         }
     });
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(e){
-        if(e.matches) theme = "dark";
-        else theme = "light";
-        themeSet();
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (){
+        themeSwitch();
     })
 
 }
