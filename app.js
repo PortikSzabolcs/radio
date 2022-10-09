@@ -414,6 +414,7 @@ function radioSelect(selected) {
 
     if(localStorage.getItem("PIP") && 'pictureInPictureEnabled' in document)pipSet();
     updateFavicon();
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function openPage() {
