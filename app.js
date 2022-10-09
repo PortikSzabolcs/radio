@@ -597,12 +597,10 @@ function idozito(){
 
 function idozitoMenuBe() {
     document.getElementById("popup_menu").style.transform = "";
-    document.getElementById("popup_menu").style.display = "block";
 }
 
 function idozitoMenuKi() {
     document.getElementById("popup_menu").style.transform = "translateY(-125%)";
-    document.getElementById("popup_menu").style.display = "none";
 }
 
 function timeInput(){
