@@ -50,7 +50,7 @@
 	<meta property="og:url" content="https://portikszabolcs.github.io/radio/" />
 	<meta property="og:image:width" content="620"/>
 	<meta property="og:image:height" content="300"/>
-
+	<script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-DD8W82L1MT"></script>
 	<script>
@@ -62,7 +62,7 @@
 </head>
 <body>
 <div id="headerID" class="header">
-	<a href="/radio" style="color: rgb(80,210,20); font-style: italic; font-family: Reem Kufi Fun, sans-serif; font-size: 30px; text-decoration: none; line-height: 50px;">
+	<a href="/radio" style="color: rgb(80,210,20); font-family: Reem Kufi Fun, sans-serif; font-size: 30px; text-decoration: none; line-height: 50px;">
 	<img id="main-logo" src="img/main-logo.svg" alt="My Radio logo">
 	MY RADIO
 	</a>
@@ -72,7 +72,10 @@
 	<button id="timer-button" class="header-button" title="Időzített kikapcsolás" onclick="idozito()" onmouseleave="idozitoMenuKi()">
 		<img id="timer-icon" src="img/timer.svg" alt="timer-icon">
 	</button>
-	<div id="popup_menu" style="transform: translateY(-120%);" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
+	<div id="cast-container">
+		<google-cast-launcher style="--disconnected-color:white; --connected-color:rgb(80,210,20)"></google-cast-launcher>
+	</div>
+	<div id="popup_menu" style="transform: translateY(-140%);" onmouseover="idozitoMenuBe()" onmouseleave="idozitoMenuKi()">
 		<button class="timer-buttons" onclick="ido(0); idozitoMenuKi()">OFF</button>
 		<button class="timer-buttons" onclick="ido(30); idozitoMenuKi()">0:30</button>
 		<button class="timer-buttons" onclick="ido(60); idozitoMenuKi()">1:00</button>

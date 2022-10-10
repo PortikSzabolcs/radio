@@ -415,6 +415,7 @@ function radioSelect(selected) {
     if(localStorage.getItem("PIP") && 'pictureInPictureEnabled' in document)pipSet();
     updateFavicon();
     window.scrollTo({top: 0, behavior: 'smooth'});
+    castSetStream();
 }
 
 function openPage() {
@@ -601,7 +602,7 @@ function idozitoMenuBe() {
 }
 
 function idozitoMenuKi() {
-    document.getElementById("popup_menu").style.transform = "translateY(-125%)";
+    document.getElementById("popup_menu").style.transform = "translateY(-140%)";
 }
 
 function timeInput(){
@@ -723,6 +724,12 @@ function settingSwitch() {
 
 function settingsInit() {
     
+    window['__onGCastApiAvailable'] = function(isAvailable) {
+        if (isAvailable) {
+          initializeCastApi();
+        }
+    };
+    
     document.addEventListener('keydown', (event) => {
         var code = event.code;
         switch(code){
@@ -770,4 +777,38 @@ function settingsInit() {
         themeSwitch();
     })
 
+}
+
+function initializeCastApi (){
+    var context = cast.framework.CastContext.getInstance();
+    context.setOptions({
+      receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+      autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+    });
+    var context = cast.framework.CastContext.getInstance();
+    context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
+    function(event) {
+        if(event.sessionState == cast.framework.SessionState.SESSION_STARTED){
+            castSetStream();
+        }
+    })
+};
+
+function castSetStream(){
+    try{
+        var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+        if(castSession && nowPlaying) {
+            var mediaInfo = new chrome.cast.media.MediaInfo(player.src, 'audio/mpeg');
+            mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata();
+            mediaInfo.metadata.title = radios[nowPlaying].name;
+            mediaInfo.metadata.artist = "Saját Rádió";
+            mediaInfo.metadata.images = [{ url: "https://portikszabolcs.github.io/radio/img/stations/"+radios[nowPlaying].id+".png"}];
+            var request = new chrome.cast.media.LoadRequest(mediaInfo);
+            castSession.loadMedia(request).then(
+                function() { console.log('Cast Load succeed'); },
+                function(errorCode) { console.log('Cast Error code: ' + errorCode); });
+            }
+    } catch(error){
+        console.log(error);
+    }
 }
