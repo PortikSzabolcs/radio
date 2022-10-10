@@ -592,19 +592,6 @@ function networkHelper() {
 
 // ~~~~~ IDOZITO FUNKCIOK ~~~~~
 
-function idozito(){
-    if(document.getElementById("popup_menu").style.transform) idozitoMenuBe();
-    else idozitoMenuKi();
-}
-
-function idozitoMenuBe() {
-    document.getElementById("popup_menu").style.transform = "";
-}
-
-function idozitoMenuKi() {
-    document.getElementById("popup_menu").style.transform = "translateY(-140%)";
-}
-
 function timeInput(){
     let str = document.getElementById("timer-input").value;
     if(str === "") ido(0);
@@ -630,12 +617,11 @@ function ido(min) {
         idozites[0] = null;
         idozites[1] = null;
         idozites[2] = null;
-        document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.svg\" alt=\"timer-icon\">";
+        document.getElementById("timer-input").value = "00:00";
     } else {
         idozites[0] = setTimeout(stopAll, min * 60000);
         idozites[1] = Date.now() + min * 60000;
         idozites[2] = setInterval(countdown, 1000);
-        document.getElementById("timer-button").innerText = formatTime(min*60);
     }
 }
 
@@ -645,12 +631,11 @@ function stopAll() {
     idozites[1] = null;
     idozites[2] = null;
     document.getElementById("timer-input").value = "00:00";
-    document.getElementById("timer-button").innerHTML = "<img id=\"timer-icon\" src=\"img/timer.svg\" alt=\"timer-icon\">";
 }
 
 function countdown() {
     let until = idozites[1] - Date.now();
-    document.getElementById("timer-button").innerText = formatTime(until/1000);
+    document.getElementById("timer-input").value = formatTime(until/1000);
 }
 
 function formatTime(sec){
@@ -658,19 +643,10 @@ function formatTime(sec){
     let minutes = Math.floor((sec / 60) % 60);
     let hours = Math.floor((sec / 3600) % 60);
     let str = "";
-    if(hours){
-        str += hours + ":";
-        if(minutes < 10) str += "0";
-        str += minutes;
-        return str;
-    }
-    if(minutes){
-        str += minutes + ":";
-        if(seconds < 10) str += "0";
-        str += seconds;
-        return str;
-    }
-    str += "0:";
+    if(hours < 10) str += "0";
+    str += hours + ":";
+    if(minutes < 10) str += "0";
+    str += minutes + ":";
     if(seconds < 10) str += "0";
     str += seconds;
     return str;

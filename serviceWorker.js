@@ -1,4 +1,4 @@
-let cacheName = 'radio-cache-v13.5';
+let cacheName = 'radio-cache-v13.6';
 let urlsToCache = [
     './',
     './index.html',
@@ -11,7 +11,6 @@ let urlsToCache = [
     './img/android-chrome.png',
     './img/maskable-icon.png',
     './img/maskable-grey.svg',
-    './img/timer.svg',
     './img/settings.svg',
     './img/star.png',
     './img/star-filled.png',
