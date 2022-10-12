@@ -77,14 +77,14 @@
 <div id="contentID" class="content">
 
 	<div id="playing">
-		<div id="playerHeader">
-			<button class="nowPlayingButton" id="addToFavorites-button" title="Kedvencekhez ad/eltávolít" onclick="favoriteSwitch()">
-				<img id="star-icon" src="img/star.png" alt="favorite icon">
+		<div id="player-header">
+			<button class="player-header-button" id="addToFavorites-button" title="Kedvencekhez ad/eltávolít" onclick="favoriteSwitch()">
+				<img class="player-header-image" id="star-icon" src="img/star.png" alt="favorite icon">
 			</button>
-			<button class="nowPlayingButton" id="openWebsite-button" title="Rádió weboldala" onclick="openPage()">
-				<img src="img/website.png" alt="station website">
+			<button class="player-header-button" id="openWebsite-button" title="Rádió weboldala" onclick="openPage()">
+				<img class="player-header-image" src="img/website.png" alt="station website">
 			</button>
-			<span id="radio-title"> Válassz rádiót</span>
+			<span class="section-title" id="radio-title"> Válassz rádiót</span>
 		</div>
 
 		<div id="big-logo-container">
@@ -94,16 +94,16 @@
 	</div>
 
 	<div id="favorites">
-		<h1> Kedvencek </h1>
+		<h1 class="section-title"> Kedvencek </h1>
 	</div>
 
-	<div id="radioList">
-		<h1> Minden rádió </h1>
+	<div id="radio-list">
+		<h1 class="section-title"> Minden rádió </h1>
 	</div>
 
 	<div id="settings" style="transform: translateX(100%)">
 		<div class="settings-entry" style="border-width: unset; padding: 25px 10px; margin: 0;">
-			<h1 style="font-weight: bolder;"> Beállítások
+			<h1 class="section-title" style="font-weight: bolder;"> Beállítások
 			<button style="float: right; font-size: 30px; height: 46px; font-family: 'Reem Kufi Fun', Sans-Serif; font-weight: bold" onclick="settingSwitch()"> X </button>
 			</h1>
 		</div>
@@ -115,25 +115,25 @@
 				<option value="auto" selected> Auto </option>
 			</select>
 			<br>
-			<p class="helpText"> Sötét, világos vagy automatikus színmód az eszköz beállításai szerint </p>
+			<p class="help-text"> Sötét, világos vagy automatikus színmód az eszköz beállításai szerint </p>
 		</div>
 		<div class="settings-entry">
 			<label for="timer-input2"> Időzített kikapcsolás </label>
 			<input type="time" id="timer-input" name="timer-input" style="display: inline-block;" value="00:00" onchange="timeInput()">
 			<br>
-			<p class="helpText"> A lejátszás automatikus leállítása megadott idő múlva </p>
+			<p class="help-text"> A lejátszás automatikus leállítása megadott idő múlva </p>
 		</div>
 		<div class="settings-entry">
 			<label for="autoplay"> Automatikus betöltés </label>
 			<input class="checkbox" type="checkbox" id="autoplay" name="autoplay">
 			<br>
-			<p class="helpText"> Utoljára hallgatott rádió betöltése az alkalmazás/weboldal megnyitásakor</p>
+			<p class="help-text"> Utoljára hallgatott rádió betöltése az alkalmazás/weboldal megnyitásakor</p>
 		</div>
 		<div class="settings-entry">
 			<label for="networkHelper"> Internetes stabilitás növelése </label>
 			<input class="checkbox" type="checkbox" id="networkHelper" name="networkHelper">
 			<br>
-			<p class="helpText"> Ha szakadozik az internet, segít az újrapróbálkozásban (Kísérleti funkció) </p>
+			<p class="help-text"> Ha szakadozik az internet, segít az újrapróbálkozásban (Kísérleti funkció) </p>
 		</div>
 		<div class="settings-entry">
 			<a href="https://docs.google.com/forms/d/e/1FAIpQLSed5_IUz_paWywaOuTRvPk_XzwsNywqyqhzlhY2ANmIAhgUWQ/viewform?usp=sf_link" style="color:inherit" target="_blank" rel="noopener noreferrer">

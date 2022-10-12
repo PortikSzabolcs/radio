@@ -1,28 +1,3 @@
-const radiosOld = [
-    {id: "logo"},
-    {id: "radio1"},
-    {id: "gaga"},
-    {id: "petofi"},
-    {id: "retro"},
-    {id: "msvradio"},
-    {id: "szepvizfm"},
-    {id: "coolfm"},
-    {id: "oxygen"},
-    {id: "best-dance"},
-    {id: "profm"},
-    {id: "kissfm"},
-    {id: "onefm"},
-    {id: "impuls"},
-    {id: "dancefm"},
-    {id: "digifm"},
-    {id: "zum"},
-    {id: "europafm"},
-    {id: "rockfm"},
-    {id: "magicfm"},
-    {id: "kiss-pop"},
-    {id: "kiss-energy"},
-];
-
 const radios = [
     {
         "name": "Válassz rádiót",
@@ -260,9 +235,6 @@ function initPage() {
         themeSwitch();
     }
 
-    if (localStorage.getItem("favorites")) {
-        updateOldFavorites();
-    }
     if (localStorage.getItem("favs")) {
         let string = localStorage.getItem("favs");
         const arr = string.split(',');
@@ -319,7 +291,7 @@ function createRadioList() {
             this.src = "img/maskable-grey.svg";
         };
         image.alt = radios[i].name + " logo";
-        image.classList.add("radio-button-logo");
+        image.classList.add("radio-list-button-logo");
         let button = document.createElement('button');
         button.appendChild(image);
         let text = document.createElement('span');
@@ -327,12 +299,12 @@ function createRadioList() {
         text.style.verticalAlign = "middle";
         text.style.marginLeft = "5px";
         button.appendChild(text);
-        button.classList.add("radio-button");
+        button.classList.add("radio-list-button");
         button.onclick = function () {
             radioSelect(i);
         }
-        if (radios[i - 1].lang === "hu" && radios[i].lang !== "hu") document.getElementById("radioList").appendChild(document.createElement('hr'));
-        document.getElementById("radioList").appendChild(button);
+        if (radios[i - 1].lang === "hu" && radios[i].lang !== "hu") document.getElementById("radio-list").appendChild(document.createElement('hr'));
+        document.getElementById("radio-list").appendChild(button);
     }
 }
 
@@ -343,11 +315,9 @@ function mediaSessionInit() {
     navigator.mediaSession.metadata.artwork = [{src: "radio/img/apple-touch.png", sizes: '180x180', type: 'image/png'}, {src:"radio/img/maskable-icon.png", sizes:'512x512', type:'image/png'}];
     navigator.mediaSession.setActionHandler('pause',() => {
         player.pause();
-        if(document.getElementById("video")) document.getElementById("video").pause();
     });
     navigator.mediaSession.setActionHandler('play',() => {
         player.play();
-        if(document.getElementById("video")) document.getElementById("video").play();
     });
     navigator.mediaSession.setActionHandler('nexttrack', () => {
         if (favorites.length !== 0) {
@@ -412,8 +382,8 @@ function radioSelect(selected) {
     document.getElementById("big-logo").alt = radios[selected].name + " logo";
     nowPlaying = selected;
 
-    if(localStorage.getItem("PIP") && 'pictureInPictureEnabled' in document)pipSet();
     updateFavicon();
+    document.getElementById("contentID").scrollTo({top: 0, behavior: 'smooth'});
     window.scrollTo({top: 0, behavior: 'smooth'});
     castSetStream();
 }
@@ -424,18 +394,6 @@ function openPage() {
 }
 
 // ~~~~~ KEDVENCEK FUNKCIOK ~~~~~
-function updateOldFavorites() {
-    let string = localStorage.getItem("favorites");
-    const arr = string.split(',');
-    arr.pop();
-    let updated = "";
-    for (let i = 0; i < arr.length; i++) {
-        updated += radiosOld[Number(arr[i])].id + ",";
-        localStorage.setItem("favs", updated);
-    }
-    localStorage.removeItem("favorites");
-}
-
 function updateFavicon() {
     if (favorites.includes(nowPlaying)) {
         document.getElementById("star-icon").src = "img/star-filled.png";
@@ -479,51 +437,20 @@ function removeFromFavorites(nr) {
 }
 
 function updateFavList() {
-    document.getElementById("favorites").innerHTML = "<h1> Kedvencek </h1>";
+    document.getElementById("favorites").innerHTML = "<h1 class=\"section-title\"> Kedvencek </h1>";
     for (let i = 0; i < favorites.length; i++) {
         let button = document.createElement("button");
         let image = document.createElement("img");
         image.src = "img/stations/" + radios[favorites[i]].id + ".png";
         image.alt = radios[favorites[i]].name;
-        image.classList.add("favoriteLogo");
-        button.classList.add("favoriteButton");
+        image.classList.add("favorite-logo");
+        button.classList.add("favorite-button");
         button.appendChild(image);
         button.onclick = function () {
             radioSelect(favorites[i]);
         }
         document.getElementById("favorites").appendChild(button);
     }
-}
-
-// ~~~~~ PIP ~~~~~
-function pipInit(){
-    const video = document.createElement('video');
-    video.id = "video";
-    video.muted = true;
-    video.hidden = true;
-    document.getElementById('playing').appendChild(video);
-}
-
-function pipSet(){
-    if(document.getElementById("video") === null) pipInit();
-
-    const canvas = document.createElement('canvas');
-    canvas.width = 300;
-    canvas.height = 170;
-
-    const image = new Image();
-    image.src = document.getElementById("big-logo").src;
-    let width = (image.width/image.height)*170;
-
-    canvas.getContext('2d').drawImage(image, (300-width)/2, 0, width, 170);
-    document.getElementById("video").srcObject = canvas.captureStream();
-    canvas.remove();
-
-    document.getElementById("video").play().then(function (){
-        document.getElementById("video").requestPictureInPicture().then(r => console.log(r)).catch(e => console.log(e));
-    }).catch(error => {
-        console.log(error);
-    })
 }
 
 // ~~~~~ HALOZATI STABILITAS ~~~~~
@@ -677,9 +604,9 @@ function themeSwitch() {
 
 function themeSet() {
     if (theme === "light") {
-        document.getElementById("settings").classList.remove("darkBackground");
+        document.getElementById("settings").classList.remove("dark-background");
     } else {
-        document.getElementById("settings").classList.add("darkBackground");
+        document.getElementById("settings").classList.add("dark-background");
     }
     document.documentElement.style.colorScheme = theme;
 }
@@ -711,14 +638,14 @@ function settingsInit() {
         switch(code){
             case "ArrowDown", "ArrowRight": {
                 event.preventDefault();
-                if(focused == -1) focused = 8;
+                if(focused == -1) focused = 3;
                 else if(focused < document.getElementsByTagName("button").length - 1) focused++;
                 document.getElementsByTagName("button")[focused].focus();
                 break;
             }
             case "ArrowUp", "ArrowLeft": {
                 event.preventDefault();
-                if(focused == -1) focused = 8;
+                if(focused == -1) focused = 3;
                 else if(focused > 0) focused--;
                 document.getElementsByTagName("button")[focused].focus();
                 break;

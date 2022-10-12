@@ -5,7 +5,7 @@ body {
 	margin: 0 0;
 	overscroll-behavior-y: contain;
 }
-h1, #radio-title{
+.section-title{
 	font-size: 42px;
 	line-height: 46px;
 	font-family: Reem Kufi Fun, sans-serif;
@@ -16,8 +16,6 @@ h1, #radio-title{
 	}
 img	{
 	vertical-align: middle;
-	width:40px;
-	border-radius:3px;
 }
 button{
 	background-color: transparent;
@@ -31,7 +29,7 @@ button{
 	float: right;
 	margin: 0 10px;
 }
-select, #timer-input{
+select, input[type="time"]{
 	font-size: 22px;
 	vertical-align: middle;
 	float: right;
@@ -50,7 +48,8 @@ select, #timer-input{
 	padding: 5px;
 	top: 0;
 	left: 0;
-	z-index:10;}
+	z-index:10;
+}
 #main-logo	{
 	max-height: 50px;
 	max-width:200px;
@@ -74,6 +73,8 @@ select, #timer-input{
 }
 #settings-icon{
 	transition: all .4s ease;
+	width:40px;
+	height:40px;
 }
 #cast-container{
 	width: 75px;
@@ -102,15 +103,21 @@ google-cast-launcher{
 	float: left;
 	padding: 15px;
 }
-#playerHeader{
+#player-header{
 	text-align: left;
 	margin: 5px 0;
 }
-.nowPlayingButton{
+.player-header-button{
 	float: right;
 	padding: 3px;
 	height: auto;
 }
+
+.player-header-image{
+	height: 40px;
+	width: 40px;
+}
+
 #favorites{
 	width: 100%;
 	margin: 0;
@@ -119,22 +126,23 @@ google-cast-launcher{
 	overflow: hidden;
 }
 
-.favoriteButton{
+.favorite-button{
 	width: 25%;
 	height: 100%;
 	padding: 10px;
 	border-radius: 10px;
 }
-.favoriteLogo{
+.favorite-logo{
 	max-width: unset;
 	max-height: unset;
+	border-radius: 2px;
 	width: 100%;
 	aspect-ratio: 1/1;
 	object-fit: contain;
 	background-color: #ccc1;
 	box-shadow: 0 1px 2px #777a;
 }
-#radioList{
+#radio-list{
 	float: right;
 	width: 100%;
 	padding: 15px;
@@ -156,7 +164,7 @@ google-cast-launcher{
 	overflow-y: scroll;
 	transition: transform .4s;
 }
-.darkBackground{
+.dark-background{
 	background-color: #000000f5 !important;
 }
 .settings-entry{
@@ -167,40 +175,41 @@ google-cast-launcher{
 	padding: 15px 5px;
 	margin: 0 15px;
 }
-.helpText{
+.help-text{
 	font-size: small;
 	line-height: normal;
 	margin: 0;
 }
-.radio-button{
+.radio-list-button{
 	border-radius: 2px;
-	width: 100%;
+	width: 99%;
 	height: 42px;
 	color: inherit;
 	vertical-align: middle;
 	text-align: left;
 	font-size: 28px;
 	padding: 3px;
-	margin: 2px 0;
+	margin: 2px 3px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: clip;
-	background-color: #7771;
+	background-color: #7772;
 }
-.radio-button:hover{
-	background-color: #080;
+.radio-list-button:hover{
+	background-color: #7777;
 }
-.radio-button-logo{
+.radio-list-button-logo{
+	border-radius: 2px;
 	width: 36px;
 	aspect-ratio: 1/1;
 	object-fit: contain;
-	box-shadow: 0 0 0 1px #7777;
-	background-color: #7777;
+	box-shadow: 0 0 1px 0px;
 }
 #big-logo{
 	max-height: unset;
 	max-width: unset;
 	width: 100%;
+	border-radius: 3px;
 }
 #big-logo-container{
 	width: 50%;
@@ -214,6 +223,8 @@ google-cast-launcher{
 	background-color: #ccc2;
 	box-shadow: 0 1px 2px #777a;
 }
+
+/*				~~~~~~~~~~~~~~~	    @MEDIA		~~~~~~~~~~~~~~~			 */
 
 @media all and (display-mode: standalone) {
 	.content {
@@ -229,23 +240,23 @@ google-cast-launcher{
 	.header-button:hover{
 		background-color: #080;
 	}
-	.nowPlayingButton:hover{
+	.player-header-button:hover{
 		background-color: unset;
-		scale: 1.2;
+		scale: 1.1;
 	}
-	.favoriteButton:hover{
+	.favorite-button:hover{
 		background-color: unset;
-		padding: 5px;
+		padding: 8px;
 	}
   }
 
 @media only screen and (min-width: 768px) {
 	#playing	{width: 50%;}
 	#favorites	{width: 50%;}
-	.favoriteButton{
+	.favorite-button{
 		width: 33%;
 	}
-	.radio-button{
+	.radio-list-button{
 		width: 49%;
 	}
 	#cast-container{
@@ -273,18 +284,19 @@ google-cast-launcher{
 		top: 0;
 		order: -1;
 	}
-	#radioList {
+	#radio-list {
 		width: 35%;
 		padding: 20px;
 	}
 	#settings{
 		width: 35%;
+		box-shadow: 0 0 3px;
 	}
 	#big-logo-container{
 		margin: 60px auto;
 	}
-	.radio-button {
-		width: 100%;
+	.radio-list-button {
+		width: 99%;
 	}
 	.content {
 		height: calc(100vh - 60px);
