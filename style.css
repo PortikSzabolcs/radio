@@ -82,13 +82,13 @@ select, input[type="time"]{
 	position: absolute;
 	bottom: 0;
 	right: 75px;
-	padding: 12px;
+	padding: 13px;
 	background-color: rgb(0, 70, 10);
 }
 google-cast-launcher{
 	cursor: pointer;
 	--disconnected-color:white;
-	--connected-color:rgb(80,210,20);
+	--connected-color:lightgreen;
 }
 .content{
 	display: flex;

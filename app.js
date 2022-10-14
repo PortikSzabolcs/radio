@@ -470,7 +470,7 @@ function networkHelper() {
         if (networkTimeout) {
             clearInterval(networkTimeout);
             networkTimeout = null;
-            console.log("timeout unset!");
+            console.log("NetworkHelper: timeout unset!");
             return true;
         }
         return false;
@@ -480,11 +480,11 @@ function networkHelper() {
         if (window.ononline) {
             if (player.networkState !== 1) {
                 window.ononline = null;
-                console.log("removed event listener for online");
+                console.log("NetworkHelper: removed event listener for online");
             } else {
                 setTimeout(function () {
                     window.ononline = null;
-                    console.log("deleted event listener for online");
+                    console.log("NetworkHelper: deleted event listener for online");
                 }, 150000);
             }
         }
@@ -493,12 +493,12 @@ function networkHelper() {
     window.addEventListener("offline", function () {
         if (!player.paused) {
             window.ononline = retryPlaying;
-            console.log("added event listener for online");
+            console.log("NetworkHelper: added event listener for online");
         }
     });
     player.addEventListener('waiting', function () {
         if (player.readyState === 2 && navigator.onLine) {
-            console.log("slow connection timeout set!");
+            console.log("NetworkHelper: slow connection timeout set!");
             networkTimeout = setInterval(function () {
                 if (navigator.onLine) retryPlaying();
                 else deleteNetworkTimeout();
@@ -709,13 +709,13 @@ function castSetStream(){
             mediaInfo.metadata = new chrome.cast.media.MusicTrackMediaMetadata();
             mediaInfo.metadata.title = radios[nowPlaying].name;
             mediaInfo.metadata.artist = "Saját Rádió";
-            mediaInfo.metadata.images = [{ url: "https://portikszabolcs.github.io/radio/img/stations/"+radios[nowPlaying].id+".png"}];
+            mediaInfo.metadata.images = [{ url: "https://portikszabolcs.github.io/radio/img/stations/"+radios[nowPlaying].id+".png"}, { url: "https://portikszabolcs.github.io/radio/img/stations/logo.png"}];
             var request = new chrome.cast.media.LoadRequest(mediaInfo);
             castSession.loadMedia(request).then(
                 function() { console.log('Cast Load succeed');},
                 function(errorCode) { console.log('Cast Error code: ' + errorCode); });
-            }
             player.pause();
+            }
     } catch(error){
         console.log(error);
     }
