@@ -694,6 +694,10 @@ function initializeCastApi (){
         if(event.sessionState == cast.framework.SessionState.SESSION_STARTED){
             castSetStream();
         }
+        if(event.sessionState == cast.framework.SessionState.SESSION_ENDED){
+            player.load();
+            player.play();
+        }
     })
 };
 
@@ -708,9 +712,10 @@ function castSetStream(){
             mediaInfo.metadata.images = [{ url: "https://portikszabolcs.github.io/radio/img/stations/"+radios[nowPlaying].id+".png"}];
             var request = new chrome.cast.media.LoadRequest(mediaInfo);
             castSession.loadMedia(request).then(
-                function() { console.log('Cast Load succeed'); },
+                function() { console.log('Cast Load succeed');},
                 function(errorCode) { console.log('Cast Error code: ' + errorCode); });
             }
+            player.pause();
     } catch(error){
         console.log(error);
     }
