@@ -456,10 +456,11 @@ function updateFavList() {
 // ~~~~~ HALOZATI STABILITAS ~~~~~
 function networkHelper() {
 
+    let offlineTimeout = null;
     let networkTimeout = null;
 
     function retryPlaying() {
-        setTimeout(function () {
+        if(nowPlaying) setTimeout(function () {
             player.src = radios[nowPlaying].audio;
             player.load();
             player.play();
@@ -470,40 +471,37 @@ function networkHelper() {
         if (networkTimeout) {
             clearInterval(networkTimeout);
             networkTimeout = null;
-            console.log("NetworkHelper: timeout unset!");
-            return true;
+            console.log("NetworkHelper: timeout unset");
         }
-        return false;
     }
-
-    function deleteOfflineTimeout() {
-        if (window.ononline) {
-            if (player.networkState !== 1) {
-                window.ononline = null;
-                console.log("NetworkHelper: removed event listener for online");
-            } else {
-                setTimeout(function () {
-                    window.ononline = null;
-                    console.log("NetworkHelper: deleted event listener for online");
-                }, 150000);
-            }
+    function deleteOfflineTimeout(){
+        if(offlineTimeout && !player.error){
+            clearTimeout(offlineTimeout);
+            offlineTimeout = null;
+            console.log("NetworkHelper: deleted offline timeout");
         }
     }
 
-    window.addEventListener("offline", function () {
-        if (!player.paused) {
-            window.ononline = retryPlaying;
-            console.log("NetworkHelper: added event listener for online");
+    player.addEventListener('waiting', function () {
+        if (player.readyState === 2) {
+            console.log("NetworkHelper: slow connection timeout set");
+            networkTimeout = setInterval(function(){ retryPlaying(); }, 7500);
+                setTimeout(function() { deleteNetworkTimeout(); }, 180000);
         }
     });
-    player.addEventListener('waiting', function () {
-        if (player.readyState === 2 && navigator.onLine) {
-            console.log("NetworkHelper: slow connection timeout set!");
-            networkTimeout = setInterval(function () {
-                if (navigator.onLine) retryPlaying();
-                else deleteNetworkTimeout();
-            }, 7500);
-            setTimeout(deleteNetworkTimeout, 180000);
+
+    player.addEventListener("error", function () {
+        if(nowPlaying && player.error.code === 2) retryPlaying();
+        if(nowPlaying && player.error.code === 4) {
+            if(!offlineTimeout){
+                console.log("NetworkHelper: offline timeout set");
+                offlineTimeout = setTimeout(function(){
+                    nowPlaying = 0;
+                    offlineTimeout = null;
+                    console.log("NetworkHelper: deleted offline timeout");
+                }, 180000);
+            }
+            setTimeout(function(){ retryPlaying(); }, 5500);
         }
     });
     // ha elindul a lejatszas vagy szuneteltetodik, akkor torlodik az idozito
@@ -670,7 +668,7 @@ function settingsInit() {
     document.getElementById("networkHelper").addEventListener("click", function () {
         if (!document.getElementById("networkHelper").checked) {
             localStorage.removeItem("networkHelper");
-            networkHelper();
+            if(confirm("A beállítás mentéséhez újra kell tölteni az oldalt.")) location.reload();
         } else {
             localStorage.setItem("networkHelper", "true");
             networkHelper();
@@ -717,6 +715,6 @@ function castSetStream(){
             player.pause();
             }
     } catch(error){
-        console.log(error);
+        console.log("No cast SDK loaded");
     }
 }
