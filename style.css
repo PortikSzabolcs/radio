@@ -30,11 +30,11 @@ button{
 	margin: 0 10px;
 }
 select, input[type="time"]{
-	font-size: 22px;
+	font-size: 20px;
 	vertical-align: middle;
 	float: right;
 	margin: 0 10px;
-	width: auto;
+	height: 28px;
 }
 .header {
 	height:60px;
@@ -195,9 +195,6 @@ google-cast-launcher{
 	text-overflow: clip;
 	background-color: #7772;
 }
-.radio-list-button:hover{
-	background-color: #7777;
-}
 .radio-list-button-logo{
 	border-radius: 2px;
 	width: 36px;
@@ -247,6 +244,9 @@ google-cast-launcher{
 	.favorite-button:hover{
 		background-color: unset;
 		padding: 8px;
+	}
+	.radio-list-button:hover{
+		background-color: #7777;
 	}
   }
 
