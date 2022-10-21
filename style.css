@@ -35,6 +35,7 @@ select, input[type="time"]{
 	float: right;
 	margin: 0 10px;
 	height: 28px;
+	width: auto;
 }
 .header {
 	height:60px;
