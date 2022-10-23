@@ -4,6 +4,8 @@ body {
 	min-height: 100vh;
 	margin: 0 0;
 	overscroll-behavior-y: contain;
+	background-image: url("img/silk-bg.svg");
+	background-size: contain;
 }
 .section-title{
 	font-size: 42px;
@@ -40,7 +42,8 @@ select, input[type="time"]{
 .header {
 	height:60px;
 	width: 100%;
-	background-color:rgb(0, 70, 10);
+	/* background-color:rgb(0, 70, 10); */
+	background-color:rgb(70, 25, 0);
 	box-shadow: 0 1px 1px #6666;
 	border-bottom-style: solid;
 	border-bottom-width: thin;
@@ -56,12 +59,11 @@ select, input[type="time"]{
 	max-width:200px;
 	width:auto;
 	height: 48px;
-	margin: 0 5px;
+	margin: 0 5px 0 10px;
 	vertical-align: sub;
 	}
 .header-button{
 	position: absolute;
-	background-color: rgb(0, 70, 10);
 	bottom: 0;
 	height: 60px;
 	border-style: none;
@@ -84,7 +86,6 @@ select, input[type="time"]{
 	bottom: 0;
 	right: 75px;
 	padding: 13px;
-	background-color: rgb(0, 70, 10);
 }
 google-cast-launcher{
 	cursor: pointer;
@@ -236,7 +237,7 @@ google-cast-launcher{
 		cursor: pointer;
 	}
 	.header-button:hover{
-		background-color: #080;
+		background-color: #fff3;
 	}
 	.player-header-button:hover{
 		background-color: unset;
@@ -252,6 +253,10 @@ google-cast-launcher{
   }
 
 @media only screen and (min-width: 768px) {
+	body{
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
 	#playing	{width: 50%;}
 	#favorites	{width: 50%;}
 	.favorite-button{
