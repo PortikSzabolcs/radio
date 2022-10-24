@@ -218,10 +218,16 @@ const radios = [
     }
 ];
 
+const holidays = [
+    { name: "Normal", color:"rgb(0, 70, 10)", text:"rgb(95, 210, 35)"},
+    { name: "Halloween", color:"rgb(65, 28, 0)", text:"#d72d1e"}
+];
+
 const mediaAPI = ('mediaSession' in navigator);
 const player = document.getElementById("audio");
 let param = window.location.search;
 let theme = null;
+let Hday = 1;
 let focused = -1;
 let nowPlaying = 0;
 let favorites = [];
@@ -234,6 +240,8 @@ function initPage() {
         document.getElementById("theme-selector").value = localStorage.getItem("mode");
         themeSwitch();
     }
+
+    if (Hday) holidaySet(holidays[Hday]);
 
     if (localStorage.getItem("favs")) {
         let string = localStorage.getItem("favs");
@@ -607,6 +615,14 @@ function themeSet() {
         document.getElementById("settings").classList.add("dark-background");
     }
     document.documentElement.style.colorScheme = theme;
+}
+
+function holidaySet(hData){
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", hData.color);
+    document.getElementById("headerID").style.backgroundColor = hData.color;
+    document.getElementById("my-radio").style.color = hData.text;
+    document.getElementById("settings-icon").src = "img/event-icon.svg";
+    document.getElementById("contentID").style.backgroundImage = "url(\"img/event-bg.svg\")";
 }
 
 //~~~~~ BEALLITASOK ~~~~~

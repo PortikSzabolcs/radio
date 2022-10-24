@@ -12,6 +12,8 @@ let urlsToCache = [
     './img/maskable-icon.png',
     './img/maskable-grey.svg',
     './img/settings.svg',
+    './img/event-icon.svg',
+    './img/event-bg.svg',
     './img/star.png',
     './img/star-filled.png',
     './img/website.png'
