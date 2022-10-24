@@ -97,6 +97,7 @@ google-cast-launcher{
 	align-items: flex-start;
 	background-image: url("img/silk-bg.svg");
 	background-size: contain;
+	background-attachment: local;
 }
 #playing{
 	margin: 0;
