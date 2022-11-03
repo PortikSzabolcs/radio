@@ -653,10 +653,10 @@ function settingsInit() {
                 this.document.getElementById("contentID").appendChild(toast);
                 setTimeout(function(){
                     toast.style.opacity = '0';
-                }, 4000);
+                }, 6500);
                 setTimeout(function(){
                     this.document.getElementById("contentID").removeChild(toast);
-                }, 5000);
+                }, 7500);
             })
         }
     })

@@ -234,6 +234,7 @@ google-cast-launcher{
 	height: 50px;
 	background-color: dimgrey;
 	opacity: .9;
+	pointer-events: none;
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 25px;
 	color: white;
