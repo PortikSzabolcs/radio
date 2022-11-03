@@ -641,9 +641,29 @@ function settingSwitch() {
 
 function settingsInit() {
     
+    window.addEventListener('load', function() {
+        if(this.navigator.userAgent.toLowerCase().indexOf("android")>-1){
+            window.history.pushState({}, '')
+            window.addEventListener('popstate', (event) => {
+                toast = this.document.createElement("div");
+                toast.classList.add("toast");
+                span = this.document.createElement("span");
+                span.innerText = "Vissza gomb: leállítás és kilépés\nKezdőlap gomb: lejátszás a háttérben";
+                toast.appendChild(span);
+                this.document.getElementById("contentID").appendChild(toast);
+                setTimeout(function(){
+                    toast.style.opacity = '0';
+                }, 4000);
+                setTimeout(function(){
+                    this.document.getElementById("contentID").removeChild(toast);
+                }, 5000);
+            })
+        }
+    })
+    
     window['__onGCastApiAvailable'] = function(isAvailable) {
         if (isAvailable) {
-          initializeCastApi();
+            initializeCastApi();
         }
     };
     
