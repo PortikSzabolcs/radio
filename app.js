@@ -227,7 +227,7 @@ const mediaAPI = ('mediaSession' in navigator);
 const player = document.getElementById("audio");
 let param = window.location.search;
 let theme = null;
-let Hday = 1;
+let Hday = 0;
 let focused = -1;
 let nowPlaying = 0;
 let favorites = [];
@@ -268,16 +268,22 @@ function initPage() {
         const params = new URLSearchParams(param);
         if(params.has("s")){
             const radio = params.get("s");
-            for(let i=0; i<radios.length; i++){
-                if(radios[i].id === radio) {
-                    radioSelect(i);
-                    break;
+            if(radio == "last" && localStorage.getItem("lastStation")) radioSelect(Number(localStorage.getItem("lastStation")));
+            else{
+                if(radio == "fav" && favorites.length > 0) radioSelect(favorites[0]);
+                else{
+                    for(let i=0; i<radios.length; i++){
+                        if(radios[i].id === radio) {
+                            radioSelect(i);
+                            break;
+                        }
+                    }
                 }
             }
         }
     }
 
-    if (localStorage.getItem("lastStation") && !nowPlaying) {
+    if (localStorage.getItem("autoplay") && !nowPlaying) {
         document.getElementById("autoplay").checked = true;
         radioSelect(Number(localStorage.getItem("lastStation")));
     }
@@ -365,7 +371,7 @@ function radioSelect(selected) {
         let playPromise = player.play();
         if (playPromise !== undefined) {
             playPromise.then(function () {
-                if (document.getElementById("autoplay").checked) localStorage.setItem("lastStation", selected);
+                localStorage.setItem("lastStation", selected);
                 if (mediaAPI) {
                     if (navigator.mediaSession.metadata == null) mediaSessionInit();
                     navigator.mediaSession.metadata.title = radios[selected].name;
@@ -695,9 +701,9 @@ function settingsInit() {
     
     document.getElementById("autoplay").addEventListener("click", function () {
         if (document.getElementById("autoplay").checked) {
-            localStorage.setItem("lastStation", nowPlaying);
+            localStorage.setItem("autoplay", true);
         } else {
-            localStorage.removeItem("lastStation");
+            localStorage.removeItem("autoplay");
         }
     });
 
