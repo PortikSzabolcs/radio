@@ -55,7 +55,7 @@
     },
     {
       "name": "1.Kedvenc",
-      "short_name": "#1",
+      "short_name": "#1 Kedvenc",
       "description": "A kedvencek első elemének lejátszása",
       "url": "/radio/?s=fav",
       "icons": [{ "src": "img/favorite.png", "sizes": "192x192" }]

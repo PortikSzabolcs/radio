@@ -283,9 +283,9 @@ function initPage() {
         }
     }
 
-    if (localStorage.getItem("autoplay") && !nowPlaying) {
+    if (localStorage.getItem("autoplay")) {
         document.getElementById("autoplay").checked = true;
-        radioSelect(Number(localStorage.getItem("lastStation")));
+        if (!nowPlaying)radioSelect(Number(localStorage.getItem("lastStation")));
     }
 
     if (localStorage.getItem("networkHelper")) {
