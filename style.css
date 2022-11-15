@@ -10,7 +10,7 @@ body {
 	line-height: 2.8rem;
 	font-family: Reem Kufi Fun, sans-serif;
 	text-align: left;
-	margin: 5px 10px 5px 5px;
+	margin: 5px 5px 5px 0;
 	font-weight: normal;
 	overflow-wrap: break-word;
 	}
@@ -105,7 +105,7 @@ google-cast-launcher{
 	background-attachment: local;
 }
 .main-element{
-	margin: 12px auto;
+	margin: 10px auto 20px auto;
 	width: 95%;
 }
 #playing{
@@ -136,7 +136,6 @@ google-cast-launcher{
 	width: 21%;
 	height: 100%;
 	margin: 2%;
-	border-radius: 10px;
 }
 .favorite-logo{
 	max-width: unset;
@@ -186,13 +185,13 @@ google-cast-launcher{
 }
 .radio-list-button{
 	border-radius: 2px;
-	width: 99%;
+	width: 98%;
 	color: inherit;
 	vertical-align: middle;
 	text-align: left;
 	font-size: 1.7rem;
 	padding: 3px;
-	margin: 2px 0.5%;
+	margin: 2px 1%;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: clip;
@@ -287,7 +286,7 @@ google-cast-launcher{
 		width: 29%;
 	}
 	.radio-list-button{
-		width: 49%;
+		width: 48%;
 	}
 	#cast-container{
 		right: 100px;
