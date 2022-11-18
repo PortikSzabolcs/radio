@@ -21,6 +21,7 @@
         });
     }
 	</script>
+	<script type="text/javascript" src="icy-metadata.js" charset="UTF-8" defer></script>
 	<script type="text/javascript" src="app.js" charset="UTF-8" defer></script>
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -90,6 +91,7 @@
 		<div id="big-logo-container">
 			<img id="big-logo" src="img/maskable-grey.svg" alt="station logo">
 		</div>
+		<p id="song-info" style="font-family: 'Reem Kufi Fun', Sans-Serif; font-size: large;"></p>
 		<audio id="audio" src="" controls>Player</audio>
 	</div>
 
@@ -127,7 +129,13 @@
 			<label for="autoplay"> Automatikus betöltés </label>
 			<input class="checkbox" type="checkbox" id="autoplay" name="autoplay">
 			<br>
-			<p class="help-text"> Utoljára hallgatott rádió betöltése az alkalmazás/weboldal megnyitásakor</p>
+			<p class="help-text"> Utoljára hallgatott rádió betöltése az alkalmazás/weboldal megnyitásakor </p>
+		</div>
+		<div class="settings-entry">
+			<label for="metadata"> Zene információ </label>
+			<input class="checkbox" type="checkbox" id="metadata" name="metadata">
+			<br>
+			<p class="help-text"> Az éppen játszott zene adatainak megjelenítése amennyiben elérhető </p>
 		</div>
 		<div class="settings-entry">
 			<label for="networkHelper"> Internetes stabilitás növelése </label>

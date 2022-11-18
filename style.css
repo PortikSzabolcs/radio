@@ -1,4 +1,7 @@
-*	{box-sizing: border-box;}
+*	{
+	box-sizing: border-box;
+	font-family: Helvetica, sans-serif;
+}
 body {
 	padding-top:60px;
 	min-height: 100vh;
@@ -307,13 +310,13 @@ google-cast-launcher{
 	#playing {
 		position: -webkit-sticky;
 		position: sticky;
-		top: 0;
+		top: 10px;
 	}
 	#favorites {
 		width: 25%;
 		position: -webkit-sticky;
 		position: sticky;
-		top: 0;
+		top: 10px;
 		order: -1;
 	}
 	#settings{

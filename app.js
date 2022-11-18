@@ -9,7 +9,7 @@ const radios = [
     {
         "name": "Best - Dance Radio",
         "id": "best-dance",
-        "audio": "https://ssl.omegahost.ro/8088/;",
+        "audio": "https://sonic1-rbx.cloud-center.ro/8018/;",
         "website": "https://best-dance.ro",
         "lang": "hu"
     },
@@ -231,6 +231,7 @@ let Hday = 0;
 let focused = -1;
 let nowPlaying = 0;
 let favorites = [];
+let iceMetadata = null;
 console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
 initPage();
 
@@ -286,6 +287,10 @@ function initPage() {
     if (localStorage.getItem("autoplay")) {
         document.getElementById("autoplay").checked = true;
         if (!nowPlaying)radioSelect(Number(localStorage.getItem("lastStation")));
+    }
+
+    if (!localStorage.getItem("metadata")) {
+        document.getElementById("metadata").checked = true;
     }
 
     if (localStorage.getItem("networkHelper")) {
@@ -363,6 +368,7 @@ function mediaSessionInit() {
 
 function radioSelect(selected) {
     if(!selected) return;
+    document.getElementById("song-info").innerText = "";
     let selectedLogo = "img/stations/" + radios[selected].id + ".png";
     player.src = radios[selected].audio;
     if (!navigator.onLine) {
@@ -375,8 +381,10 @@ function radioSelect(selected) {
                 if (mediaAPI) {
                     if (navigator.mediaSession.metadata == null) mediaSessionInit();
                     navigator.mediaSession.metadata.title = radios[selected].name;
+                    navigator.mediaSession.metadata.artist = "Saját Rádió";
                     navigator.mediaSession.metadata.artwork = [{src: selectedLogo}, {src: "img/stations/logo.png"}];
                 }
+                if(document.getElementById("metadata").checked) getMetadata(selected);
             })
                 .catch(function () {
                     if (radios[selected].audio[4] !== 's') {
@@ -400,6 +408,34 @@ function radioSelect(selected) {
     document.getElementById("contentID").scrollTo({top: 0, behavior: 'smooth'});
     window.scrollTo({top: 0, behavior: 'smooth'});
     castSetStream();
+}
+
+function getMetadata(selected){
+    let p = document.getElementById("song-info");
+    const onStats = (stats) => {
+        console.log(stats);
+        if(stats.sevenhtml != undefined) p.innerText = stats.sevenhtml[0].StreamTitle;
+        if(stats.icestats != undefined){
+            for(let i=0; i<stats.icestats.source.length; i++){
+                let slash = radios[selected].audio.lastIndexOf('/') - radios[selected].audio.length;
+                if(stats.icestats.source[i].listenurl.slice(slash) == radios[selected].audio.slice(slash)) p.innerText = stats.icestats.source[i].title;
+            }
+        }
+        if(stats.icy != undefined) p.innerText = stats.icy.StreamTitle;
+        if (p.innerText == "undefined") p.innerText = "";
+        if(p.innerText != "" && mediaAPI && navigator.mediaSession.metadata){
+            navigator.mediaSession.metadata.title = p.innerText;
+            navigator.mediaSession.metadata.artist = "Saját Rádió - " + radios[selected].name;
+        }
+    };
+    if(iceMetadata) {
+        iceMetadata.stop();
+    }
+    iceMetadata = new IcecastMetadataStats(
+        radios[selected].audio,     // stream endpoint
+        { onStats, sources: ["icy", "icestats", "sevenhtml"] }         // options (stats callback, stats sources)
+    );
+    iceMetadata.start();
 }
 
 function openPage() {
@@ -666,6 +702,10 @@ function settingsInit() {
             })
         }
     })
+
+    player.addEventListener('pause', function () {
+        if(iceMetadata) iceMetadata.stop();
+    });
     
     window['__onGCastApiAvailable'] = function(isAvailable) {
         if (isAvailable) {
@@ -704,6 +744,15 @@ function settingsInit() {
             localStorage.setItem("autoplay", true);
         } else {
             localStorage.removeItem("autoplay");
+        }
+    });
+
+    document.getElementById("metadata").addEventListener("click", function () {
+        if (document.getElementById("metadata").checked) {
+            localStorage.removeItem("metadata");
+        } else {
+            localStorage.setItem("metadata", false);
+            if(iceMetadata) iceMetadata.stop();
         }
     });
 
