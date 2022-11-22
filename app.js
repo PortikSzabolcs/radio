@@ -452,7 +452,7 @@ function getMetadata(selected){
 }
 
 async function getArtwork(title, artist){
-    fetch('http://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&album=' + title + '&autocorrect=1&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&album=' + title + '&autocorrect=1&format=json')
         .then(response => response.json())
         .then(response => {
             console.log(response);
@@ -467,7 +467,7 @@ async function getArtwork(title, artist){
 }
 
 async function getArtworkByTitle(title, artist) {
-    fetch('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&track=' + title + '&autocorrect=1&format=json')
+    fetch('https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&track=' + title + '&autocorrect=1&format=json')
         .then(response => response.json())
         .then(response => {
             console.log(response);
