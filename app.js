@@ -414,6 +414,7 @@ function getMetadata(selected){
     let p = document.getElementById("song-info");
     const onStats = (stats) => {
         console.log(stats);
+        let titleTmp = p.innerText;
         if(stats.sevenhtml != undefined) p.innerText = stats.sevenhtml[0].StreamTitle;
         if(stats.icestats != undefined){
             for(let i=0; i<stats.icestats.source.length; i++){
@@ -423,19 +424,61 @@ function getMetadata(selected){
         }
         if(stats.icy != undefined) p.innerText = stats.icy.StreamTitle;
         if (p.innerText == "undefined") p.innerText = "";
-        if(p.innerText != "" && mediaAPI && navigator.mediaSession.metadata){
-            navigator.mediaSession.metadata.title = p.innerText;
-            navigator.mediaSession.metadata.artist = "Saját Rádió - " + radios[selected].name;
+
+        if(titleTmp != p.innerText){
+            let minus = p.innerText.indexOf(" - ");
+            if (minus != -1) {
+                let title = p.innerText.slice(minus+3 - p.innerText.length);
+                if(title.search(/[\s][^\w\s][\w]/) > -1) title = title.substring(0, title.search(/[\s][^\w\s][\w]/));
+                let artist = p.innerText.substring(0, minus).replace(',', " &").toLowerCase();
+                let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
+                console.log("Most szol: " + title + "\n" + formatedArtist);
+                getArtwork(title, formatedArtist);
+            }
+            if(p.innerText != "" && mediaAPI && navigator.mediaSession.metadata){
+                navigator.mediaSession.metadata.title = p.innerText;
+                navigator.mediaSession.metadata.artist = "Saját Rádió - " + radios[selected].name;
+            }
         }
     };
     if(iceMetadata) {
         iceMetadata.stop();
     }
     iceMetadata = new IcecastMetadataStats(
-        radios[selected].audio,     // stream endpoint
-        { onStats, sources: ["icy", "icestats", "sevenhtml"] }         // options (stats callback, stats sources)
+        radios[selected].audio,
+        { onStats, sources: ["icy", "icestats", "sevenhtml"] }
     );
     iceMetadata.start();
+}
+
+async function getArtwork(title, artist){
+    fetch('http://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&album=' + title + '&autocorrect=1&format=json')
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            console.log(JSON.stringify(response.album.image[3]));
+            let url = JSON.stringify(response.album.image[3]).substring(30, JSON.stringify(response.album.image[3]).length - 2);
+            if(url != "") document.getElementById("big-logo").src = url;
+            else getArtworkByTitle(title, artist);
+        }).catch(function(){
+            console.log("Nincs talalat az albumra");
+            getArtworkByTitle(title, artist);
+        })
+}
+
+async function getArtworkByTitle(title, artist) {
+    fetch('http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&track=' + title + '&autocorrect=1&format=json')
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            console.log(JSON.stringify(response.track.album.image[2]));
+            let url = JSON.stringify(response.track.album.image[2]).substring(10, JSON.stringify(response.track.album.image[2]).length - 17);
+            if(url != "") document.getElementById("big-logo").src = url;
+            getArtworkByTitle(title, artist);
+        }).catch(function(){
+            console.log("Nincs talalat a zeneszamra");
+            document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
+        })
 }
 
 function openPage() {
