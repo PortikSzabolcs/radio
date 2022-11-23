@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Fetch Metadata
-      run: wget -O metadata.json https://www.profm.ro/api-current-song/2918
+      run: wget -O metadata.json https://www.profm.ro/api-current-song/2918 ; ls -l
         # pelda: ${{ github.event.inputs.description }}
     
     - uses: actions/checkout@v3
