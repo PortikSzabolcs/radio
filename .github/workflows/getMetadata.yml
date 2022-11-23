@@ -26,6 +26,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: wget https://www.profm.ro/api-current-song/2918
+    - name: Fetch metadata
+      run: wget -O ../metadata.json https://www.profm.ro/api-current-song/2918
       # pelda: ${{ github.event.inputs.description }}
