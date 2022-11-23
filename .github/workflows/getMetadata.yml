@@ -17,14 +17,15 @@ jobs:
 
   fetch:
     runs-on: ubuntu-latest
-    steps:
+    steps: 
+    - name: Repo sync
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
     - name: Fetch Metadata
       run: wget -O metadata.json https://www.profm.ro/api-current-song/2918 ; ls -l
         # pelda: ${{ github.event.inputs.description }}
-    
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     
     - name: Add & Commit
       uses: EndBug/add-and-commit@v9.1.1
