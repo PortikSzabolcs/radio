@@ -1,31 +1,57 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Fetching radio metadata
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
+
     inputs:
       name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
+        description: 'Radio to fetch'
+        default: 'ProFM'
         required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  fetch:
+    runs-on: ubuntu-latest
     steps:
-    # Runs a single command using the runners shell
-    - name: Fetch metadata
-      run: wget -O ../metadata.json https://www.profm.ro/api-current-song/2918
-      # pelda: ${{ github.event.inputs.description }}
+    - name: Fetch Metadata
+      run: wget -O metadata.json https://www.profm.ro/api-current-song/2918
+        # pelda: ${{ github.event.inputs.description }}
+      
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v9.1.1
+      with:
+    # The arguments for the `git add` command (see the paragraph below for more info)
+    # Default: '.'
+        add: ./metadata.json
+
+    # The name of the user that will be displayed as the author of the commit.
+    # Default: depends on the default_author input
+        author_name: PortikSzabolcs
+
+    # The email of the user that will be displayed as the author of the commit.
+    # Default: depends on the default_author input
+        author_email: portikszabolcs@student.ms.sapientia.ro
+
+    # The local path to the directory where your repository is located. You should use actions/checkout first to set it up.
+    # Default: '.'
+    #    cwd: './path/to/the/repo'
+
+    # Arguments for the git fetch command. If set to false, the action won't fetch the repo.
+    # For more info as to why fetching is usually recommended, please see the "Performance on large repos" FAQ. 
+    # Default: --tags --force
+        fetch: false
+        
+        message: 'Update Metadata'
+
+    # If this input is set, the action will push the commit to a new branch with this name.
+    # Default: ''
+      #  new_branch: custom-new-branch
+
+    # The arguments for the `git rm` command (see the paragraph below for more info)
+    # Default: ''
+    #  remove: './dir/old_file.js'
