@@ -27,4 +27,5 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      run: wget https://www.profm.ro/api-current-song/2918
+      # pelda: ${{ github.event.inputs.description }}
