@@ -451,7 +451,7 @@ function getMetadata(selected){
     iceMetadata.start();
 }
 
-async function getArtwork(title, artist){
+function getArtwork(title, artist){
     fetch('https://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&album=' + title + '&autocorrect=1&format=json')
         .then(response => response.json())
         .then(response => {
@@ -466,7 +466,7 @@ async function getArtwork(title, artist){
         })
 }
 
-async function getArtworkByTitle(title, artist) {
+function getArtworkByTitle(title, artist) {
     fetch('https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&track=' + title + '&autocorrect=1&format=json')
         .then(response => response.json())
         .then(response => {
@@ -474,7 +474,6 @@ async function getArtworkByTitle(title, artist) {
             console.log(JSON.stringify(response.track.album.image[2]));
             let url = JSON.stringify(response.track.album.image[2]).substring(10, JSON.stringify(response.track.album.image[2]).length - 17);
             if(url != "") document.getElementById("big-logo").src = url;
-            getArtworkByTitle(title, artist);
         }).catch(function(){
             console.log("Nincs talalat a zeneszamra");
             document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
