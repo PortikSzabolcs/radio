@@ -410,10 +410,11 @@ function radioSelect(selected) {
     castSetStream();
 }
 
-function getMetadata(selected){
+async function getMetadata(selected){
+    let type = "";
     let p = document.getElementById("song-info");
+
     const onStats = (stats) => {
-        console.log(stats);
         let titleTmp = p.innerText;
         if(stats.sevenhtml != undefined) p.innerText = stats.sevenhtml[0].StreamTitle;
         if(stats.icestats != undefined){
@@ -424,31 +425,44 @@ function getMetadata(selected){
         }
         if(stats.icy != undefined) p.innerText = stats.icy.StreamTitle;
         if (p.innerText == "undefined") p.innerText = "";
-
-        if(titleTmp != p.innerText){
-            let minus = p.innerText.indexOf(" - ");
-            if (minus != -1) {
-                let title = p.innerText.slice(minus+3 - p.innerText.length);
-                if(title.search(/[\s][^\w\s][\w]/) > -1) title = title.substring(0, title.search(/[\s][^\w\s][\w]/));
-                let artist = p.innerText.substring(0, minus).replace(',', " &").toLowerCase();
-                let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
-                console.log("Most szol: " + title + "\n" + formatedArtist);
-                getArtwork(title, formatedArtist);
-            }
-            if(p.innerText != "" && mediaAPI && navigator.mediaSession.metadata){
-                navigator.mediaSession.metadata.title = p.innerText;
-                navigator.mediaSession.metadata.artist = "Saját Rádió - " + radios[selected].name;
-            }
-        }
+        if(titleTmp != p.innerText && p.innerText != "") formatMetadata(p.innerText);
     };
-    if(iceMetadata) {
-        iceMetadata.stop();
-    }
+
+    if(iceMetadata) iceMetadata.stop();
     iceMetadata = new IcecastMetadataStats(
         radios[selected].audio,
-        { onStats, sources: ["icy", "icestats", "sevenhtml"] }
+        { onStats, sources: ["icy", "sevenhtml", "icestast"] }
     );
-    iceMetadata.start();
+    let tmp = await iceMetadata.getSevenhtml();
+    if(tmp.sevenhtml != undefined) type = "sevenhtml";
+    tmp = await iceMetadata.getIcestats();
+    if(tmp.icestats != undefined) type = "icestats";
+    tmp = await iceMetadata.getIcyMetadata();
+    if(tmp.icy != undefined) type = "icy";
+
+    if(type != ""){
+        iceMetadata = new IcecastMetadataStats(
+            radios[selected].audio,
+            { onStats, sources: [type] }
+        );
+        iceMetadata.start();
+    }
+}
+
+function formatMetadata(data){
+    let minus = data.indexOf(" - ");
+    if (minus != -1) {
+        let title = data.slice(minus+3 - data.length);
+        if(title.search(/[\s][^\w\s][\w]/) > -1) title = title.substring(0, title.search(/[\s][^\w\s][\w]/));
+        let artist = data.substring(0, minus).replace(',', " &").toLowerCase();
+        let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
+        console.log("Most szol: " + title + " + " + formatedArtist);
+        getArtwork(title.toLowerCase(), formatedArtist);
+    }
+    if(mediaAPI && navigator.mediaSession.metadata){
+        navigator.mediaSession.metadata.title = data;
+        navigator.mediaSession.metadata.artist = radios[nowPlaying].name + " - Saját Rádió";
+    }
 }
 
 function getArtwork(title, artist){
@@ -456,12 +470,16 @@ function getArtwork(title, artist){
         .then(response => response.json())
         .then(response => {
             console.log(response);
-            console.log(JSON.stringify(response.album.image[3]));
             let url = JSON.stringify(response.album.image[3]).substring(30, JSON.stringify(response.album.image[3]).length - 2);
-            if(url != "") document.getElementById("big-logo").src = url;
+            if(url != "") {
+                document.getElementById("big-logo").src = url;
+                if(mediaAPI && navigator.mediaSession.metadata){
+                    url = JSON.stringify(response.album.image[2]).substring(25, JSON.stringify(response.album.image[2]).length - 2);
+                    navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}, {src: "img/stations/"+radios[nowPlaying].id+".png"}];
+                }
+            }
             else getArtworkByTitle(title, artist);
         }).catch(function(){
-            console.log("Nincs talalat az albumra");
             getArtworkByTitle(title, artist);
         })
 }
@@ -471,12 +489,17 @@ function getArtworkByTitle(title, artist) {
         .then(response => response.json())
         .then(response => {
             console.log(response);
-            console.log(JSON.stringify(response.track.album.image[2]));
             let url = JSON.stringify(response.track.album.image[2]).substring(10, JSON.stringify(response.track.album.image[2]).length - 17);
-            if(url != "") document.getElementById("big-logo").src = url;
+            if(url != "") {
+                document.getElementById("big-logo").src = url;
+                if(mediaAPI && navigator.mediaSession.metadata){
+                    navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}, {src: "img/stations/"+radios[nowPlaying].id+".png"}];
+                }
+            }
         }).catch(function(){
-            console.log("Nincs talalat a zeneszamra");
+            console.log("Nincs albumborito talalat a zeneszamra");
             document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
+            navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
         })
 }
 
