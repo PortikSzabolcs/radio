@@ -492,6 +492,10 @@ function getArtworkByTitle(title, artist) {
             if(url != "") {
                 document.getElementById("big-logo").src = url;
                 if(mediaAPI && navigator.mediaSession.metadata) navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}];
+            } else{
+                console.log("Nincs albumborito talalat a zeneszamra");
+                document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
+                navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
             }
         }).catch(function(){
             console.log("Nincs albumborito talalat a zeneszamra");
