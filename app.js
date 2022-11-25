@@ -474,8 +474,7 @@ function getArtwork(title, artist){
             if(url != "") {
                 document.getElementById("big-logo").src = url;
                 if(mediaAPI && navigator.mediaSession.metadata){
-                    url = JSON.stringify(response.album.image[2]).substring(25, JSON.stringify(response.album.image[2]).length - 2);
-                    navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}, {src: "img/stations/"+radios[nowPlaying].id+".png"}];
+                    navigator.mediaSession.metadata.artwork = [{src: url, sizes:'300x300'}, {src: "img/stations/"+radios[nowPlaying].id+".png"}];
                 }
             }
             else getArtworkByTitle(title, artist);
@@ -492,9 +491,7 @@ function getArtworkByTitle(title, artist) {
             let url = JSON.stringify(response.track.album.image[2]).substring(10, JSON.stringify(response.track.album.image[2]).length - 17);
             if(url != "") {
                 document.getElementById("big-logo").src = url;
-                if(mediaAPI && navigator.mediaSession.metadata){
-                    navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}, {src: "img/stations/"+radios[nowPlaying].id+".png"}];
-                }
+                if(mediaAPI && navigator.mediaSession.metadata) navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}];
             }
         }).catch(function(){
             console.log("Nincs albumborito talalat a zeneszamra");

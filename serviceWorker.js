@@ -1,4 +1,4 @@
-let cacheName = 'radio-cache-v17';
+let cacheName = 'radio-cache-v17.1';
 let urlsToCache = [
     './',
     './index.html',
