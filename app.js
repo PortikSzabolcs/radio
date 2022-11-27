@@ -460,6 +460,8 @@ function formatMetadata(data){
         let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
         console.log("Most szol: " + title + " + " + formatedArtist);
         getArtwork(title.toLowerCase(), formatedArtist);
+    } else{
+        document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
     }
     if(mediaAPI && navigator.mediaSession.metadata){
         navigator.mediaSession.metadata.title = data;
