@@ -369,6 +369,7 @@ function mediaSessionInit() {
 function radioSelect(selected) {
     if(!selected) return;
     document.getElementById("song-info").innerText = "";
+    document.getElementById("now-playing").style.display = "none";
     let selectedLogo = "img/stations/" + radios[selected].id + ".png";
     player.src = radios[selected].audio;
     if (!navigator.onLine) {
@@ -450,6 +451,7 @@ async function getMetadata(selected){
 }
 
 function formatMetadata(data){
+    document.getElementById("now-playing").style.display="block";
     let minus = data.indexOf(" - ");
     if (minus != -1) {
         let title = data.slice(minus+3 - data.length);
