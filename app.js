@@ -468,11 +468,11 @@ function formatMetadata(data){
     document.getElementById("now-playing").style.display="block";
     let minus = data.indexOf(" - ");
     if (minus != -1) {
-        let title = data.slice(minus+3 - data.length);
-        let artist = data.substring(0, minus).replace(',', " &").toLowerCase();
+        let title = data.slice(minus+3 - data.length).replaceAll('&',"%26").toLowerCase();
+        let artist = data.substring(0, minus).replaceAll(',', " &").toLowerCase();
         let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
         console.log("Most szol: " + title + " + " + formatedArtist);
-        getArtwork(title.toLowerCase(), formatedArtist);
+        getArtwork(title, formatedArtist);
     } else{
         document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
     }
@@ -483,7 +483,7 @@ function formatMetadata(data){
 }
 
 function getArtwork(title, artist){
-    let nonWord = title.search(/[\s][^\w\s][\w]/);
+    let nonWord = title.search(/[\s][^\w\s%][\w]/);
     fetch('https://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&album=' + title + '&autocorrect=1&format=json')
         .then(response => response.json())
         .then(response => {
@@ -805,9 +805,6 @@ function settingsInit() {
     
     document.addEventListener('keydown', (event) => {
         var code = event.key;
-        let s = document.createElement('p');
-        s.innerText = code;
-        document.getElementById("settings").appendChild(s);
         switch(code){
             case "ArrowDown", "ArrowRight": {
                 event.preventDefault();
