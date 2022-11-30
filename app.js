@@ -805,6 +805,9 @@ function settingsInit() {
     
     document.addEventListener('keydown', (event) => {
         var code = event.code;
+        let s = document.createElement('p');
+        s.innerText = code;
+        document.getElementById("settings").appendChild(s);
         switch(code){
             case "ArrowDown", "ArrowRight": {
                 event.preventDefault();
