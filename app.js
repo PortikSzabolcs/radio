@@ -804,7 +804,7 @@ function settingsInit() {
     };
     
     document.addEventListener('keydown', (event) => {
-        var code = event.code;
+        var code = event.key;
         let s = document.createElement('p');
         s.innerText = code;
         document.getElementById("settings").appendChild(s);
