@@ -235,6 +235,8 @@ let iceMetadata = null;
 console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
 initPage();
 
+// ~~~~~~ OLDAL BETOLTESE ~~~~~~
+
 function initPage() {
 
     if (localStorage.getItem("mode")) {
@@ -379,8 +381,8 @@ function radioSelect(selected) {
         if (playPromise !== undefined) {
             playPromise.then(function () {
                 localStorage.setItem("lastStation", selected);
-                if (mediaAPI) {
-                    if (navigator.mediaSession.metadata == null) mediaSessionInit();
+                if (mediaAPI && navigator.mediaSession.metadata == null) {
+                    mediaSessionInit();
                     navigator.mediaSession.metadata.title = radios[selected].name;
                     navigator.mediaSession.metadata.artist = "Saját Rádió";
                     navigator.mediaSession.metadata.artwork = [{src: selectedLogo}, {src: "img/stations/logo.png"}];
@@ -394,6 +396,11 @@ function radioSelect(selected) {
                         console.log("HTTP Play promise rejected");
                     }
                 });
+        }
+        if(mediaAPI && navigator.mediaSession.metadata) {
+            navigator.mediaSession.metadata.title = radios[selected].name;
+            navigator.mediaSession.metadata.artist = "Saját Rádió";
+            navigator.mediaSession.metadata.artwork = [{src: selectedLogo}, {src: "img/stations/logo.png"}];
         }
     }
 
@@ -410,6 +417,13 @@ function radioSelect(selected) {
     window.scrollTo({top: 0, behavior: 'smooth'});
     castSetStream();
 }
+
+function openPage() {
+    if (!nowPlaying) return;
+    window.open(radios[nowPlaying].website, "_blank");
+}
+
+// ~~~~~~~~ ALBUM ADATOK LEKERESE ~~~~~~~~~
 
 async function getMetadata(selected){
     let type = "";
@@ -455,7 +469,6 @@ function formatMetadata(data){
     let minus = data.indexOf(" - ");
     if (minus != -1) {
         let title = data.slice(minus+3 - data.length);
-        if(title.search(/[\s][^\w\s][\w]/) > -1) title = title.substring(0, title.search(/[\s][^\w\s][\w]/));
         let artist = data.substring(0, minus).replace(',', " &").toLowerCase();
         let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
         console.log("Most szol: " + title + " + " + formatedArtist);
@@ -470,6 +483,7 @@ function formatMetadata(data){
 }
 
 function getArtwork(title, artist){
+    let nonWord = title.search(/[\s][^\w\s][\w]/);
     fetch('https://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=6f68ff8bedf80e4d0b42e7db4598f38a&artist=' + artist + '&album=' + title + '&autocorrect=1&format=json')
         .then(response => response.json())
         .then(response => {
@@ -478,12 +492,20 @@ function getArtwork(title, artist){
             if(url != "") {
                 document.getElementById("big-logo").src = url;
                 if(mediaAPI && navigator.mediaSession.metadata){
-                    navigator.mediaSession.metadata.artwork = [{src: url, sizes:'300x300'}, {src: "img/stations/"+radios[nowPlaying].id+".png"}];
+                    navigator.mediaSession.metadata.artwork = [{src: url, sizes:'300x300'}];
                 }
             }
-            else getArtworkByTitle(title, artist);
+            else {
+                if( nonWord > -1) {
+                    let newTitle = title.substring(0, nonWord);
+                    setTimeout(function(){ getArtwork(newTitle, artist); }, 500);
+                } else getArtworkByTitle(title, artist);
+            }
         }).catch(function(){
-            getArtworkByTitle(title, artist);
+            if( nonWord > -1) {
+                let newTitle = title.substring(0, nonWord);
+                setTimeout(function(){ getArtwork(newTitle, artist); }, 500);
+            } else getArtworkByTitle(title, artist);
         })
 }
 
@@ -508,12 +530,8 @@ function getArtworkByTitle(title, artist) {
         })
 }
 
-function openPage() {
-    if (!nowPlaying) return;
-    window.open(radios[nowPlaying].website, "_blank");
-}
+// ~~~~~ KEDVENCEK FUNKCIOI ~~~~~
 
-// ~~~~~ KEDVENCEK FUNKCIOK ~~~~~
 function updateFavicon() {
     if (favorites.includes(nowPlaying)) {
         document.getElementById("star-icon").src = "img/star-filled.png";
@@ -574,6 +592,7 @@ function updateFavList() {
 }
 
 // ~~~~~ HALOZATI STABILITAS ~~~~~
+
 function networkHelper() {
 
     let offlineTimeout = null;
@@ -738,6 +757,7 @@ function holidaySet(hData){
 }
 
 //~~~~~ BEALLITASOK ~~~~~
+
 function settingSwitch() {
     let settings = document.getElementById("settings");
     let settingsIcon = document.getElementById("settings-icon");
@@ -840,6 +860,8 @@ function settingsInit() {
     })
 
 }
+
+// ~~~~~~ CHROMECAST BEALLITASOK ~~~~~~
 
 function initializeCastApi (){
     var context = cast.framework.CastContext.getInstance();
