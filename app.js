@@ -494,6 +494,7 @@ function getArtwork(title, artist){
                 if(mediaAPI && navigator.mediaSession.metadata){
                     navigator.mediaSession.metadata.artwork = [{src: url, sizes:'300x300'}];
                     let temp = navigator.mediaSession.metadata.title;
+                    navigator.mediaSession.metadata.title = "";
                     navigator.mediaSession.metadata.title = temp;
                 }
             }
@@ -522,6 +523,7 @@ function getArtworkByTitle(title, artist) {
                 if(mediaAPI && navigator.mediaSession.metadata) {
                     navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}];
                     let temp = navigator.mediaSession.metadata.title;
+                    navigator.mediaSession.metadata.title = "";
                     navigator.mediaSession.metadata.title = temp;
                 }
             } else{
@@ -529,6 +531,7 @@ function getArtworkByTitle(title, artist) {
                 document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
                 navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
                 let temp = navigator.mediaSession.metadata.title;
+                navigator.mediaSession.metadata.title = "";
                 navigator.mediaSession.metadata.title = temp;
             }
         }).catch(function(){
@@ -536,6 +539,7 @@ function getArtworkByTitle(title, artist) {
             document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
             navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
             let temp = navigator.mediaSession.metadata.title;
+            navigator.mediaSession.metadata.title = "";
             navigator.mediaSession.metadata.title = temp;
         })
 }
