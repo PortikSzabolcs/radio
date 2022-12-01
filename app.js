@@ -478,7 +478,7 @@ function formatMetadata(data){
     }
     if(mediaAPI && navigator.mediaSession.metadata){
         navigator.mediaSession.metadata.title = data;
-        navigator.mediaSession.metadata.artist = radios[nowPlaying].name + " - Saját Rádió";
+        navigator.mediaSession.metadata.artist = radios[nowPlaying].name;
     }
 }
 
@@ -493,9 +493,7 @@ function getArtwork(title, artist){
                 document.getElementById("big-logo").src = url;
                 if(mediaAPI && navigator.mediaSession.metadata){
                     navigator.mediaSession.metadata.artwork = [{src: url, sizes:'300x300'}];
-                    let temp = navigator.mediaSession.metadata.title;
-                    navigator.mediaSession.metadata.title = "";
-                    navigator.mediaSession.metadata.title = temp;
+                    navigator.mediaSession.metadata.artist = navigator.mediaSession.metadata.artist + " - Saját Rádió";
                 }
             }
             else {
@@ -522,25 +520,17 @@ function getArtworkByTitle(title, artist) {
                 document.getElementById("big-logo").src = url;
                 if(mediaAPI && navigator.mediaSession.metadata) {
                     navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}];
-                    let temp = navigator.mediaSession.metadata.title;
-                    navigator.mediaSession.metadata.title = "";
-                    navigator.mediaSession.metadata.title = temp;
+                    navigator.mediaSession.metadata.artist = navigator.mediaSession.metadata.artist + " - Saját Rádió";
                 }
             } else{
                 console.log("Nincs albumborito talalat a zeneszamra");
                 document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
                 navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
-                let temp = navigator.mediaSession.metadata.title;
-                navigator.mediaSession.metadata.title = "";
-                navigator.mediaSession.metadata.title = temp;
             }
         }).catch(function(){
             console.log("Nincs albumborito talalat a zeneszamra");
             document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
             navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
-            let temp = navigator.mediaSession.metadata.title;
-            navigator.mediaSession.metadata.title = "";
-            navigator.mediaSession.metadata.title = temp;
         })
 }
 
