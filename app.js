@@ -805,22 +805,38 @@ function settingsInit() {
     
     document.addEventListener('keydown', (event) => {
         var code = event.key;
+        const keys = ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "];
+        if (keys.indexOf(code) == -1) return;
+        let focusable = [];
+        focusable.push(document.getElementsByTagName("button")[0]);
+        if(!settings.style.transform){
+            for(let i=0; i<document.getElementsByTagName("select").length; i++){
+                focusable.push(document.getElementsByTagName("select")[i]);
+            }
+            for(let i=0; i<document.getElementsByTagName("input").length; i++){
+                focusable.push(document.getElementsByTagName("input")[i]);
+            }
+        } else{
+            for(let i=1; i<document.getElementsByTagName("button").length - 1; i++){
+                focusable.push(document.getElementsByTagName("button")[i]);
+            }
+        }
         switch(code){
             case "ArrowDown", "ArrowRight": {
                 event.preventDefault();
                 if(focused == -1) focused = 3;
-                else if(focused < document.getElementsByTagName("button").length - 1) focused++;
-                document.getElementsByTagName("button")[focused].focus();
+                else if(focused < focusable.length -1) focused++;
+                focusable[focused].focus();
                 break;
             }
             case "ArrowUp", "ArrowLeft": {
                 event.preventDefault();
                 if(focused == -1) focused = 3;
                 else if(focused > 0) focused--;
-                document.getElementsByTagName("button")[focused].focus();
+                focusable[focused].focus();
                 break;
             }
-            case "Space": {
+            case " ": {
                 event.preventDefault();
                 if(player.paused) player.play();
                 else player.pause();
