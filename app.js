@@ -493,6 +493,7 @@ function getArtwork(title, artist){
                 document.getElementById("big-logo").src = url;
                 if(mediaAPI && navigator.mediaSession.metadata){
                     navigator.mediaSession.metadata.artwork = [{src: url, sizes:'300x300'}];
+                    navigator.mediaSession.metadata.artist = radios[nowPlaying].name + " - Saját Rádió";
                 }
             }
             else {
@@ -517,16 +518,21 @@ function getArtworkByTitle(title, artist) {
             let url = JSON.stringify(response.track.album.image[2]).substring(10, JSON.stringify(response.track.album.image[2]).length - 17);
             if(url != "") {
                 document.getElementById("big-logo").src = url;
-                if(mediaAPI && navigator.mediaSession.metadata) navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}];
+                if(mediaAPI && navigator.mediaSession.metadata) {
+                    navigator.mediaSession.metadata.artwork = [{src: url, sizes: '174x174'}];
+                    navigator.mediaSession.metadata.artist = radios[nowPlaying].name + " - Saját Rádió";
+                }
             } else{
                 console.log("Nincs albumborito talalat a zeneszamra");
                 document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
                 navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
+                navigator.mediaSession.metadata.artist = radios[nowPlaying].name + " - Saját Rádió";
             }
         }).catch(function(){
             console.log("Nincs albumborito talalat a zeneszamra");
             document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
             navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
+            navigator.mediaSession.metadata.artist = radios[nowPlaying].name + " - Saját Rádió";
         })
 }
 
