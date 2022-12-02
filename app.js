@@ -450,10 +450,12 @@ async function getMetadata(selected){
     );
     let tmp = await iceMetadata.getSevenhtml();
     if(tmp.sevenhtml != undefined) type = "sevenhtml";
-    tmp = await iceMetadata.getIcestats();
-    if(tmp.icestats != undefined) type = "icestats";
-    tmp = await iceMetadata.getIcyMetadata();
-    if(tmp.icy != undefined) type = "icy";
+    else{
+        tmp = await iceMetadata.getIcestats();
+        if(tmp.icestats != undefined) type = "icestats";
+        tmp = await iceMetadata.getIcyMetadata();
+        if(tmp.icy != undefined) type = "icy";
+    }
 
     if(type != ""){
         iceMetadata = new IcecastMetadataStats(
