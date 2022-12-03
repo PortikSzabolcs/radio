@@ -77,14 +77,14 @@ const radios = [
         "lang": "hu"
     },
     {
-        "name": "Rádió Gaga - Marosszék",
+        "name": "Rádió GaGa - Marosszék",
         "id": "gaga-ms",
         "audio": "https://securestreams4.autopo.st:1696/live",
         "website": "https://radiogaga.ro",
         "lang": "hu"
     },
     {
-        "name": "Rádió Gaga - Príma Rádió",
+        "name": "Rádió GaGa - Príma Rádió",
         "id": "gaga",
         "audio": "https://securestreams5.autopo.st:1992/player",
         "website": "https://radiogaga.ro",
@@ -431,7 +431,10 @@ async function getMetadata(selected){
 
     const onStats = (stats) => {
         let titleTmp = p.innerText;
-        if(stats.sevenhtml != undefined) p.innerText = stats.sevenhtml[0].StreamTitle;
+        if(stats.sevenhtml != undefined){
+            let text = correctEncoding(stats.sevenhtml[0].StreamTitle);
+            p.innerText = text;
+        }
         if(stats.icestats != undefined){
             for(let i=0; i<stats.icestats.source.length; i++){
                 let slash = radios[selected].audio.lastIndexOf('/') - radios[selected].audio.length;
@@ -466,13 +469,30 @@ async function getMetadata(selected){
     }
 }
 
+function correctEncoding(text){
+    if(text.includes('Ă')){
+        text = text.replaceAll(/Ăˇ/g, 'á');
+        text = text.replaceAll(/Ăł/g, 'ó');
+        text = text.replaceAll(/Ă©/g, 'é');
+        text = text.replaceAll(/Ăş/g, 'ú');
+        text = text.replaceAll(/Ă­/g, 'í');
+        text = text.replaceAll(/Ă±/g, 'ñ');
+        text = text.replaceAll(/Ă«/g, 'ë');
+    }
+    t = document.createElement('p');
+    t.innerHTML = text;
+    text = t.innerText;
+    return text;
+}
+
 function formatMetadata(data){
     document.getElementById("now-playing").style.display="block";
     let minus = data.indexOf(" - ");
     if (minus != -1) {
-        let title = data.slice(minus+3 - data.length).replaceAll('&',"%26").toLowerCase();
-        let artist = data.substring(0, minus).replaceAll(',', " &").toLowerCase();
-        let formatedArtist = artist.replaceAll(/\s([/x]|f(ea)?t\.?)\s/ig, " & ");
+        let title = data.slice(minus+3 - data.length).replaceAll('&',"%26");
+        let artist = data.substring(0, minus);
+        let regx = /(\s([/x]|f(ea)?t\.?)\s|,\s)/gi;
+        let formatedArtist = artist.split(regx)[0];
         console.log("Most szol: " + title + " + " + formatedArtist);
         getArtwork(title, formatedArtist);
     } else{

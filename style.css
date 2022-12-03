@@ -148,7 +148,7 @@ google-cast-launcher{
 	aspect-ratio: 1/1;
 	object-fit: contain;
 	background-color: #ccc1;
-	box-shadow: 0 1px 2px #777a;
+	box-shadow: 0 1px 2px #555a;
 }
 #radio-list{
 	float: right;
@@ -211,7 +211,6 @@ google-cast-launcher{
 	max-height: unset;
 	max-width: unset;
 	width: 100%;
-	border-radius: 3px;
 }
 #big-logo-container{
 	width: 50%;
@@ -219,11 +218,10 @@ google-cast-launcher{
 	position: relative;
 	max-width:225px;
 	margin: 35px auto;
-	border-radius: 3px;
 	display: flex;
 	align-items: center;
 	background-color: #ccc2;
-	box-shadow: 0 1px 2px #777a;
+	box-shadow: 0 1px 3px #333;
 }
 .toast{
 	transition: all 1s;
