@@ -220,14 +220,15 @@ const radios = [
 
 const holidays = [
     { name: "Normal", color:"rgb(0, 70, 10)", text:"rgb(95, 210, 35)"},
-    { name: "Halloween", color:"rgb(65, 28, 0)", text:"#d72d1e"}
+    { name: "Halloween", color:"rgb(65, 28, 0)", text:"#d72d1e"},
+    { name: "Christmas", color:"#165b33", text:"#fff9"}
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
 const player = document.getElementById("audio");
 let param = window.location.search;
 let theme = null;
-let Hday = 0;
+let Hday = 2;
 let focused = -1;
 let nowPlaying = 0;
 let favorites = [];

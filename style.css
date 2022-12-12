@@ -322,7 +322,8 @@ google-cast-launcher{
 		box-shadow: 0 0 3px;
 	}
 	#big-logo-container{
-		margin: 60px auto;
+		margin: 75px auto;
+		max-width: 250px;
 	}
 	.radio-list-button {
 		width: 99%;
