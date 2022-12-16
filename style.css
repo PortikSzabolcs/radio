@@ -163,7 +163,7 @@ google-cast-launcher{
 	right: 0;
 	width: 100%;
 	height: calc(100vh - 60px);
-	background-color: #fffffff2;
+	background-color: #fff;
 	vertical-align: middle;
 	padding: 5px;
 	overflow: hidden;
@@ -171,7 +171,7 @@ google-cast-launcher{
 	transition: transform .4s;
 }
 .dark-background{
-	background-color: #000000f5 !important;
+	background-color: #000 !important;
 }
 .settings-entry{
 	font-size: 26px;

@@ -764,8 +764,8 @@ function themeSwitch() {
             theme = "light";
             break;
         case "auto": {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) theme = "light";
-            else theme = "dark";
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) theme = "dark";
+            else theme = "light";
             break;
         }
         default :
