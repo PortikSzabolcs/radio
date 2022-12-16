@@ -840,7 +840,7 @@ function settingsInit() {
     
     document.addEventListener('keydown', (event) => {
         var code = event.key;
-        const keys = ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "];
+        const keys = ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "PageUp", "PageDown", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"," "];
         if (keys.indexOf(code) == -1) return;
         let focusable = [];
         focusable.push(document.getElementsByTagName("button")[0]);
@@ -857,21 +857,39 @@ function settingsInit() {
             }
         }
         switch(code){
-            case "ArrowDown", "ArrowRight": {
+            case "ArrowDown":
+            case "ArrowRight": {
                 event.preventDefault();
                 if(focused == -1) focused = 3;
                 else if(focused < focusable.length -1) focused++;
                 focusable[focused].focus();
                 break;
             }
-            case "ArrowUp", "ArrowLeft": {
+            case "ArrowUp":
+            case "ArrowLeft": {
                 event.preventDefault();
                 if(focused == -1) focused = 3;
                 else if(focused > 0) focused--;
                 focusable[focused].focus();
                 break;
             }
-            case " ": {
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9": {
+                event.preventDefault();
+                if(favorites.length >= Number(code)){
+                    radioSelect(favorites[Number(code)-1]);
+                }
+                break;
+            }
+            case " ":
+            case "0": {
                 event.preventDefault();
                 if(player.paused) player.play();
                 else player.pause();
