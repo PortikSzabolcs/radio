@@ -414,8 +414,12 @@ function radioSelect(selected) {
     nowPlaying = selected;
 
     updateFavicon();
-    document.getElementById("contentID").scrollTo({top: 0, behavior: 'smooth'});
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    try{
+        document.getElementById("contentID").scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }catch(err) {
+        window.scrollTo(0,0);
+    }
     castSetStream();
 }
 
@@ -426,8 +430,7 @@ function openPage() {
 
 // ~~~~~~~~ ALBUM ADATOK LEKERESE ~~~~~~~~~
 
-async function getMetadata(selected){
-    let type = "";
+function getMetadata(selected){
     let p = document.getElementById("song-info");
 
     const onStats = (stats) => {
@@ -452,22 +455,32 @@ async function getMetadata(selected){
         radios[selected].audio,
         { onStats, sources: ["icy", "sevenhtml", "icestast"] }
     );
-    let tmp = await iceMetadata.getSevenhtml();
-    if(tmp.sevenhtml != undefined) type = "sevenhtml";
-    else{
-        tmp = await iceMetadata.getIcestats();
-        if(tmp.icestats != undefined) type = "icestats";
-        tmp = await iceMetadata.getIcyMetadata();
-        if(tmp.icy != undefined) type = "icy";
-    }
 
-    if(type != ""){
-        iceMetadata = new IcecastMetadataStats(
-            radios[selected].audio,
-            { onStats, sources: [type] }
-        );
+    iceMetadata.getSevenhtml().then(function(rsp){
+        if(rsp.sevenhtml != undefined){
+            iceMetadata = new IcecastMetadataStats(
+                radios[selected].audio,
+                { onStats, sources: ["sevenhtml"] }
+            );
         iceMetadata.start();
-    }
+        } else iceMetadata.getIcestats().then(function(rsp){
+            if(rsp.icestats != undefined){
+                iceMetadata = new IcecastMetadataStats(
+                    radios[selected].audio,
+                    { onStats, sources: ["icestats"] }
+                );
+            iceMetadata.start();
+            } else iceMetadata.getIcyMetadata().then(function(rsp){
+                if(rsp.icy != undefined){
+                    iceMetadata = new IcecastMetadataStats(
+                        radios[selected].audio,
+                        { onStats, sources: ["icy"] }
+                    );
+                iceMetadata.start();
+                }
+            });
+        });
+    });
 }
 
 function correctEncoding(text){
