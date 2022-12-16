@@ -375,7 +375,7 @@ function radioSelect(selected) {
     let selectedLogo = "img/stations/" + radios[selected].id + ".png";
     player.src = radios[selected].audio;
     if (!navigator.onLine) {
-        alert("Nincs internetkapcsolat!");
+        toastMessage("Nincs internetkapcsolat!");
     } else {
         let playPromise = player.play();
         if (playPromise !== undefined) {
@@ -391,7 +391,7 @@ function radioSelect(selected) {
             })
                 .catch(function () {
                     if (radios[selected].audio[4] !== 's') {
-                        if (favorites.length === 0) alert("Ez a rádió csak új ablakban indul el!");
+                        if (favorites.length === 0) toastMessage("Ez a rádió csak új ablakban indul el!");
                         window.open(radios[selected].audio, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,height=100px,width=400px');
                         console.log("HTTP Play promise rejected");
                     }
@@ -523,6 +523,7 @@ function getArtwork(title, artist){
         .then(response => response.json())
         .then(response => {
             console.log(response);
+            document.getElementById("song-link").setAttribute('href', response.album.url);
             let url = JSON.stringify(response.album.image[3]).substring(30, JSON.stringify(response.album.image[3]).length - 2);
             if(url != "") {
                 document.getElementById("big-logo").src = url;
@@ -560,6 +561,7 @@ function getArtworkByTitle(title, artist) {
             }
         }).catch(function(){
             console.log("Nincs albumborito talalat a zeneszamra");
+            document.getElementById("song-link").removeAttribute("href");
             document.getElementById("big-logo").src = "img/stations/" + radios[nowPlaying].id + ".png";
             navigator.mediaSession.metadata.artwork = [{src: "img/stations/"+radios[nowPlaying].id+".png"}, {src: "img/stations/logo.png"}];
         })
@@ -668,11 +670,10 @@ function networkHelper() {
         if(nowPlaying && player.error.code === 2) retryPlaying();
         if(nowPlaying && player.error.code === 4) {
             if(!offlineTimeout){
-                console.log("NetworkHelper: offline timeout set");
+                toastMessage("Megszakadt az internetkapcsolat 📶️");
                 offlineTimeout = setTimeout(function(){
                     nowPlaying = 0;
                     offlineTimeout = null;
-                    console.log("NetworkHelper: deleted offline timeout");
                 }, 180000);
             }
             setTimeout(function(){ retryPlaying(); }, 5500);
@@ -680,6 +681,7 @@ function networkHelper() {
     });
     // ha elindul a lejatszas vagy szuneteltetodik, akkor torlodik az idozito
     player.addEventListener('canplay', function () {
+        if(offlineTimeout) toastMessage("Helyreállt az internetkapcsolat 📶️");
         deleteNetworkTimeout();
         deleteOfflineTimeout();
     });
@@ -812,21 +814,10 @@ function settingsInit() {
         if(this.navigator.userAgent.toLowerCase().indexOf("android")>-1){
             window.history.pushState({}, '')
             window.addEventListener('popstate', (event) => {
-                toast = this.document.createElement("div");
-                toast.classList.add("toast");
-                span = this.document.createElement("span");
-                span.innerText = "Vissza gomb: leállítás és kilépés\nKezdőlap gomb: lejátszás a háttérben";
-                toast.appendChild(span);
-                this.document.getElementById("contentID").appendChild(toast);
-                setTimeout(function(){
-                    toast.style.opacity = '0';
-                }, 6500);
-                setTimeout(function(){
-                    this.document.getElementById("contentID").removeChild(toast);
-                }, 7500);
-            })
+                toastMessage("Vissza gomb: leállítás és kilépés\nKezdőlap gomb: lejátszás a háttérben");
+            });
         }
-    })
+    });
 
     player.addEventListener('pause', function () {
         if(iceMetadata) iceMetadata.stop();
@@ -840,7 +831,7 @@ function settingsInit() {
     
     document.addEventListener('keydown', (event) => {
         var code = event.key;
-        const keys = ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "PageUp", "PageDown", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"," "];
+        const keys = ["ArrowRight", "ArrowLeft", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"," "];
         if (keys.indexOf(code) == -1) return;
         let focusable = [];
         focusable.push(document.getElementsByTagName("button")[0]);
@@ -857,7 +848,6 @@ function settingsInit() {
             }
         }
         switch(code){
-            case "ArrowDown":
             case "ArrowRight": {
                 event.preventDefault();
                 if(focused == -1) focused = 3;
@@ -865,7 +855,6 @@ function settingsInit() {
                 focusable[focused].focus();
                 break;
             }
-            case "ArrowUp":
             case "ArrowLeft": {
                 event.preventDefault();
                 if(focused == -1) focused = 3;
@@ -936,6 +925,21 @@ function settingsInit() {
         themeSwitch();
     });
 
+}
+
+function toastMessage(message){
+    let toast = document.createElement("div");
+    toast.classList.add("toast");
+    let span = document.createElement("span");
+    span.innerText = message;
+    toast.appendChild(span);
+    document.getElementById("contentID").appendChild(toast);
+    setTimeout(function(){
+        toast.style.opacity = '0';
+    }, 6500);
+    setTimeout(function(){
+        document.getElementById("contentID").removeChild(toast);
+    }, 7500);
 }
 
 // ~~~~~~ CHROMECAST BEALLITASOK ~~~~~~
