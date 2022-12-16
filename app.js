@@ -233,7 +233,6 @@ let focused = -1;
 let nowPlaying = 0;
 let favorites = [];
 let iceMetadata = null;
-console.log("ESZKOZ ADATOK: \n\t" + navigator.userAgent);
 initPage();
 
 // ~~~~~~ OLDAL BETOLTESE ~~~~~~
@@ -907,9 +906,17 @@ function settingsInit() {
             networkHelper();
         }
     });
+
+    let devData = document.createElement('p');
+    devData.innerText = "Böngésző: \t" + navigator.userAgent;
+    devData.classList.add("help-text");
+    devData.style.opacity = "0.3";
+    devData.style.padding = "15px";
+    document.getElementById("settings").appendChild(devData);
+
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (){
         themeSwitch();
-    })
+    });
 
 }
 
