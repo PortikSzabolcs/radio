@@ -221,7 +221,7 @@ const radios = [
 const holidays = [
     { name: "Normal", color:"rgb(0, 70, 10)", text:"rgb(95, 210, 35)"},
     { name: "Halloween", color:"rgb(65, 28, 0)", text:"#d72d1e"},
-    { name: "Christmas", color:"#165b33", text:"#fff9"}
+    { name: "Christmas", color:"rgb(115, 0, 0)", text:"#fff9"}
 ];
 
 const mediaAPI = ('mediaSession' in navigator);
@@ -491,7 +491,12 @@ function correctEncoding(text){
         text = text.replaceAll(/Ă­/g, 'í');
         text = text.replaceAll(/Ă±/g, 'ñ');
         text = text.replaceAll(/Ă«/g, 'ë');
+        text = text.replaceAll(/ĂĄ/g, 'å');
+        text = text.replaceAll(/ĂŤ/g, 'Í');
+        text = text.replaceAll(/Ă‰/g, 'É');
+        text = text.replaceAll(/Ă¶/g, 'ö');
     }
+    text = text.replaceAll(/Ĺ‘/g, 'ő');
     t = document.createElement('p');
     t.innerHTML = text;
     text = t.innerText;
@@ -915,9 +920,9 @@ function settingsInit() {
     });
 
     let devData = document.createElement('p');
-    devData.innerText = "Böngésző: \t" + navigator.userAgent;
+    devData.innerText = "Eszköz:\t" + navigator.userAgent;
     devData.classList.add("help-text");
-    devData.style.opacity = "0.3";
+    devData.style.opacity = "0.2";
     devData.style.padding = "15px";
     document.getElementById("settings").appendChild(devData);
 
